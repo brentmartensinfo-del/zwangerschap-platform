@@ -89,20 +89,6 @@ export default function Filters({ filterOptions }) {
 
       {/* ── Locatie ── */}
       <FilterGroup title="Locatie">
-        {/* Stad picker */}
-        <div className="flex items-center gap-3 px-3.5 py-2.5 border border-black/[0.08] rounded-md bg-white text-sm text-foreground">
-          <iconify-icon icon="lucide:map-pin" class="text-base text-foreground shrink-0" />
-          <span className="flex-1">{activeCity || 'Kies een stad'}</span>
-          {activeCity && (
-            <button
-              onClick={() => setParam('city', '')}
-              aria-label="Verwijder locatiefilter"
-              className="hover:opacity-70 transition-opacity"
-            >
-              <iconify-icon icon="lucide:x" class="text-sm text-muted-foreground" />
-            </button>
-          )}
-        </div>
         {/* Stad opties */}
         <div className="flex flex-wrap gap-2 mt-1">
           {filterOptions.cities.map((city) => (

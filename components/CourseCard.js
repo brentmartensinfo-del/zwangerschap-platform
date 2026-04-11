@@ -13,10 +13,10 @@ export default function CourseCard({
   price,
 }) {
   return (
-    <article className="bg-white border border-black/[0.08] rounded-xl overflow-hidden flex flex-col shadow-[0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.07)] transition-shadow">
+    <article className="h-full bg-white border border-black/[0.08] rounded-xl overflow-hidden flex flex-col shadow-[0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.07)] transition-shadow">
 
       {/* Image */}
-      <div className="w-full aspect-[4/3] overflow-hidden">
+      <div className="relative w-full aspect-[4/3] overflow-hidden shrink-0">
         <img
           src={image}
           alt={alt}
@@ -25,6 +25,22 @@ export default function CourseCard({
           loading="lazy"
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
         />
+
+        {/* Rating overlay */}
+        <div
+          className="absolute bottom-2 right-2 flex items-center gap-1 px-2 py-1 bg-white/90 rounded-md shadow-sm text-sm font-medium text-foreground"
+          aria-label={ratingCount ? `Beoordeling: ${rating} op basis van ${ratingCount} reviews` : rating}
+        >
+          {rating !== 'Nieuw' && (
+            <iconify-icon icon="lucide:star" class="text-sm text-foreground" aria-hidden="true" />
+          )}
+          <span>{rating}</span>
+          {ratingCount && (
+            <span className="text-muted-foreground font-normal" aria-hidden="true">
+              ({ratingCount})
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Content */}
@@ -42,33 +58,17 @@ export default function CourseCard({
           ))}
         </ul>
 
-        <h3 className="text-sm md:text-base font-semibold leading-snug mb-1.5 text-foreground">
+        <h3 className="text-sm md:text-base font-semibold leading-snug mb-1.5 text-foreground line-clamp-2">
           {title}
         </h3>
 
-        <p className="text-[13px] text-muted-foreground mb-2.5">{provider}</p>
+        <p className="text-[13px] text-muted-foreground mb-2.5 truncate">{provider}</p>
 
-        {/* Rating */}
-        <div
-          className="flex items-center gap-1 text-[13px] font-medium mb-3.5 text-foreground"
-          aria-label={ratingCount ? `Beoordeling: ${rating} op basis van ${ratingCount} reviews` : rating}
-        >
-          {rating !== 'Nieuw' && (
-            <iconify-icon icon="lucide:star" class="text-sm text-foreground" aria-hidden="true" />
-          )}
-          <span>{rating}</span>
-          {ratingCount && (
-            <span className="text-muted-foreground font-normal" aria-hidden="true">
-              ({ratingCount})
-            </span>
-          )}
-        </div>
-
-        <p className="text-[13px] text-muted-foreground leading-relaxed line-clamp-2 mb-5 md:mb-6 flex-1">
+        <p className="text-[13px] text-muted-foreground leading-relaxed line-clamp-2 flex-1">
           {description}
         </p>
 
-        {/* Footer */}
+        {/* Footer — mt-auto pins this to the bottom */}
         <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-black/[0.06] mt-auto">
           <span className="text-base md:text-lg font-semibold text-foreground">
             {price}

@@ -6,10 +6,10 @@ import { useRouter } from 'next/navigation';
 const TRUST_ITEMS = [
   'Vergelijk eenvoudig',
   'Onafhankelijk platform',
-  'Direct contact met aanbieder',
+  'Direct boeken bij de aanbieder',
 ];
 
-const CITY_OPTIONS   = ['Amsterdam', 'Rotterdam', 'Utrecht', 'Haarlem'];
+const CITY_OPTIONS   = ['Amsterdam', 'Den Haag', 'Eindhoven', 'Groningen', 'Haarlem', 'Rotterdam', 'Utrecht'];
 const TYPE_OPTIONS   = ['Zwangerschapsyoga', 'Hypnobirthing', 'Online Cursussen', 'Samen met partner', 'Zwangerschapsgym'];
 const PRICE_OPTIONS  = [
   { label: 'Tot €50',     value: 'low'  },

@@ -124,7 +124,6 @@ function LanguageSelector({ activeLang, onChange }) {
           </button>
         </span>
       ))}
-      <iconify-icon icon="lucide:chevron-down" class="text-xs text-muted-foreground ml-0.5" aria-hidden="true" />
     </div>
   );
 }

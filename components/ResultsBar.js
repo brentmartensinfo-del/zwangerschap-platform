@@ -14,6 +14,14 @@ const FILTER_LABELS = {
   type:     'Type',
   city:     'Locatie',
   language: 'Taal',
+  q:        'Zoekterm',
+  price:    'Prijs',
+};
+
+const PRICE_LABELS = {
+  low:  'Tot \u20ac50',
+  mid:  '\u20ac50 - \u20ac150',
+  high: '\u20ac150+',
 };
 
 /**
@@ -49,12 +57,13 @@ export default function ResultsBar({ total }) {
   );
 
   // Bouw actieve filter-chips uit de huidige searchParams
-  const activeChips = ['type', 'city', 'language']
+  const activeChips = ['type', 'city', 'language', 'q', 'price']
     .filter((key) => searchParams.get(key))
-    .map((key) => ({
-      key,
-      label: `${FILTER_LABELS[key]}: ${searchParams.get(key)}`,
-    }));
+    .map((key) => {
+      const raw = searchParams.get(key);
+      const value = key === 'price' ? (PRICE_LABELS[raw] ?? raw) : raw;
+      return { key, label: `${FILTER_LABELS[key]}: ${value}` };
+    });
 
   const currentSortLabel =
     SORT_OPTIONS.find((o) => o.value === activeSort)?.label ?? 'Meest aanbevolen';
