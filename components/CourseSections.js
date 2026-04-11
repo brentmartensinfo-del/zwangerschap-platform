@@ -29,7 +29,7 @@ function SectionHeader({ title, id }) {
  *  lg      → 3 kolommen
  *  xl      → 4 kolommen
  *
- * @param {{ courses: import('@/lib/courses').Course[] }} props
+ * @param {{ courses: import('@/lib/Courses').Course[] }} props
  */
 function CourseGrid({ courses }) {
   return (
@@ -47,7 +47,7 @@ function CourseGrid({ courses }) {
 }
 
 /**
- * @param {{ courses: import('@/lib/courses').Course[] }} props
+ * @param {{ courses: import('@/lib/Courses').Course[] }} props
  */
 export function PopularCourses({ courses }) {
   return (
@@ -59,7 +59,7 @@ export function PopularCourses({ courses }) {
 }
 
 /**
- * @param {{ courses: import('@/lib/courses').Course[] }} props
+ * @param {{ courses: import('@/lib/Courses').Course[] }} props
  */
 export function NewCourses({ courses }) {
   return (

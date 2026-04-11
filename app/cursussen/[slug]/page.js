@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { getCourseBySlug, getAllCourses } from '@/lib/courses';
+import { getCourseBySlug, getAllCourses } from '@/lib/Courses';
 
 /* ── Static params voor build-time generatie ─────────────────────────────── */
 export async function generateStaticParams() {
