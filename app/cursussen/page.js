@@ -5,7 +5,7 @@ import Filters from '@/components/Filters';
 import ResultsBar from '@/components/ResultsBar';
 import CourseList from '@/components/CourseList';
 import Pagination from '@/components/Pagination';
-import { getAllCourses, getFilterOptions } from '@/lib/Courses';
+import { getAllCourses, getFilterOptions } from '@/lib/courses';
 
 /** Aantal cursussen per pagina */
 const PAGE_SIZE = 6;
