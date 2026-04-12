@@ -40,7 +40,7 @@ export default async function ProviderPage({ params }) {
     <>
       <Navbar />
 
-      <main className="flex-1 pt-[65px]">
+      <main className="flex-1 pt-[0px]">
 
         {/* ── Hero ──────────────────────────────────────────────────────── */}
         <section className="relative w-full h-[400px] md:h-[480px] overflow-hidden">
