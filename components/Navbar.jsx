@@ -17,9 +17,9 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-6 md:px-12 py-4">
           {/* ── Logo ── */}
           <a href="/" className="flex items-center gap-2.5 shrink-0" aria-label="Lumi Cursussen – home">
-            <iconify-icon icon="lucide:flower-2" class="text-[26px] text-primary" aria-hidden="true" />
+            <iconify-icon icon="lucide:baby" class="text-[26px] text-primary" aria-hidden="true" />
             <span className="text-lg md:text-xl font-semibold tracking-tight text-foreground">
-              Mami Cursussen
+              MamaNest
             </span>
           </a>
 

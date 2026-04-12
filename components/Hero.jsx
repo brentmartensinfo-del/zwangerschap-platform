@@ -296,7 +296,7 @@ export default function Hero() {
             <StatCard
               label="Meest gekozen categorie"
                value={<a href="/cursussen?type=Zwangerschapsyoga">Zwangerschapsyoga</a>}
-              sub="48 cursussen in heel Nederland"
+              sub="10 cursussen in heel Nederland"
             />
             <StatCard
               label="Gemiddelde beoordeling"
