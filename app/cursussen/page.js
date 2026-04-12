@@ -8,7 +8,7 @@ import Pagination from '@/components/Pagination';
 import { getAllCourses, getFilterOptions } from '@/lib/Courses';
 
 /** Aantal cursussen per pagina */
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 9 ;
 
 /**
  * /cursussen — Server Component

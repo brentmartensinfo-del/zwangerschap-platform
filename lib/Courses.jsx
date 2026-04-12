@@ -189,7 +189,7 @@
       descriptionLong: 'Geen tijd voor wekelijkse lessen? In dit intensieve weekend leer je alles over d... Meer informatie vind je op de website van de aanbieder.',
       price: '€ 195',
       bookingUrl: 'https://praktijdekern.nl/bevalcursus-weekend',
-      type: 'Samen met partner',
+      type: 'Intensief / Weekend',
       city: 'Utrecht',
       language: 'Nederlands',
     curriculum: DEFAULT_CURRICULUM,
