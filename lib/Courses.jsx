@@ -82,6 +82,7 @@
   const POPULAR_COURSES = [
     {
       slug: 'zwangerschapscursus-mom-en-co',
+      providerSlug: 'zwangerschapscursus-mom-en-co', 
       image: 'https://momenco.nl/wp-content/uploads/2023/11/momenco-header-img.png',
       alt: 'Zwangere vrouw wijst naar haar buik',
       labels: ['1 dag tot 4 weken', 'Fysiek', 'NL'],
@@ -91,8 +92,8 @@
       ratingCount: '128',
       description: 'Een baby onderweg? Dan ben je bij ons op de juiste plek. Met onze unieke en complete zwangerschapscursussen ontwikkeld door verloskundigen, begeleiden we jou én je (geboorte)partner op deze reis naar het ouderschap.',
       descriptionLong: 'Zwanger zijn kan best overweldigend zijn: Naast dat je lichaam keihard aan het werk is, is er van alles wat gaat veranderen. Die babykamer komt wel af, veel belangrijker is het dat je zorgt dat je straks positief terugkijkt op je geboorte-ervaring. Dus moet je goed voorbereid zijn; want dan kan je de geboorte van je kleinte met kracht, vertrouwen en met de juiste tools aan gaan – én kan je meebewegen als het anders loopt dan verwacht. \n\nDit is wat de zwangerschapscursus van Mom & Co’s is: een leuke, complete zwangerschapscursus voor zwangere én partner. Bomvol tools die jou de fundering geven om in je kracht te gaan staan, en te gaan voor die positieve ervaring! ',
-      price: '€ 330',
-      bookingUrl: 'https://momenco.nl/#groepscursussen',
+      price: 'v.a. € 330',
+      bookingUrl: 'https://momenco-online.nl/alle-online-cursussen/',
       type: 'Zwangerschapsyoga',
       city: 'Amsterdam',
       language: 'Nederlands',
@@ -104,10 +105,10 @@
         { period: 'Online', title: 'De Online Zwangerschapscursus',         body: 'De complete zwangerschapscursus van Mom & co. In een persoonlijke online omgeving, te volgen waar en wanneer je maar wil.' },
       ],
       learningItems: [
-        'Diepe ademhalingstechnieken voor pijnverlichting tijdens weeën.',
-        'Versterken van bekkenbodem en rug om klachten te voorkomen.',
-        'Ontspanningshoudingen die je thuis (samen met je partner) kunt oefenen.',
-        'Bewust contact maken met je baby en voorbereiden op het moederschap.',
+        'Alles over de verzorging van je baby.',
+        'Meest voorkomende ziektebeelden.',
+        'Borst- en flesvoeding.',
+        'Slaap (en het gebrek daaraan).',
       ],
       includes: [
         'Fysieke lessen met oefeningen',

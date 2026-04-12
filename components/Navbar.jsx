@@ -1,104 +1,133 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-const NAV_LINKS = ['Over ons', 'Hoe werkt het', 'Aanbieders', 'Contact'];
+const NAV_LINKS = [
+  { label: 'Over ons',      href: '/over-ons' },
+  { label: 'Hoe werkt het', href: '/#hoe-het-werkt' },
+  { label: 'Aanbieders',    href: '/aanbieders' },
+  { label: 'Contact',       href: '/contact' },
+];
 
 export default function Navbar() {
   const [activeLang, setActiveLang] = useState('NL');
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen]     = useState(false);
+  const pathname = usePathname();
 
   return (
-    <header>
-      <nav
-        aria-label="Hoofdnavigatie"
-        className="sticky top-0 z-50 bg-background border-b border-black/[0.08]"
-      >
-        <div className="flex items-center justify-between px-6 md:px-12 py-4">
-          {/* ── Logo ── */}
-          <a href="/" className="flex items-center gap-2.5 shrink-0" aria-label="Lumi Cursussen – home">
-            <iconify-icon icon="lucide:baby" class="text-[26px] text-primary" aria-hidden="true" />
-            <span className="text-lg md:text-xl font-semibold tracking-tight text-foreground">
-              GeboorteHub
-            </span>
-          </a>
+    <>
+      <header>
+        <nav
+          aria-label="Hoofdnavigatie"
+          className="sticky top-0 z-50 bg-background border-b border-black/[0.08]"
+        >
+          <div className="flex items-center justify-between px-6 md:px-12 py-4">
 
-          {/* ── Desktop nav links ── */}
-          <ul className="hidden lg:flex items-center gap-8" role="list">
-            {NAV_LINKS.map((link) => (
-              <li key={link}>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
-                >
-                  {link}
-                </a>
-              </li>
-            ))}
-          </ul>
-
-          {/* ── Desktop actions ── */}
-          <div className="hidden lg:flex items-center gap-3">
-            <LanguageSelector activeLang={activeLang} onChange={setActiveLang} />
-            <a
-              href="/cursussen"
-              className="px-4 py-2 rounded-md bg-foreground text-background text-sm font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+            {/* ── Logo ── */}
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 shrink-0"
+              aria-label="Lumi Cursussen – home"
             >
-              Alle cursussen
-            </a>
-          </div>
+              <iconify-icon icon="lucide:flower-2" class="text-[26px] text-primary" aria-hidden="true" />
+              <span className="text-lg md:text-xl font-semibold tracking-tight text-foreground">
+                Lumi Cursussen
+              </span>
+            </Link>
 
-          {/* ── Mobile: lang + hamburger ── */}
-          <div className="flex lg:hidden items-center gap-3">
-            <LanguageSelector activeLang={activeLang} onChange={setActiveLang} />
-            <button
-              onClick={() => setMenuOpen((v) => !v)}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
-              className="p-2 rounded-md hover:bg-muted transition-colors"
-            >
-              <iconify-icon
-                icon={menuOpen ? 'lucide:x' : 'lucide:menu'}
-                class="text-xl text-foreground"
-                aria-hidden="true"
-              />
-            </button>
-          </div>
-        </div>
-
-        {/* ── Mobile dropdown menu ── */}
-        {menuOpen && (
-          <div
-            id="mobile-menu"
-            className="lg:hidden border-t border-black/[0.08] bg-background px-6 pb-6"
-          >
-            <ul className="flex flex-col gap-1 pt-4" role="list">
-              {NAV_LINKS.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    onClick={() => setMenuOpen(false)}
-                    className="block py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link}
-                  </a>
-                </li>
-              ))}
+            {/* ── Desktop nav links ── */}
+            <ul className="hidden lg:flex items-center gap-8" role="list">
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-foreground ${
+                        isActive ? 'text-foreground' : 'text-muted-foreground'
+                      }`}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
-            <a
-              href="#"
-              className="mt-4 block w-full text-center px-4 py-2.5 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
-            >
-              Alle cursussen
-            </a>
+
+            {/* ── Desktop actions ── */}
+            <div className="hidden lg:flex items-center gap-3">
+              <LanguageSelector activeLang={activeLang} onChange={setActiveLang} />
+              <Link
+                href="/cursussen"
+                className="px-4 py-2 rounded-md bg-foreground text-background text-sm font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+              >
+                Alle cursussen
+              </Link>
+            </div>
+
+            {/* ── Mobile: lang + hamburger ── */}
+            <div className="flex lg:hidden items-center gap-3">
+              <LanguageSelector activeLang={activeLang} onChange={setActiveLang} />
+              <button
+                onClick={() => setMenuOpen((v) => !v)}
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu"
+                aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
+                className="p-2 rounded-md hover:bg-muted transition-colors"
+              >
+                <iconify-icon
+                  icon={menuOpen ? 'lucide:x' : 'lucide:menu'}
+                  class="text-xl text-foreground"
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
           </div>
-        )}
-      </nav>
-    </header>
+
+          {/* ── Mobile dropdown menu ── */}
+          {menuOpen && (
+            <div
+              id="mobile-menu"
+              className="lg:hidden border-t border-black/[0.08] bg-background px-6 pb-6"
+            >
+              <ul className="flex flex-col gap-1 pt-4" role="list">
+                {NAV_LINKS.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        onClick={() => setMenuOpen(false)}
+                        className={`block py-2.5 text-sm font-medium transition-colors hover:text-foreground ${
+                          isActive ? 'text-foreground' : 'text-muted-foreground'
+                        }`}
+                        aria-current={isActive ? 'page' : undefined}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+              <Link
+                href="/cursussen"
+                onClick={() => setMenuOpen(false)}
+                className="mt-4 block w-full text-center px-4 py-2.5 rounded-md bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+              >
+                Alle cursussen
+              </Link>
+            </div>
+          )}
+        </nav>
+      </header>
+    </>
   );
 }
 
+/* ── LanguageSelector ─────────────────────────────────────────────────────── */
 function LanguageSelector({ activeLang, onChange }) {
   return (
     <div

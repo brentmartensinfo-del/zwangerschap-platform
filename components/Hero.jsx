@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 const TRUST_ITEMS = [
   'Vergelijk eenvoudig',
   'Onafhankelijk platform',
-  'Direct boeken bij de aanbieder',
+  'Direct contact met aanbieder',
 ];
 
 const CITY_OPTIONS   = ['Amsterdam', 'Den Haag', 'Eindhoven', 'Groningen', 'Haarlem', 'Rotterdam', 'Utrecht'];
@@ -36,12 +36,12 @@ export default function Hero() {
 
   return (
     <section className="px-4 sm:px-8 md:px-12 pt-6 md:pt-7 pb-8 md:pb-10">
-      <div className="relative min-h-[480px] md:min-h-[520px] rounded-xl overflow-hidden flex items-stretch bg-secondary">
+      <div className="relative min-h-[480px] md:min-h-[520px] rounded-xl bg-secondary">
 
         {/* ── Background image ── */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 rounded-xl overflow-hidden">
           <img
-            src="https://images.pexels.com/photos/15797917/pexels-photo-15797917.jpeg"
+            src="https://storage.googleapis.com/banani-generated-images/generated-images/bb02e9bd-da3c-4e2d-bcef-80ec69823bcc.jpg"
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
@@ -295,8 +295,8 @@ export default function Hero() {
           <div className="hidden xl:flex self-end justify-self-end flex-col gap-3 w-[260px]">
             <StatCard
               label="Meest gekozen categorie"
-               value={<a href="/cursussen?type=Zwangerschapsyoga">Zwangerschapsyoga</a>}
-              sub="10 cursussen in heel Nederland"
+              value="Zwangerschapsyoga"
+              sub="48 cursussen in heel Nederland"
             />
             <StatCard
               label="Gemiddelde beoordeling"

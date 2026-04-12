@@ -2,7 +2,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { getCourseBySlug, getAllCourses } from '@/lib/Courses';
+import { getCourseBySlug, getAllCourses } from '@/lib/courses';
+import { getProviderBySlug } from '@/lib/providers';
 
 /* ── Static params voor build-time generatie ─────────────────────────────── */
 export async function generateStaticParams() {
@@ -46,7 +47,10 @@ export default async function CourseDetailPage({ params }) {
     guarantees = [],
     practical = [],
     quickInfo = [],
+    providerSlug,
   } = course;
+
+  const providerData = providerSlug ? await getProviderBySlug(providerSlug) : null;
 
   return (
     <>
@@ -161,11 +165,11 @@ export default async function CourseDetailPage({ params }) {
                 </section>
               )}
 
-              {/* Cursus overzicht */}
+              {/* Programma overzicht */}
               {curriculum.length > 0 && (
                 <section aria-labelledby="programma-heading">
                   <h2 id="programma-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-2">
-                    Cursus overzicht
+                    Programma overzicht
                   </h2>
                   <p className="text-base text-muted-foreground leading-relaxed mb-6">
                     De cursus is opgebouwd rondom de belangrijkste thema's voor een ontspannen zwangerschap en voorbereiding op de bevalling.
@@ -229,7 +233,7 @@ export default async function CourseDetailPage({ params }) {
                 </h2>
                 <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center p-6 border border-black/[0.08] rounded-xl bg-white">
                   <img
-                    src="https://storage.googleapis.com/banani-avatars/avatar%2Ffemale%2F25-35%2FEuropean%2F3 "
+                    src={providerData?.avatar ?? 'https://storage.googleapis.com/banani-avatars/avatar%2Ffemale%2F25-35%2FEuropean%2F3'}
                     alt={`Profielfoto van ${provider}`}
                     className="w-16 h-16 rounded-full object-cover shrink-0"
                     width={64}
@@ -237,12 +241,23 @@ export default async function CourseDetailPage({ params }) {
                   />
                   <div>
                     <h3 className="text-lg font-semibold text-foreground mb-1">{provider}</h3>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Gecertificeerd Yogadocente &amp; Doula
-                    </p>
-                    <button className="px-4 py-2 border border-black/[0.08] rounded-md text-[13px] font-medium text-foreground hover:border-black/20 transition-colors">
-                      Bekijk profiel
-                    </button>
+                    {providerData && (
+                      <p className="text-sm text-muted-foreground mb-3">
+                        {providerData.tagline}
+                      </p>
+                    )}
+                    {providerSlug ? (
+                      <Link
+                        href={`/aanbieders/${providerSlug}`}
+                        className="inline-block px-4 py-2 border border-black/[0.08] rounded-md text-[13px] font-medium text-foreground hover:border-black/20 transition-colors"
+                      >
+                        Bekijk profiel
+                      </Link>
+                    ) : (
+                      <button className="px-4 py-2 border border-black/[0.08] rounded-md text-[13px] font-medium text-foreground hover:border-black/20 transition-colors">
+                        Bekijk profiel
+                      </button>
+                    )}
                   </div>
                 </div>
               </section>
@@ -312,4 +327,4 @@ export default async function CourseDetailPage({ params }) {
       <Footer />
     </>
   );
-}
+} 
