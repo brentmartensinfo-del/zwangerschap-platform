@@ -5,7 +5,7 @@
    * Rendert een responsive grid van CourseCards.
    * Ontvangt gefilterde + gepagineerde cursussen van page.js.
    *
-   * @param {{ courses: import('@/lib/Courses').Course[] }} props
+   * @param {{ courses: import('@/lib/courses').Course[] }} props
    */
   export default function CourseList({ courses }) {
     if (courses.length === 0) {
