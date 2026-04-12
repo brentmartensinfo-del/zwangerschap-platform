@@ -63,7 +63,7 @@ export default function Hero() {
                 Vind de perfecte cursus voor jouw zwangerschap
               </h1>
               <p className="text-base md:text-[17px] text-body-muted leading-relaxed max-w-[560px]">
-                Vind en vergelijk zwangerschapscursussen die aansluiten bij jullie wensen en behoeften.
+                Vergelijk onafhankelijk het aanbod en ontdek wat het beste bij jullie past.
               </p>
             </div>
 

@@ -23,9 +23,9 @@ const FAQS = [
   },
   {
     id: 'faq-4',
-    question: 'Betaal ik extra servicekosten als ik via Lumi boek?',
+    question: 'Betaal ik extra servicekosten als ik via GeboorteHub boek?',
     answer:
-      'Nee. Lumi rekent geen enkele servicekost. Je betaalt precies het bedrag dat op de cursuspagina staat vermeld, rechtstreeks aan de aanbieder.',
+      'Nee. GeboorteHub rekent geen enkele servicekosteb, onze dienstverlening is gratis. Je betaalt precies het bedrag dat op de cursuspagina staat vermeld, rechtstreeks aan de aanbieder.',
   },
 ];
 

@@ -8,7 +8,7 @@ import Pagination from '@/components/Pagination';
 import { getAllCourses, getFilterOptions } from '@/lib/Courses';
 
 /** Aantal cursussen per pagina */
-const PAGE_SIZE = 9 ;
+const PAGE_SIZE = 9;
 
 /**
  * /cursussen — Server Component
@@ -68,11 +68,9 @@ export default async function CursussenPage({ searchParams }) {
 
             {/* ── Filters sidebar ──
                 Suspense is nodig omdat Filters useSearchParams() aanroept */}
-            <div className="hidden md:block">
             <Suspense fallback={<FiltersSkeleton />}>
-            <Filters filterOptions={filterOptions} />
+              <Filters filterOptions={filterOptions} />
             </Suspense>
-            </div>
 
             {/* ── Resultaten ── */}
             <div className="flex-1 flex flex-col gap-6 min-w-0">

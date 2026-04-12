@@ -1,7 +1,7 @@
 const TESTIMONIALS = [
   {
     quote:
-      'Via Lumi vond ik precies de hypnobirthing cursus die ik zocht. Het overzicht was super helder en ik kon de prijzen goed vergelijken. De cursus zelf was een fantastische ervaring!',
+      'Via GeboorteHub vond ik precies de hypnobirthing cursus die ik zocht. Het overzicht was super helder en ik kon de prijzen goed vergelijken. De cursus zelf was een fantastische ervaring!',
     name: 'Sanne (29)',
     context: 'Volgde Hypnobirthing in Utrecht',
     avatar:
@@ -9,7 +9,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      'Mijn partner en ik zagen door de bomen het bos niet meer. Lumi bracht daar verandering in. Binnen vijf minuten hadden we een weekendcursus geboekt die perfect bij ons paste.',
+      'Mijn partner en ik zagen door de bomen het bos niet meer. GeboorteHub bracht daar verandering in. Binnen vijf minuten hadden we een weekendcursus geboekt die perfect bij ons paste.',
     name: 'Mark (32)',
     context: 'Volgde Intensieve Bevalcursus',
     avatar:

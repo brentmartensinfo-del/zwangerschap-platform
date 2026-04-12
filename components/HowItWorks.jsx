@@ -3,13 +3,13 @@ const STEPS = [
     icon: 'lucide:search',
     title: 'Zoek & Filter',
     description:
-      'Vul je locatie in en ontdek het ruime aanbod van zwangerschapscursussen bij jou in de buurt.',
+      'Vul je locatie in en ontdek het ruime aanbod van cursussen bij jou in de buurt.',
   },
   {
     icon: 'lucide:layout-list',
     title: 'Vergelijk het aanbod',
     description:
-      'Lees reviews, bekijk de prijzen en ontdek welke cursus het beste aansluit bij jouw wensen.',
+      'Lees reviews, bekijk de prijzen en ontdek wat het beste aansluit bij jouw wensen.',
   },
   {
     icon: 'lucide:message-circle-heart',
@@ -29,7 +29,7 @@ export default function HowItWorks() {
         id="how-it-works-heading"
         className="text-2xl md:text-[28px] font-semibold mb-10 md:mb-12 text-foreground"
       >
-        Hoe Lumi werkt
+        Hoe GeboorteHub werkt
       </h2>
 
       <ol
