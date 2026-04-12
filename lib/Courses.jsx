@@ -111,12 +111,12 @@
       ],
       includes: [
         'Fysieke lessen met oefeningen',
-        'Gebruik van yogamatjes en kussens',
+        'Echte bevalverhalen',
         'Gezonde lunch van Sla',
         'Toegang tot online e-learning',
       ],
       guarantees: [
-        { icon: 'lucide:shield-check', text: 'Veilig betalen via iDEAL' },
+        { icon: 'lucide:shield-check', text: 'Meestal vergoed via je vezekering' },
         { icon: 'lucide:refresh-ccw',  text: 'Kosteloos annuleren tot 14 dagen vooraf' },
         { icon: 'lucide:award',        text: 'Geverifieerde aanbieder' },
       ],
@@ -133,11 +133,11 @@
     },
     {
       slug: 'hypnobirthing-voor-twee',
-      image: 'https://storage.googleapis.com/banani-generated-images/generated-images/f8047725-fff5-4be2-8dea-873aa1bf5bac.jpg',
+      image: 'https://images.squarespace-cdn.com/content/v1/5a2720408a02c70bedc3ca87/abca5562-b3e7-455d-b662-dd7f90252c29/Wellington+Obstetrics+-+Hypnobirthing+%26+Pain+Management.png',
       alt: 'Stel oefent hypnobirthing technieken in een rustige, warme omgeving',
       labels: ['4 weken', 'Hybride', 'NL'],
       title: 'Hypnobirthing voor Twee',
-      provider: 'Geboorte in Balans, Rotterdam',
+      provider: 'The HypnoBirth Course',
       rating: '4.8',
       ratingCount: '84',
       description: 'Een nuchtere en praktische cursus waar je samen met je partner leert ontspannen en vol vertrouwen de bevalling tegemoet gaat.',
@@ -156,7 +156,7 @@
     },
     {
       slug: 'online-cursus-goed-voorbereid',
-      image: 'https://storage.googleapis.com/banani-generated-images/generated-images/e7fe9998-0c4a-4572-ae0a-36dbf0dfc51f.jpg',
+      image: 'https://i0.wp.com/krachtigbevallen.nl/wp-content/uploads/2020/10/DSC_0833ok-b-2952091091-1635242886246.jpg',
       alt: 'Zwangere vrouw volgt online cursus op laptop in een lichte ruimte',
       labels: ['Zelfstudie', 'Online', 'EN / NL'],
       title: 'Online Cursus: Goed Voorbereid',
@@ -178,7 +178,7 @@
     },
     {
       slug: 'intensieve-bevalcursus-weekend',
-      image: 'https://storage.googleapis.com/banani-generated-images/generated-images/911782ef-1dbd-40ea-9709-f371c217ef5a.jpg',
+      image: 'https://www.liesinbalans.com/uploads/7/2/0/6/72067507/28616523-1818225478478423-7162459316943799848-o_orig.jpg',
       alt: 'Groep zwangere vrouwen in een kring tijdens een weekendcursus',
       labels: ['1 weekend', 'Fysiek', 'NL'],
       title: 'Intensieve Bevalcursus (Weekend)',
@@ -205,7 +205,7 @@
   const NEW_COURSES = [
     {
       slug: 'zwangerschapspilates',
-      image: 'https://storage.googleapis.com/banani-generated-images/generated-images/b236f7bb-dbb2-4c09-8511-11ca679a6d04.jpg',
+      image: 'https://www.themompany.com/wp-content/uploads/2021/12/IMG_6328-2.jpg',
       alt: 'Pilates apparatuur in een rustige, lichte studio voor zwangere vrouwen',
       labels: ['6 weken', 'Fysiek', 'NL'],
       title: 'Zwangerschapspilates',
@@ -228,7 +228,7 @@
     },
     {
       slug: 'mindful-pregnancy-course',
-      image: 'https://storage.googleapis.com/banani-generated-images/generated-images/53d8f310-55ba-4cef-85bf-b83c46481c52.jpg',
+      image: 'https://www.honest.com/dw/image/v2/BDBW_PRD/on/demandware.static/-/Library-Sites-HC-content/default/dwa3bf8727/blog/20200114/20200114.jpg',
       alt: 'Zwangere vrouw mediteert buiten bij zachte zonsopgang',
       labels: ['8 weken', 'Online', 'EN'],
       title: 'Mindful Pregnancy Course',
@@ -250,8 +250,8 @@
       quickInfo: DEFAULT_QUICK_INFO,
     },
     {
-      slug: 'zwangerschapszwemmen',
-      image: 'https://storage.googleapis.com/banani-generated-images/generated-images/4d1a9c05-f97d-4697-a785-ae219290a712.jpg',
+      slug: 'zwangerschapszwemmen-utrecht',
+      image: 'https://www.sportintilburg.nl//fileadmin/subsites/sport-in-tilburg/sport_en_bewegen/zwemmen/860_zwangerschapszwemmen.jpg',
       alt: 'Aqua aerobics les voor zwangere vrouwen in rustig blauw water',
       labels: ['10 weken', 'Fysiek', 'NL'],
       title: 'Zwangerschapszwemmen',
@@ -274,7 +274,7 @@
     },
     {
       slug: 'prive-bevalcursus-thuis',
-      image: 'https://storage.googleapis.com/banani-generated-images/generated-images/06bd7004-eacd-4a1d-8934-75eb13ea2ca6.jpg',
+      image: 'https://www.simonekamping.nl/wp-content/uploads/2018/10/IMG_8885.jpg',
       alt: 'Doula in gesprek met zwanger stel in een warme, gezellige woonkamer',
       labels: ['1 dag', 'Privé', 'NL'],
       title: 'Privé Bevalcursus Thuis',

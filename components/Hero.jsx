@@ -41,7 +41,7 @@ export default function Hero() {
         {/* ── Background image ── */}
         <div className="absolute inset-0">
           <img
-            src="https://images.pexels.com/photos/3988431/pexels-photo-3988431.jpeg"
+            src="https://images.pexels.com/photos/15797917/pexels-photo-15797917.jpeg"
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
