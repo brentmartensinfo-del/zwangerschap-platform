@@ -229,7 +229,7 @@ export default async function CourseDetailPage({ params }) {
                 </h2>
                 <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center p-6 border border-black/[0.08] rounded-xl bg-white">
                   <img
-                    src="https://images.pexels.com/photos/34317993/pexels-photo-34317993.jpeg"
+                    src="https://storage.googleapis.com/banani-avatars/avatar%2Ffemale%2F25-35%2FEuropean%2F3 "
                     alt={`Profielfoto van ${provider}`}
                     className="w-16 h-16 rounded-full object-cover shrink-0"
                     width={64}

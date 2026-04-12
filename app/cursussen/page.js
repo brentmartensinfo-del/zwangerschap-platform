@@ -68,33 +68,31 @@ export default async function CursussenPage({ searchParams }) {
 
             {/* ── Filters sidebar ──
                 Suspense is nodig omdat Filters useSearchParams() aanroept */}
+            <div className="hidden md:block">
             <Suspense fallback={<FiltersSkeleton />}>
-              <div className="hidden md:block">
-              <Filters filterOptions={filterOptions} />
-              </div>
+            <Filters filterOptions={filterOptions} />
             </Suspense>
+            </div>
 
-🔁 Door:
-<CoursesLayoutClient
-  total={allFiltered.length}
-  filterOptions={filterOptions}
->
-  {/* Active chips + sortering */}
-  <Suspense fallback={null}>
-    <ResultsBar total={allFiltered.length} />
-  </Suspense>
+            {/* ── Resultaten ── */}
+            <div className="flex-1 flex flex-col gap-6 min-w-0">
 
-  {/* Cursuskaarten */}
-  <CourseList courses={courses} />
+              {/* Active chips + sortering */}
+              <Suspense fallback={null}>
+                <ResultsBar total={allFiltered.length} />
+              </Suspense>
 
-  {/* Paginering */}
-  <Suspense fallback={null}>
-    <Pagination
-      currentPage={currentPage}
-      totalPages={totalPages}
-    />
-  </Suspense>
-</CoursesLayoutClient>
+              {/* Cursuskaarten grid */}
+              <CourseList courses={courses} />
+
+              {/* Paginering */}
+              <Suspense fallback={null}>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                />
+              </Suspense>
+            </div>
           </div>
         </div>
       </main>
