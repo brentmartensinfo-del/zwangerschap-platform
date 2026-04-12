@@ -295,7 +295,7 @@ export default function Hero() {
           <div className="hidden xl:flex self-end justify-self-end flex-col gap-3 w-[260px]">
             <StatCard
               label="Meest gekozen categorie"
-              value="Zwangerschapsyoga"
+               value={<a href="/cursussen?type=Zwangerschapsyoga">Zwangerschapsyoga</a>}
               sub="48 cursussen in heel Nederland"
             />
             <StatCard
