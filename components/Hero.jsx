@@ -41,7 +41,7 @@ export default function Hero() {
         {/* ── Background image ── */}
         <div className="absolute inset-0">
           <img
-            src="https://storage.googleapis.com/banani-generated-images/generated-images/bb02e9bd-da3c-4e2d-bcef-80ec69823bcc.jpg"
+            src="https://images.pexels.com/photos/3988431/pexels-photo-3988431.jpeg"
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
