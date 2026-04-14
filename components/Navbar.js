@@ -33,7 +33,7 @@ export default function Navbar() {
             >
               <iconify-icon icon="lucide:baby" class="text-[26px] text-primary" aria-hidden="true" />
               <span className="text-lg md:text-xl font-semibold tracking-tight text-foreground">
-                Lumi Cursussen
+                Mami Cursussen
               </span>
             </Link>
 

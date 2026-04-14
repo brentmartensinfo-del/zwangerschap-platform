@@ -56,3 +56,6 @@ ul {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+.bg-hero-overlay {
+  border-radius: 20px !important;
+}
