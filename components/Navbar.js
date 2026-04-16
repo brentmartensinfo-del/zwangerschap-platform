@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
-  { label: 'Over ons',      href: '/over-ons' },
+  { label: 'Over Birthly',  href: '/over-ons' },
   { label: 'FAQ',           href: '/faq' },
   { label: 'Aanbieders',    href: '/aanbieders' },
   { label: 'Contact',       href: '/contact' },

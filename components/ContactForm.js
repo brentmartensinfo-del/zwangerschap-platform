@@ -1,108 +1,82 @@
-'use client';
-
-import { useState } from 'react';
-
-const SUBJECTS = [
-  'Vraag over een cursus',
-  'Vraag over mijn boeking',
-  'Ik ben aanbieder en wil me aansluiten',
-  'Technisch probleem',
-  'Anders',
-];
-
-const INPUT_CLASS =
-  'w-full h-12 px-4 border border-black/[0.08] rounded-md bg-background text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-black/20 transition-colors font-sans';
+const WHATSAPP_NUMBER = '31653742392';
+const WHATSAPP_MESSAGE = 'Hi! Ik heb een vraag over Birthly.';
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export default function ContactForm() {
-  const [subject, setSubject] = useState('');
-
   return (
-    <div className="bg-white border border-black/[0.08] rounded-xl p-8 md:p-10 shadow-[0_4px_12px_rgba(0,0,0,0.03)]">
-      <form className="flex flex-col" noValidate>
+    <div className="relative bg-[#f0faf0] border border-primary/20 rounded-2xl overflow-hidden">
 
-        {/* Naam row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-          <FormGroup label="Voornaam" htmlFor="firstname">
-            <input
-              id="firstname"
-              type="text"
-              placeholder="Bijv. Sanne"
-              className={INPUT_CLASS}
-            />
-          </FormGroup>
-          <FormGroup label="Achternaam" htmlFor="lastname">
-            <input
-              id="lastname"
-              type="text"
-              placeholder="Bijv. de Vries"
-              className={INPUT_CLASS}
-            />
-          </FormGroup>
-        </div>
+      {/* Decorative circles */}
+      <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-primary/5" aria-hidden="true" />
+      <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full bg-primary/5" aria-hidden="true" />
 
-        {/* E-mail */}
-        <FormGroup label="E-mailadres" htmlFor="email" className="mb-6">
-          <input
-            id="email"
-            type="email"
-            placeholder="jouw@email.nl"
-            className={INPUT_CLASS}
-          />
-        </FormGroup>
+      <div className="relative z-10 p-8 md:p-10 flex flex-col gap-8">
 
-        {/* Onderwerp */}
-        <FormGroup label="Onderwerp" htmlFor="subject" className="mb-6">
-          <div className="relative">
-            <select
-              id="subject"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              className={`${INPUT_CLASS} appearance-none pr-10 ${
-                !subject ? 'text-muted-foreground' : 'text-foreground'
-              }`}
-            >
-              <option value="" disabled>Kies een onderwerp</option>
-              {SUBJECTS.map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
+        {/* Header */}
+        <div className="flex items-center gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shrink-0 shadow-[0_4px_16px_rgba(122,166,122,0.35)]">
             <iconify-icon
-              icon="lucide:chevron-down"
-              class="text-base text-muted-foreground absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none"
+              icon="lucide:message-circle-more"
+              class="text-[26px] text-white"
               aria-hidden="true"
             />
           </div>
-        </FormGroup>
+          <div>
+            <h2 className="text-xl md:text-2xl font-bold text-foreground leading-tight">
+              WhatsApp met ons
+            </h2>
+            <p className="text-[13px] text-primary font-medium mt-0.5">
+              Gemiddeld antwoord binnen 2 uur
+            </p>
+          </div>
+        </div>
 
-        {/* Bericht */}
-        <FormGroup label="Bericht" htmlFor="message" className="mb-2">
-          <textarea
-            id="message"
-            rows={5}
-            placeholder="Typ hier je vraag of opmerking..."
-            className="w-full px-4 pt-3 border border-black/[0.08] rounded-md bg-background text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-black/20 transition-colors resize-none font-sans"
-          />
-        </FormGroup>
+        {/* Description */}
+        <p className="text-[15px] text-muted-foreground leading-relaxed">
+          Heb je een vraag over een cursus, aanbieder of boeking? App ons
+          direct — geen formulieren, geen wachttijden.
+        </p>
 
-        {/* Submit */}
-        <button
-          type="submit"
-          className="mt-3 w-full h-12 bg-primary text-white rounded-md text-[15px] font-medium hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+        {/* Preview bubble */}
+        <div className="bg-white rounded-xl p-4 border border-black/[0.06]">
+          <p className="text-[11px] font-semibold text-muted-foreground uppercase tracking-wide mb-2">
+            Jouw bericht
+          </p>
+          <div className="inline-block bg-primary/10 rounded-xl rounded-tl-sm px-4 py-2.5 max-w-[280px]">
+            <p className="text-[13px] text-foreground leading-relaxed">
+              {WHATSAPP_MESSAGE}
+            </p>
+          </div>
+          <p className="text-[11px] text-muted-foreground mt-2">
+            Pas het bericht aan nadat je op de knop klikt.
+          </p>
+        </div>
+
+        {/* CTA */}
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2.5 w-full py-4 bg-primary text-white rounded-xl text-[15px] font-semibold hover:opacity-90 active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 shadow-[0_4px_16px_rgba(122,166,122,0.3)]"
         >
-          Verstuur bericht
-        </button>
-      </form>
-    </div>
-  );
-}
+          <iconify-icon icon="lucide:message-circle-more" class="text-xl" aria-hidden="true" />
+          Open WhatsApp
+        </a>
 
-function FormGroup({ label, htmlFor, children, className = '' }) {
-  return (
-    <div className={`flex flex-col gap-2 ${className}`}>
-      <label htmlFor={htmlFor} className="text-sm font-medium text-foreground">
-        {label}
-      </label>
-      {children}
+        {/* Trust items */}
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
+          {[
+            'Gratis & vrijblijvend',
+            'Veilig & vertrouwelijk',
+            'Ma–vr, 09:00–18:00',
+          ].map((item) => (
+            <span key={item} className="flex items-center gap-1.5 text-[12px] text-muted-foreground">
+              <iconify-icon icon="lucide:check-circle-2" class="text-primary text-sm" aria-hidden="true" />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

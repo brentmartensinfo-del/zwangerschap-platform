@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 const FAQS = [
   {
@@ -25,7 +26,7 @@ const FAQS = [
     id: 'faq-4',
     question: 'Betaal ik extra servicekosten als ik via GeboorteHub boek?',
     answer:
-      'Nee. GeboorteHub rekent geen enkele servicekosteb, onze dienstverlening is gratis. Je betaalt precies het bedrag dat op de cursuspagina staat vermeld, rechtstreeks aan de aanbieder.',
+      'Nee. GeboorteHub rekent geen enkele servicekosten, onze dienstverlening is gratis. Je betaalt precies het bedrag dat op de cursuspagina staat vermeld, rechtstreeks aan de aanbieder.',
   },
 ];
 
@@ -86,6 +87,25 @@ export default function FAQ() {
           );
         })}
       </dl>
+
+      {/* ── CTA ── */}
+      <div className="mt-8 md:mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 bg-secondary rounded-xl px-6 py-6 md:px-8 md:py-7">
+        <div className="text-center sm:text-left">
+          <p className="text-[15px] font-semibold text-foreground mb-1">
+            Meer vragen?
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Bekijk alle veelgestelde vragen op onze FAQ pagina.
+          </p>
+        </div>
+        <Link
+          href="/faq"
+          className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-medium rounded-md hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 whitespace-nowrap"
+        >
+          Bekijk alle veelgestelde vragen
+          <iconify-icon icon="lucide:arrow-right" class="text-base" aria-hidden="true" />
+        </Link>
+      </div>
     </section>
   );
 }
