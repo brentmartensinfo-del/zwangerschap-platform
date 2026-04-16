@@ -12,73 +12,102 @@ export default function CourseCard({
   description,
   price,
 }) {
-  return (
-    <article className="h-full bg-white border border-black/[0.08] rounded-xl overflow-hidden flex flex-col shadow-[0_4px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.07)] transition-shadow">
+  const isNew = rating === 'Nieuw';
 
-      {/* Image */}
-      <div className="relative w-full aspect-[4/3] overflow-hidden shrink-0">
+  return (
+    <article className="group h-full bg-white border border-black/[0.07] rounded-2xl overflow-hidden flex flex-col shadow-[0_2px_12px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.10)] hover:-translate-y-1 transition-all duration-300">
+
+      {/* ── Image ── */}
+      <Link
+        href={`/cursussen/${slug}`}
+        className="relative block w-full aspect-[4/3] overflow-hidden shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+        tabIndex={-1}
+        aria-hidden="true"
+      >
         <img
           src={image}
           alt={alt}
           width={400}
           height={300}
           loading="lazy"
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-[1.04] group-hover:brightness-[0.97] transition-all duration-500 ease-out"
         />
 
-        {/* Rating overlay */}
+        {/* Bottom gradient for label legibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent" />
+
+        {/* Labels on image */}
+        {labels.length > 0 && (
+          <ul className="absolute top-3 left-3 flex flex-wrap gap-1.5" role="list">
+            {labels.slice(0, 2).map((label) => (
+              <li
+                key={label}
+                className="text-[10px] px-2.5 py-1 bg-white/90 backdrop-blur-sm text-foreground rounded-full font-semibold uppercase tracking-wide shadow-sm"
+              >
+                {label}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Rating badge on image */}
         <div
-          className="absolute bottom-2 right-2 flex items-center gap-1 px-2 py-1 bg-white/90 rounded-md shadow-sm text-sm font-medium text-foreground"
-          aria-label={ratingCount ? `Beoordeling: ${rating} op basis van ${ratingCount} reviews` : rating}
+          className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1.5 bg-white/95 backdrop-blur-sm rounded-full shadow-sm"
+          aria-label={ratingCount ? `${rating} op basis van ${ratingCount} reviews` : rating}
         >
-          {rating !== 'Nieuw' && (
-            <iconify-icon icon="lucide:star" class="text-sm text-foreground" aria-hidden="true" />
-          )}
-          <span>{rating}</span>
-          {ratingCount && (
-            <span className="text-muted-foreground font-normal" aria-hidden="true">
-              ({ratingCount})
-            </span>
+          {isNew ? (
+            <span className="text-[11px] font-bold text-primary uppercase tracking-wide">Nieuw</span>
+          ) : (
+            <>
+              <iconify-icon icon="lucide:star" class="text-yellow-400 text-xs" aria-hidden="true" />
+              <span className="text-[12px] font-bold text-foreground">{rating}</span>
+              {ratingCount && (
+                <span className="text-[11px] text-muted-foreground">({ratingCount})</span>
+              )}
+            </>
           )}
         </div>
-      </div>
+      </Link>
 
-      {/* Content */}
-      <div className="p-4 md:p-5 flex flex-col flex-1">
+      {/* ── Content ── */}
+      <div className="p-5 md:p-6 flex flex-col flex-1 gap-3">
 
-        {/* Labels */}
-        <ul className="flex flex-wrap gap-1.5 mb-3" role="list" aria-label="Cursus kenmerken">
-          {labels.map((label) => (
-            <li
-              key={label}
-              className="text-[11px] px-2 py-1 bg-secondary text-secondary-foreground rounded font-medium uppercase tracking-wide"
-            >
-              {label}
-            </li>
-          ))}
-        </ul>
+        {/* Provider */}
+        <p className="text-[12px] font-semibold text-muted-foreground uppercase tracking-wide truncate">
+          {provider}
+        </p>
 
-        <h3 className="text-sm md:text-base font-semibold leading-snug mb-1.5 text-foreground line-clamp-2">
+        {/* Title */}
+        <h3 className="text-[15px] md:text-[16px] font-bold text-foreground leading-snug line-clamp-2 -mt-1">
           {title}
         </h3>
 
-        <p className="text-[13px] text-muted-foreground mb-2.5 truncate">{provider}</p>
-
+        {/* Description */}
         <p className="text-[13px] text-muted-foreground leading-relaxed line-clamp-2 flex-1">
           {description}
         </p>
 
-        {/* Footer — mt-auto pins this to the bottom */}
-        <div className="flex items-center justify-between pt-3 md:pt-4 border-t border-black/[0.06] mt-auto">
-          <span className="text-base md:text-lg font-semibold text-foreground">
-            {price}
-          </span>
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-4 border-t border-black/[0.06] mt-auto">
+          <div>
+            <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide mb-0.5">
+              Prijs
+            </p>
+            <span className="text-[17px] font-bold text-foreground leading-none">
+              {price}
+            </span>
+          </div>
           <Link
             href={`/cursussen/${slug}`}
-            className="px-3 md:px-4 py-2 bg-primary text-white rounded-md text-[13px] font-medium hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-            aria-label={`Bekijk cursus: ${title}`}
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-primary text-white rounded-xl text-[13px] font-semibold hover:opacity-90 active:scale-[0.97] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+            aria-label={`Bekijk ${title}`}
           >
             Bekijk cursus
+            <iconify-icon
+              icon="lucide:arrow-right"
+              class="text-sm group-hover:translate-x-0.5 transition-transform"
+              aria-hidden="true"
+            />
           </Link>
         </div>
       </div>

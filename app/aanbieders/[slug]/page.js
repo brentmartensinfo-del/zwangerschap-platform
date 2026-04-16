@@ -51,7 +51,7 @@ export default async function ProviderPage({ params }) {
             width={1440}
             height={480}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent" />
 
           <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-8 md:px-16 pb-10 md:pb-14">
             <div className="max-w-[900px]">
@@ -230,33 +230,61 @@ export default async function ProviderPage({ params }) {
             <aside className="w-full lg:sticky lg:top-24 flex flex-col gap-4" aria-label="Contact en praktische info">
 
               {/* CTA card */}
-              <div className="bg-white border border-black/[0.07] rounded-xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.05)]">
-                <p className="text-[13px] font-semibold text-muted-foreground uppercase tracking-wide mb-1">
-                  Interesse?
-                </p>
-                <h3 className="text-xl font-bold text-foreground mb-1">
-                  Neem contact op
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  Heb je een vraag of wil je een plek reserveren? {provider.name} beantwoordt
-                  je bericht binnen één werkdag.
-                </p>
-                <a
-                  href={`mailto:${provider.practical.find(p => p.label === 'E-mail')?.value}`}
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-primary text-white rounded-md text-sm font-semibold hover:opacity-90 transition-opacity"
-                >
-                  <iconify-icon icon="lucide:mail" class="text-base" aria-hidden="true" />
-                  Stuur een bericht
-                </a>
-                {courses.length > 0 && (
-                  <Link
-                    href={`/cursussen?city=${provider.city}&type=${encodeURIComponent(provider.type)}`}
-                    className="mt-3 flex items-center justify-center gap-2 w-full py-3 border border-black/[0.08] text-foreground rounded-md text-sm font-medium hover:border-black/20 transition-colors"
+              <div className="bg-white border border-black/[0.07] rounded-2xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.06)]">
+                {/* Top accent */}
+                <div className="h-1 w-full bg-gradient-to-r from-primary/60 to-primary" />
+
+                <div className="p-7">
+                  {/* Label */}
+                  <div className="flex items-center gap-2 mb-5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" aria-hidden="true" />
+                    <span className="text-[11px] font-bold text-primary uppercase tracking-widest">
+                      Direct boeken
+                    </span>
+                  </div>
+
+                  {/* Heading */}
+                  <h3 className="text-xl font-bold text-foreground mb-2 leading-snug">
+                    Bezoek de website van {provider.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                    Bekijk het volledige aanbod, lees meer over de aanpak en
+                    boek rechtstreeks bij de aanbieder — zonder tussenpersoon.
+                  </p>
+
+                  {/* Rating */}
+                  <div className="flex items-center gap-2 mb-6 pb-6 border-b border-black/[0.06]">
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <iconify-icon
+                          key={i}
+                          icon="lucide:star"
+                          class={`text-sm ${i < Math.floor(Number(provider.rating)) ? 'text-yellow-400' : 'text-black/10'}`}
+                          aria-hidden="true"
+                        />
+                      ))}
+                    </div>
+                    <span className="text-sm font-semibold text-foreground">{provider.rating}</span>
+                    <span className="text-sm text-muted-foreground">({provider.reviewCount})</span>
+                  </div>
+
+                  {/* CTA */}
+                  <a
+                    href={provider.website ?? '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-3.5 bg-primary text-white rounded-xl text-sm font-semibold hover:opacity-90 active:scale-[0.98] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                   >
-                    <iconify-icon icon="lucide:layout-list" class="text-base" aria-hidden="true" />
-                    Bekijk alle cursussen
-                  </Link>
-                )}
+                    Ga naar website
+                    <iconify-icon icon="lucide:arrow-up-right" class="text-base" aria-hidden="true" />
+                  </a>
+
+                  {/* Trust note */}
+                  <p className="flex items-center justify-center gap-1.5 text-[12px] text-muted-foreground mt-3">
+                    <iconify-icon icon="lucide:shield-check" class="text-primary text-sm shrink-0" aria-hidden="true" />
+                    Officiële website van {provider.name}
+                  </p>
+                </div>
               </div>
 
               {/* Praktische info */}
@@ -267,7 +295,7 @@ export default async function ProviderPage({ params }) {
                 <ul className="flex flex-col gap-4" role="list">
                   {provider.practical.map((item) => (
                     <li key={item.label} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-md bg-white flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-md bg-white flex items-center justify-center shrink-0 shadow-sm">
                         <iconify-icon icon={item.icon} class="text-base text-foreground" aria-hidden="true" />
                       </div>
                       <div>
