@@ -51,7 +51,7 @@ function CourseGrid({ courses }) {
  */
 export function PopularCourses({ courses }) {
   return (
-    <section className="py-8 md:py-10" aria-labelledby="popular-heading">
+    <section className="py-8 md:py-1" aria-labelledby="popular-heading">
       <SectionHeader title="Populaire cursussen" id="popular-heading" />
       <CourseGrid courses={courses} />
     </section>

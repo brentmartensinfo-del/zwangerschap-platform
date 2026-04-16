@@ -1,83 +1,126 @@
+import Link from 'next/link';
+
 const FOOTER_COLS = [
   {
-    title: 'Over Lumi',
-    links: ['Ons verhaal', 'Hoe het werkt', 'Klantervaringen', 'Werken bij Lumi'],
+    title: 'Over Birthly',
+    links: [
+      { label: 'Ons verhaal',      href: '/over-ons' },
+      { label: 'Hoe het werkt',    href: '/#hoe-het-werkt' },
+      { label: 'Klantervaringen',  href: '/#testimonials' },
+      { label: 'Werken bij Lumi',  href: '/contact' },
+    ],
   },
   {
     title: 'Voor Aanbieders',
-    links: ['Cursus aanmelden', 'Partner worden', 'Succesverhalen', 'Inloggen partners'],
+    links: [
+      { label: 'Cursus aanmelden', href: '/contact' },
+      { label: 'Partner worden',   href: '/aanbieders' },
+      { label: 'Succesverhalen',   href: '/over-ons' },
+      { label: 'Inloggen partners', href: '/contact' },
+    ],
   },
   {
     title: 'Hulp & Contact',
-    links: ['Veelgestelde vragen', 'Klantenservice', 'Contact opnemen'],
+    links: [
+      { label: 'Veelgestelde vragen', href: '/faq' },
+      { label: 'Contact opnemen',     href: '/contact' },
+    ],
   },
 ];
 
-const LEGAL_LINKS = ['Algemene Voorwaarden', 'Privacybeleid', 'Cookiebeleid'];
+const LEGAL_LINKS = [
+  { label: 'Algemene Voorwaarden', href: '/contact' },
+  { label: 'Privacybeleid',        href: '/contact' },
+  { label: 'Cookiebeleid',         href: '/contact' },
+];
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-black/[0.08] pt-12 md:pt-16 pb-8 px-4 sm:px-8 md:px-12">
+    <footer className="bg-foreground text-background pt-16 md:pt-20 pb-8 px-6 sm:px-10 md:px-12">
 
-      {/* ── Main grid ──
-          Mobile: 2 cols (brand full-width + 2 cols link groups)
-          md+: 4 cols
-      */}
-      <div className="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-8 md:gap-12 mb-10 md:mb-12">
+      {/* ── Main grid ── */}
+      <div className="max-w-[1200px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10 md:gap-12 pb-14 md:pb-16 border-b border-white/[0.08]">
 
-        {/* Brand column — full width on mobile */}
-        <div className="col-span-2 md:col-span-1">
-          <a href="/" className="inline-flex items-center gap-2.5 mb-3 md:mb-4" aria-label="Lumi Cursussen – home">
-            <iconify-icon icon="lucide:flower-2" class="text-2xl text-primary" aria-hidden="true" />
-            <span className="text-lg md:text-xl font-semibold tracking-tight text-foreground">
-              Lumi Cursussen
-            </span>
-          </a>
-          <p className="text-sm text-muted-foreground leading-relaxed max-w-[300px]">
-            Lumi is het onafhankelijke platform waar aanstaande ouders in alle rust de
-            perfecte voorbereiding op hun bevalling kunnen vinden, vergelijken en boeken.
-          </p>
+          {/* ── Brand column ── */}
+          <div className="flex flex-col gap-5">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2.5 group"
+              aria-label="Lumi Cursussen – home"
+            >
+              <iconify-icon
+                icon="lucide:flower-2"
+                class="text-2xl text-primary"
+                aria-hidden="true"
+              />
+              <span className="text-lg font-semibold tracking-tight text-white">
+                Lumi Cursussen
+              </span>
+            </Link>
+
+            <p className="text-[14px] text-white/50 leading-relaxed max-w-[280px]">
+              Het onafhankelijke platform voor aanstaande ouders die de perfecte
+              zwangerschapscursus willen vinden, vergelijken en boeken.
+            </p>
+
+            {/* Trust badges */}
+            <ul className="flex flex-col gap-2.5 mt-1" role="list">
+              {[
+                'Gratis te gebruiken',
+                'Onafhankelijk & transparant',
+                'Alleen gecertificeerde aanbieders',
+              ].map((item) => (
+                <li key={item} className="flex items-center gap-2 text-[13px] text-white/40">
+                  <iconify-icon icon="lucide:check-circle-2" class="text-primary text-sm shrink-0" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* ── Link columns ── */}
+          {FOOTER_COLS.map((col) => (
+            <nav key={col.title} aria-label={col.title}>
+              <h3 className="text-[13px] font-bold text-white/90 uppercase tracking-widest mb-5">
+                {col.title}
+              </h3>
+              <ul className="flex flex-col gap-3.5" role="list">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="text-[14px] text-white/45 hover:text-white transition-colors focus-visible:outline-none focus-visible:underline"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
         </div>
 
-        {/* Link columns */}
-        {FOOTER_COLS.map((col) => (
-          <nav key={col.title} aria-label={col.title}>
-            <h3 className="text-[13px] md:text-[15px] font-semibold mb-4 md:mb-6 text-foreground">
-              {col.title}
-            </h3>
-            <ul className="flex flex-col gap-3 md:gap-4" role="list">
-              {col.links.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-[13px] md:text-sm text-muted-foreground hover:text-foreground transition-colors focus-visible:outline-none focus-visible:underline"
+        {/* ── Bottom bar ── */}
+        <div className="pt-7 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <p className="text-[13px] text-white/30">
+            © 2025 Lumi Cursussen B.V. Alle rechten voorbehouden.
+          </p>
+          <nav aria-label="Juridische links">
+            <ul className="flex flex-wrap gap-5" role="list">
+              {LEGAL_LINKS.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-[13px] text-white/30 hover:text-white/70 transition-colors focus-visible:outline-none focus-visible:underline"
                   >
-                    {link}
-                  </a>
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </nav>
-        ))}
-      </div>
-
-      {/* ── Bottom bar ── */}
-      <div className="pt-6 md:pt-8 border-t border-black/[0.06] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-[12px] md:text-[13px] text-muted-foreground">
-        <p>© 2025 Lumi Cursussen B.V. Alle rechten voorbehouden.</p>
-        <nav aria-label="Juridische links">
-          <ul className="flex flex-wrap gap-4 md:gap-6" role="list">
-            {LEGAL_LINKS.map((item) => (
-              <li key={item}>
-                <a
-                  href="#"
-                  className="hover:text-foreground transition-colors focus-visible:outline-none focus-visible:underline"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        </div>
       </div>
     </footer>
   );
