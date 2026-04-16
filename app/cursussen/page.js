@@ -27,13 +27,14 @@ export default async function CursussenPage({ searchParams }) {
   const locationLabel = city  ? ` in ${city}` : '';
   const typeLabel     = type  ?? 'Zwangerschapscursussen';
   const pageTitle     = `${typeLabel}${locationLabel}`;
-  const hasFilters    = !!(type || city || language || q || price);
+  const hasFilters        = !!(type || city || language || q || price);
+  const activeFilterCount = [type, city, language, q, price].filter(Boolean).length;
 
   return (
     <>
       <Navbar />
 
-      <main className="flex-1 pt-[0px]">
+      <main className="flex-1 pt-[65px]">
 
         {/* ── Page header ── */}
         <div className="border-b border-black/[0.06] bg-background">
@@ -102,7 +103,7 @@ export default async function CursussenPage({ searchParams }) {
                     )}
                   </div>
                   <div className="p-5">
-                    <Filters filterOptions={filterOptions} />
+                    <Filters filterOptions={filterOptions} activeFilterCount={activeFilterCount} />
                   </div>
                 </div>
               </aside>
