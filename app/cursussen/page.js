@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Filters from '@/components/Filters';
@@ -7,89 +8,130 @@ import CourseList from '@/components/CourseList';
 import Pagination from '@/components/Pagination';
 import { getAllCourses, getFilterOptions } from '@/lib/courses';
 
-/** Aantal cursussen per pagina */
 const PAGE_SIZE = 9;
 
-/**
- * /cursussen — Server Component
- *
- * searchParams die worden ondersteund:
- *   ?type=Zwangerschapsyoga
- *   ?city=Amsterdam
- *   ?language=Nederlands
- *   ?sort=beoordeling | prijs-laag | prijs-hoog | aanbevolen
- *   ?page=2
- *
- * Alle filtering en paginering gebeurt server-side via lib/courses.js.
- * Client Components (Filters, ResultsBar, Pagination) schrijven alleen
- * terug naar de URL — de pagina herlaadt en de server doet de rest.
- */
 export default async function CursussenPage({ searchParams }) {
   const { type, city, language, q, price, sort, page } = await searchParams;
 
   const currentPage = Math.max(1, parseInt(page ?? '1', 10));
 
-  // Fetch data parallel
   const [allFiltered, filterOptions] = await Promise.all([
     getAllCourses({ type, city, language, q, price, sort }),
     getFilterOptions(),
   ]);
 
-  // Paginering
   const totalPages = Math.ceil(allFiltered.length / PAGE_SIZE);
-  const start = (currentPage - 1) * PAGE_SIZE;
-  const courses = allFiltered.slice(start, start + PAGE_SIZE);
+  const start      = (currentPage - 1) * PAGE_SIZE;
+  const courses    = allFiltered.slice(start, start + PAGE_SIZE);
 
-  // Paginatitel
-  const locationLabel = city ? ` in ${city}` : '';
-  const typeLabel     = type ?? 'Zwangerschapscursussen';
+  const locationLabel = city  ? ` in ${city}` : '';
+  const typeLabel     = type  ?? 'Zwangerschapscursussen';
   const pageTitle     = `${typeLabel}${locationLabel}`;
+  const hasFilters    = !!(type || city || language || q || price);
 
   return (
     <>
       <Navbar />
 
-      <main className="flex-1">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 md:px-12 py-10 md:py-14 pb-20">
+      <main className="flex-1 pt-[0px]">
 
-          {/* ── Pagina-header ── */}
-          <header className="mb-8">
-            <h1 className="text-2xl md:text-[32px] font-semibold text-foreground tracking-tight mb-2">
-              {pageTitle}
-            </h1>
-            <p className="text-sm md:text-base text-muted-foreground">
-              {allFiltered.length}{' '}
-              {allFiltered.length === 1 ? 'resultaat' : 'resultaten'} gevonden
-              {locationLabel}
-            </p>
-          </header>
+        {/* ── Page header ── */}
+        <div className="border-b border-black/[0.06] bg-background">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 py-8 md:py-10">
 
-          <div className="flex flex-col md:flex-row gap-10 md:gap-12 items-start">
+            {/* Breadcrumb */}
+            <nav aria-label="Kruimelpad" className="flex items-center gap-2 text-[13px] text-muted-foreground mb-4">
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
+              <iconify-icon icon="lucide:chevron-right" class="text-xs" aria-hidden="true" />
+              <span className="text-foreground font-medium">{typeLabel}</span>
+            </nav>
 
-            {/* ── Filters sidebar ──
-                Suspense is nodig omdat Filters useSearchParams() aanroept */}
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+              <div>
+                <h1 className="text-2xl md:text-[30px] font-bold text-foreground tracking-tight mb-1.5">
+                  {pageTitle}
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">{allFiltered.length}</span>
+                  {' '}{allFiltered.length === 1 ? 'cursus' : 'cursussen'} gevonden
+                  {locationLabel}
+                  {hasFilters && (
+                    <Link
+                      href="/cursussen"
+                      className="ml-3 text-primary hover:opacity-75 transition-opacity"
+                    >
+                      Wis filters
+                    </Link>
+                  )}
+                </p>
+              </div>
+
+              {/* Trust row */}
+              <div className="hidden md:flex items-center gap-5 text-[13px] text-muted-foreground">
+                <span className="flex items-center gap-1.5">
+                  <iconify-icon icon="lucide:shield-check" class="text-primary text-sm" aria-hidden="true" />
+                  Geverifieerde aanbieders
+                </span>
+                <span className="w-px h-4 bg-black/[0.08]" aria-hidden="true" />
+                <span className="flex items-center gap-1.5">
+                  <iconify-icon icon="lucide:star" class="text-primary text-sm" aria-hidden="true" />
+                  4.8 gemiddeld
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ── Main layout ── */}
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 py-8 md:py-10 pb-24">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
+
+            {/* ── Filters sidebar ── */}
             <Suspense fallback={<FiltersSkeleton />}>
-              <Filters filterOptions={filterOptions} />
+              <aside className="w-full lg:w-[268px] shrink-0 lg:sticky lg:top-[89px]">
+                <div className="bg-white border border-black/[0.07] rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
+                  <div className="px-5 py-4 border-b border-black/[0.06] flex items-center justify-between">
+                    <h2 className="text-[14px] font-bold text-foreground">Filters</h2>
+                    {hasFilters && (
+                      <Link
+                        href="/cursussen"
+                        className="text-[12px] text-primary font-medium hover:opacity-75 transition-opacity"
+                      >
+                        Alles wissen
+                      </Link>
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <Filters filterOptions={filterOptions} />
+                  </div>
+                </div>
+              </aside>
             </Suspense>
 
-            {/* ── Resultaten ── */}
-            <div className="flex-1 flex flex-col gap-6 min-w-0">
+            {/* ── Results ── */}
+            <div className="flex-1 flex flex-col gap-5 min-w-0">
 
-              {/* Active chips + sortering */}
+              {/* ResultsBar */}
               <Suspense fallback={null}>
                 <ResultsBar total={allFiltered.length} />
               </Suspense>
 
-              {/* Cursuskaarten grid */}
-              <CourseList courses={courses} />
+              {/* Course grid */}
+              {courses.length > 0 ? (
+                <CourseList courses={courses} />
+              ) : (
+                <EmptyState hasFilters={hasFilters} />
+              )}
 
-              {/* Paginering */}
-              <Suspense fallback={null}>
-                <Pagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                />
-              </Suspense>
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <Suspense fallback={null}>
+                  <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                  />
+                </Suspense>
+              )}
             </div>
           </div>
         </div>
@@ -100,7 +142,7 @@ export default async function CursussenPage({ searchParams }) {
   );
 }
 
-/* ── Metadata ──────────────────────────────────────────────────────────────── */
+/* ── Metadata ────────────────────────────────────────────────────────────── */
 export async function generateMetadata({ searchParams }) {
   const { type, city } = await searchParams;
   const location = city ? ` in ${city}` : '';
@@ -111,19 +153,52 @@ export async function generateMetadata({ searchParams }) {
   };
 }
 
-/* ── Skeleton voor de filters terwijl Suspense laadt ───────────────────────── */
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+function EmptyState({ hasFilters }) {
+  return (
+    <div className="flex flex-col items-center justify-center text-center py-20 px-6 bg-white border border-black/[0.07] rounded-2xl">
+      <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center mb-5">
+        <iconify-icon icon="lucide:search-x" class="text-2xl text-muted-foreground" aria-hidden="true" />
+      </div>
+      <h3 className="text-[17px] font-bold text-foreground mb-2">
+        Geen cursussen gevonden
+      </h3>
+      <p className="text-sm text-muted-foreground max-w-[340px] leading-relaxed mb-7">
+        {hasFilters
+          ? 'Je huidige filters geven geen resultaten. Probeer minder filters te gebruiken of een andere combinatie.'
+          : 'Er zijn momenteel geen cursussen beschikbaar. Kom later terug.'}
+      </p>
+      {hasFilters && (
+        <Link
+          href="/cursussen"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
+        >
+          <iconify-icon icon="lucide:x" class="text-sm" aria-hidden="true" />
+          Wis alle filters
+        </Link>
+      )}
+    </div>
+  );
+}
+
+/* ── Filters skeleton ────────────────────────────────────────────────────── */
 function FiltersSkeleton() {
   return (
     <div
-      className="w-full md:w-[280px] shrink-0 flex flex-col gap-6 animate-pulse"
+      className="w-full lg:w-[268px] shrink-0 bg-white border border-black/[0.07] rounded-2xl overflow-hidden animate-pulse"
       aria-hidden="true"
     >
-      {[1, 2, 3].map((i) => (
-        <div key={i} className="flex flex-col gap-3 pb-6 border-b border-black/[0.06]">
-          <div className="h-4 w-24 bg-muted rounded" />
-          <div className="h-10 w-full bg-muted rounded-md" />
-        </div>
-      ))}
+      <div className="px-5 py-4 border-b border-black/[0.06]">
+        <div className="h-4 w-16 bg-muted rounded" />
+      </div>
+      <div className="p-5 flex flex-col gap-6">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="flex flex-col gap-3">
+            <div className="h-3 w-20 bg-muted rounded" />
+            <div className="h-9 w-full bg-muted rounded-lg" />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

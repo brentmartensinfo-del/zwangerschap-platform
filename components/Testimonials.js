@@ -3,7 +3,7 @@ import Link from 'next/link';
 const TESTIMONIALS = [
   {
     quote:
-      'Via GeboorteHub vond ik precies de hypnobirthing cursus die ik zocht. Het overzicht was super helder en ik kon de prijzen goed vergelijken. De cursus zelf was een fantastische ervaring!',
+      'Via Birthly vond ik precies de hypnobirthing cursus die ik zocht. Het overzicht was super helder en ik kon de prijzen goed vergelijken. De cursus zelf was een fantastische ervaring!',
     name: 'Sanne (29)',
     context: 'Volgde Hypnobirthing in Utrecht',
     avatar:
@@ -12,7 +12,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      'Mijn partner en ik zagen door de bomen het bos niet meer. GeboorteHub bracht daar verandering in. Binnen vijf minuten hadden we een weekendcursus geboekt die perfect bij ons paste.',
+      'Mijn partner en ik zagen door de bomen het bos niet meer. Birthly bracht daar verandering in. Binnen vijf minuten hadden we een weekendcursus geboekt die perfect bij ons paste.',
     name: 'Mark (32)',
     context: 'Volgde Intensieve Bevalcursus',
     avatar:
@@ -52,7 +52,7 @@ export default function Testimonials() {
             >
               Waarom ouders
               <br className="hidden sm:block" />
-              voor Lumi kiezen
+              Birthly gebruiken
             </h2>
           </div>
           <div className="flex items-center gap-3 md:pb-1">

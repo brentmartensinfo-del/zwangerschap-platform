@@ -9,15 +9,6 @@ const PRICE_OPTIONS = [
   { label: '€150+',      value: 'high' },
 ];
 
-/**
- * Filters
- * Client Component — leest de actieve filters uit de URL (searchParams)
- * en schrijft wijzigingen terug via router.push, zodat de Server Component
- * (page.js) de gefilterde data opnieuw kan fetchen.
- *
- * Props:
- *  - filterOptions: { types, cities, languages }  (server-side opgehaald)
- */
 export default function Filters({ filterOptions }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -29,23 +20,16 @@ export default function Filters({ filterOptions }) {
   const activeQuery    = searchParams.get('q') ?? '';
   const activePrice    = searchParams.get('price') ?? '';
 
-  /** Pas één param aan, bewaar de rest */
   const setParam = useCallback(
     (key, value) => {
       const params = new URLSearchParams(searchParams.toString());
-      if (value) {
-        params.set(key, value);
-      } else {
-        params.delete(key);
-      }
-      // Reset naar pagina 1 bij elke filterwijziging
+      if (value) { params.set(key, value); } else { params.delete(key); }
       params.delete('page');
       router.push(`${pathname}?${params.toString()}`);
     },
     [router, pathname, searchParams],
   );
 
-  /** Toggle een checkbox-waarde (aan = zet, uit = verwijder) */
   const toggle = useCallback(
     (key, value) => {
       const current = searchParams.get(key);
@@ -60,7 +44,7 @@ export default function Filters({ filterOptions }) {
 
   return (
     <aside
-      className="w-full md:w-[280px] shrink-0 flex flex-col gap-8"
+      className="w-full flex flex-col gap-8"
       aria-label="Filters"
     >
       {/* ── Zoeken ── */}
@@ -73,13 +57,13 @@ export default function Filters({ filterOptions }) {
             onChange={(e) => setParam('q', e.target.value)}
             placeholder="Zoek cursus of thema..."
             aria-label="Zoek cursus of thema"
-            className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground"
+            className="flex-1 min-w-0 bg-transparent outline-none text-foreground placeholder:text-muted-foreground"
           />
           {activeQuery && (
             <button
               onClick={() => setParam('q', '')}
               aria-label="Wis zoekterm"
-              className="hover:opacity-70 transition-opacity"
+              className="shrink-0 hover:opacity-70 transition-opacity"
             >
               <iconify-icon icon="lucide:x" class="text-sm text-muted-foreground" />
             </button>
@@ -89,17 +73,17 @@ export default function Filters({ filterOptions }) {
 
       {/* ── Locatie ── */}
       <FilterGroup title="Locatie">
-        {/* Stad opties */}
-        <div className="flex flex-wrap gap-2 mt-1">
+        <div className="grid grid-cols-2 gap-1.5 mt-1">
           {filterOptions.cities.map((city) => (
             <button
               key={city}
               onClick={() => toggle('city', city)}
-              className={`px-3 py-1.5 rounded-full text-[13px] font-medium border transition-colors ${
+              className={`px-3 py-2 rounded-lg text-[13px] font-medium border transition-colors truncate text-center ${
                 activeCity === city
                   ? 'bg-foreground text-background border-foreground'
                   : 'bg-white border-black/[0.08] text-foreground hover:border-black/20'
               }`}
+              title={city}
             >
               {city}
             </button>
@@ -186,7 +170,6 @@ function CheckboxItem({ label, checked, onChange }) {
         onClick={onChange}
         className="flex items-center gap-3 w-full text-left group"
       >
-        {/* Checkbox box */}
         <span
           className={`w-5 h-5 rounded shrink-0 border flex items-center justify-center transition-colors ${
             checked
@@ -199,7 +182,7 @@ function CheckboxItem({ label, checked, onChange }) {
             <iconify-icon icon="lucide:check" class="text-xs text-white" />
           )}
         </span>
-        <span className="text-sm text-foreground">{label}</span>
+        <span className="text-sm text-foreground truncate">{label}</span>
       </button>
     </li>
   );
