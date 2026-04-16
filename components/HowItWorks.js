@@ -6,36 +6,27 @@ import Link from 'next/link';
 const STEPS = [
   {
     number: '01',
-    emoji: '🔍',
     title: 'Vertel ons wat je zoekt',
-    subtitle: 'In minder dan 1 minuut',
     description:
-      'Vul je stad en het type cursus in. Yoga, hypnobirthing, weekendcursus — jij bepaalt. We tonen meteen het aanbod bij jou in de buurt.',
-    microcopy: 'Geen account nodig',
-    color: 'from-[#eaf6ee] to-[#f6ede8]',
-    accent: 'bg-primary/10 text-primary',
+      'Vul je stad en het type cursus in. We tonen meteen het aanbod bij jou in de buurt — yoga, hypnobirthing, weekendcursus, alles is er.',
+    detail: 'Geen account nodig',
+    icon: 'lucide:search',
   },
   {
     number: '02',
-    emoji: '💛',
     title: 'Vergelijk op jouw manier',
-    subtitle: 'Rustig en zonder druk',
     description:
-      'Lees eerlijke ervaringen van andere ouders, vergelijk prijzen en bekijk wat er precies bij de cursus is inbegrepen. Neem de tijd die je nodig hebt.',
-    microcopy: 'Volledig gratis en onafhankelijk',
-    color: 'from-[#fff8e6] to-[#eaf6ee]',
-    accent: 'bg-amber-100 text-amber-700',
+      'Lees echte ervaringen van andere ouders, vergelijk prijzen en bekijk wat er precies bij de cursus is inbegrepen. Rustig, zonder druk.',
+    detail: 'Volledig gratis en onafhankelijk',
+    icon: 'lucide:layers',
   },
   {
     number: '03',
-    emoji: '🌸',
     title: 'Boek direct bij de aanbieder',
-    subtitle: 'Zonder tussenpersoon',
     description:
-      'Heb je jouw cursus gevonden? Je gaat direct naar de aanbieder — geen extra servicekosten, geen omwegen. Gewoon boeken en genieten.',
-    microcopy: 'Geen verborgen kosten',
-    color: 'from-[#f6ede8] to-[#eaf6ee]',
-    accent: 'bg-rose-100 text-rose-600',
+      'Je gaat rechtstreeks naar de aanbieder — geen extra servicekosten, geen omwegen. Gewoon boeken en je richten op wat telt.',
+    detail: 'Geen verborgen kosten',
+    icon: 'lucide:calendar-check',
   },
 ];
 
@@ -45,33 +36,43 @@ export default function HowItWorks() {
   return (
     <section
       id="hoe-het-werkt"
-      className="py-20 md:py-28 px-4 sm:px-8 md:px-12"
+      className="relative py-20 md:py-28 px-4 sm:px-8 md:px-12 overflow-hidden"
       aria-labelledby="how-it-works-heading"
     >
-      <div className="max-w-[1100px] mx-auto">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <img
+          src="https://storage.googleapis.com/banani-generated-images/generated-images/55c4601e-7001-4d27-a8c4-a76438bd7eb5.jpg"
+          alt=""
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Overlay — keeps text readable */}
+        <div className="absolute inset-0 bg-background/90" />
+      </div>
+      <div className="relative z-10 max-w-[1060px] mx-auto">
 
-        {/* Header */}
-        <div className="text-center mb-16 md:mb-20">
-          <span className="inline-block text-[13px] font-semibold text-primary uppercase tracking-widest mb-4">
-            Zo simpel werkt het
-          </span>
+        {/* ── Header ── */}
+        <div className="max-w-[520px] mb-16 md:mb-20">
+          <p className="text-[12px] font-semibold text-primary uppercase tracking-widest mb-4">
+            Hoe het werkt
+          </p>
           <h2
             id="how-it-works-heading"
-            className="text-3xl md:text-4xl font-bold text-foreground tracking-tight mb-5"
+            className="text-3xl md:text-[38px] font-bold text-foreground tracking-tight leading-[1.1] mb-5"
           >
-            Van zoeken naar gevonden
-            <br className="hidden sm:block" />
-            <span className="text-primary"> in drie stappen</span>
+            Van zoeken naar gevonden,
+            in drie stappen
           </h2>
-          <p className="text-base md:text-[17px] text-muted-foreground max-w-[520px] mx-auto leading-relaxed">
-            Geen stress, geen eindeloos zoeken. Lumi neemt je bij de hand zodat
-            jij je kunt focussen op wat echt telt.
+          <p className="text-base md:text-[17px] text-muted-foreground leading-relaxed">
+            Geen stress, geen eindeloos zoeken. Lumi neemt je bij de hand.
           </p>
         </div>
 
-        {/* Steps — horizontal journey on desktop, stacked on mobile */}
-        <ol className="relative flex flex-col md:flex-row gap-6 md:gap-0" role="list">
-
+        {/* ── Steps ── */}
+        <ol
+          className="flex flex-col md:grid md:grid-cols-3 gap-0 md:gap-8"
+          role="list"
+        >
           {STEPS.map((step, i) => {
             const isActive = activeStep === i;
             const isLast = i === STEPS.length - 1;
@@ -79,132 +80,96 @@ export default function HowItWorks() {
             return (
               <li
                 key={step.number}
-                className="relative flex-1"
+                className="relative"
                 onMouseEnter={() => setActiveStep(i)}
                 onMouseLeave={() => setActiveStep(null)}
               >
-                {/* Connector line between steps (desktop only) */}
-                {!isLast && (
-                  <div
-                    className="hidden md:block absolute top-[52px] left-[calc(50%+80px)] right-0 h-px z-0"
-                    aria-hidden="true"
-                  >
-                    <div className="relative h-full">
-                      {/* Base line */}
-                      <div className="absolute inset-0 border-t-2 border-dashed border-black/10" />
-                      {/* Animated fill */}
-                      <div
-                        className={`absolute inset-0 border-t-2 border-primary transition-all duration-500 ${
-                          activeStep !== null && activeStep > i
-                            ? 'opacity-100'
-                            : 'opacity-0'
-                        }`}
-                      />
-                      {/* Arrow */}
-                      <iconify-icon
-                        icon="lucide:arrow-right"
-                        class="absolute -right-3 -top-[11px] text-xl text-black/15"
-                        aria-hidden="true"
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {/* Step card */}
-                <div
-                  className={`relative z-10 mx-2 md:mx-3 rounded-2xl p-6 md:p-8 border transition-all duration-300 cursor-default
-                    bg-gradient-to-br ${step.color}
-                    ${isActive
-                      ? 'border-primary/30 shadow-[0_12px_40px_rgba(122,166,122,0.15)] -translate-y-1'
-                      : 'border-black/[0.06] shadow-[0_4px_16px_rgba(0,0,0,0.04)]'
-                    }`}
-                >
-                  {/* Step number + emoji */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-3">
-                      <span className="text-3xl" role="img" aria-label={step.title}>
-                        {step.emoji}
-                      </span>
-                      <span
-                        className="text-[11px] font-bold tracking-widest text-foreground/30 uppercase"
-                        aria-hidden="true"
-                      >
-                        Stap {step.number}
-                      </span>
-                    </div>
-                    {/* Active indicator */}
-                    <div
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        isActive ? 'bg-primary scale-125' : 'bg-foreground/15'
-                      }`}
-                      aria-hidden="true"
-                    />
-                  </div>
-
-                  {/* Subtitle pill */}
-                  <span
-                    className={`inline-block text-[11px] font-semibold px-2.5 py-1 rounded-full mb-4 ${step.accent}`}
-                  >
-                    {step.subtitle}
-                  </span>
-
-                  {/* Title */}
-                  <h3 className="text-[18px] md:text-xl font-bold text-foreground mb-3 leading-snug">
-                    {step.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-[14px] md:text-[15px] text-muted-foreground leading-relaxed mb-5">
-                    {step.description}
-                  </p>
-
-                  {/* Microcopy */}
-                  <div className="flex items-center gap-2 text-[12px] font-medium text-foreground/50">
-                    <iconify-icon
-                      icon="lucide:check-circle-2"
-                      class="text-primary text-base shrink-0"
-                      aria-hidden="true"
-                    />
-                    {step.microcopy}
-                  </div>
-                </div>
-
                 {/* Mobile connector */}
                 {!isLast && (
                   <div
-                    className="md:hidden flex justify-center py-2"
+                    className="md:hidden absolute left-[22px] top-[52px] bottom-0 w-px bg-black/[0.07]"
                     aria-hidden="true"
-                  >
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="w-px h-4 bg-black/10" />
-                      <iconify-icon icon="lucide:chevron-down" class="text-base text-black/20" />
+                  />
+                )}
+
+                <div
+                  className={`relative flex md:flex-col gap-5 md:gap-0 p-5 md:p-7 rounded-2xl transition-all duration-300 ${
+                    isActive
+                      ? 'bg-white shadow-[0_4px_24px_rgba(0,0,0,0.07)] -translate-y-0.5'
+                      : 'bg-transparent'
+                  }`}
+                >
+                  {/* Number + icon */}
+                  <div className="shrink-0 md:mb-7 flex items-center justify-center w-11 h-11 rounded-xl bg-secondary group-hover:bg-primary/10 transition-colors">
+                    <iconify-icon
+                      icon={step.icon}
+                      class={`text-xl transition-colors duration-300 ${isActive ? 'text-primary' : 'text-foreground/50'}`}
+                      aria-hidden="true"
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex flex-col gap-3 md:mt-0">
+                    <div className="flex items-center gap-3">
+                      <span className="text-[11px] font-bold text-foreground/25 tracking-widest uppercase tabular-nums">
+                        {step.number}
+                      </span>
+                      {/* Desktop connector line */}
+                      {!isLast && (
+                        <div
+                          className="hidden md:block flex-1 h-px bg-black/[0.07] relative -mr-7 mt-px"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </div>
+
+                    <h3 className="text-[17px] md:text-[18px] font-bold text-foreground leading-snug">
+                      {step.title}
+                    </h3>
+
+                    <p className="text-[14px] text-muted-foreground leading-relaxed">
+                      {step.description}
+                    </p>
+
+                    <div className="flex items-center gap-1.5 text-[12px] font-medium text-foreground/40 mt-1">
+                      <iconify-icon
+                        icon="lucide:check-circle-2"
+                        class="text-primary text-sm shrink-0"
+                        aria-hidden="true"
+                      />
+                      {step.detail}
                     </div>
                   </div>
-                )}
+                </div>
               </li>
             );
           })}
         </ol>
 
-        {/* Bottom CTA strip */}
-        <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-center">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <iconify-icon icon="lucide:clock" class="text-base text-primary" aria-hidden="true" />
-            Gemiddeld 3 minuten om de juiste cursus te vinden
+        {/* ── Bottom CTA ── */}
+        <div className="mt-14 md:mt-16 flex flex-col sm:flex-row items-center justify-between gap-5 p-6 md:p-7 bg-secondary rounded-2xl">
+          <div className="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0 shadow-sm">
+              <iconify-icon icon="lucide:clock" class="text-base text-primary" aria-hidden="true" />
+            </div>
+            <div>
+              <p className="text-[15px] font-semibold text-foreground">
+                Gemiddeld 3 minuten
+              </p>
+              <p className="text-[13px] text-muted-foreground">
+                om de juiste cursus te vinden · 4.8★ door 1.200+ ouders
+              </p>
+            </div>
           </div>
-          <div className="hidden sm:block w-px h-4 bg-black/10" aria-hidden="true" />
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <iconify-icon icon="lucide:star" class="text-base text-primary" aria-hidden="true" />
-            4.8 gemiddeld — door 1.200+ ouders beoordeeld
-          </div>
-          <div className="hidden sm:block w-px h-4 bg-black/10" aria-hidden="true" />
           <Link
             href="/cursussen"
-            className="text-sm font-semibold text-primary hover:opacity-75 transition-opacity underline underline-offset-2"
+            className="shrink-0 inline-flex items-center gap-2 px-5 py-3 bg-primary text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 whitespace-nowrap"
           >
-            Begin nu →
+            Begin nu
+            <iconify-icon icon="lucide:arrow-right" class="text-base" aria-hidden="true" />
           </Link>
         </div>
+
       </div>
     </section>
   );
