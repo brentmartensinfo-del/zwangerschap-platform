@@ -199,9 +199,9 @@ export default async function CourseDetailPage({ params }) {
                     Praktische informatie
                   </h2>
                   <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6" role="list">
-                    {practical.map((item) => (
+                    {practical.map((item) =git push> (
                       <li key={item.title} className="flex flex-col gap-4 p-6 bg-secondary rounded-md">
-                        <div className="w-9 h-9 flex items-center justify-center bg-background rounded">
+                        <div className="w-8 h-8 rounded-md flex items-center justify-center shrink-0">
                           <iconify-icon icon={item.icon} class="text-xl text-foreground" aria-hidden="true" />
                         </div>
                         <div>

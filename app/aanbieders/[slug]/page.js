@@ -267,7 +267,7 @@ export default async function ProviderPage({ params }) {
                 <ul className="flex flex-col gap-4" role="list">
                   {provider.practical.map((item) => (
                     <li key={item.label} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-md bg-white flex items-center justify-center shrink-0 shadow-sm">
+                      <div className="w-8 h-8 rounded-md bg-white flex items-center justify-center shrink-0">
                         <iconify-icon icon={item.icon} class="text-base text-foreground" aria-hidden="true" />
                       </div>
                       <div>
