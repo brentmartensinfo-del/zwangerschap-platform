@@ -2,7 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Lumi Cursussen – Vind de perfecte zwangerschapscursus',
+  title: 'Birhtly – Vind de perfecte zwangerschapscursus',
   description:
     'Vergelijk onafhankelijk zwangerschapscursussen en ontdek wat het beste bij jullie past.',
 };

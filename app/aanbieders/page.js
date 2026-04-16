@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Aanbieders | Lumi Cursussen',
+  title: 'Aanbieders | Birthly',
   description:
     'Bij Lumi geloven we dat een goede voorbereiding op de geboorte begint bij de juiste begeleiding. Ontdek onze gecertificeerde aanbieders.',
 };

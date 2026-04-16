@@ -4,7 +4,7 @@ import ContactInfo from '@/components/ContactInfo';
 import ContactForm from '@/components/ContactForm';
 
 export const metadata = {
-  title: 'Contact | Lumi Cursussen',
+  title: 'Contact | Birthly',
   description:
     'Neem contact op met Lumi Cursussen. Vragen over een cursus, boeking of aansluiting als aanbieder? Ons team helpt je graag.',
 };

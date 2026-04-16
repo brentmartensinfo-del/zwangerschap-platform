@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Over ons | Lumi Cursussen',
+  title: 'Over ons | Birhtly',
   description:
     'Lumi is opgericht om aanstaande ouders zonder stress te verbinden met de beste zwangerschapscursussen. Lees ons verhaal.',
 };
