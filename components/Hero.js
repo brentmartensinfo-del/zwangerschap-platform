@@ -41,8 +41,8 @@ export default function Hero() {
         {/* ── Background image ── */}
         <div className="absolute inset-0 rounded-xl overflow-hidden">
           <img
-            src="https://storage.googleapis.com/banani-generated-images/generated-images/bb02e9bd-da3c-4e2d-bcef-80ec69823bcc.jpg"
-            alt=""
+            src="https://images.pexels.com/photos/15797917/pexels-photo-15797917.jpeg"
+            alt="Zwangere vrouw met kind"
             aria-hidden="true"
             className="w-full h-full object-cover"
           />
