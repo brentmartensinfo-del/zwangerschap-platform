@@ -172,13 +172,13 @@ export default async function CourseDetailPage({ params }) {
                     Programma overzicht
                   </h2>
                   <p className="text-base text-muted-foreground leading-relaxed mb-6">
+                    De cursus is opgebouwd rondom de belangrijkste thema's voor een ontspannen zwangerschap en voorbereiding op de bevalling.
                   </p>
-                  <ol className="flex flex-col gap-4" role="list">
+                  <ol className="flex flex-col gap-4y" role="list">
                     {curriculum.map((item) => (
                       <li
                         key={item.period}
-                        className="flex gap-5 md:gap-6 p-5 border border-black/[0.08] rounded-md bg-white"
-                      >
+                        className="flex gap-5 md:gap-6 p-5 border border-black/[0.08] rounded-md bg-white">
                         <span className="w-[88px] shrink-0 text-center text-[12px] font-semibold bg-secondary text-secondary-foreground px-2.5 py-1 rounded-md whitespace-nowrap leading-none flex items-center justify-center border border-black/[0.06]">
                           {item.period}
                         </span>
@@ -199,7 +199,7 @@ export default async function CourseDetailPage({ params }) {
                     Praktische informatie
                   </h2>
                   <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6" role="list">
-                    {practical.map((item) =git push> (
+                    {practical.map((item) => (
                       <li key={item.title} className="flex flex-col gap-4 p-6 bg-secondary rounded-md">
                         <div className="w-8 h-8 rounded-md flex items-center justify-center shrink-0">
                           <iconify-icon icon={item.icon} class="text-xl text-foreground" aria-hidden="true" />
