@@ -70,16 +70,17 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-6 md:px-12 py-4">
 
           {/* ── Logo ── */}
-          <Link
-            href="/"
-            className="flex items-center gap-2.5 shrink-0"
-            aria-label="Birthly – home"
-          >
-            <iconify-icon icon="lucide:baby" class="text-[26px] text-primary" aria-hidden="true" />
-            <span className="text-lg md:text-xl font-semibold tracking-tight text-foreground">
-              Birthly
-            </span>
-          </Link>
+<Link
+  href="/"
+  className="flex items-center gap-2.5 shrink-0"
+  aria-label="Birthly – home"
+>
+  <img
+    src="/images/logo_final_2.png"
+    alt="Birthly logo"
+    className="h-10 w-auto"
+  />
+</Link>
 
           {/* ── Right: nav links + lang + CTA + mobile hamburger ── */}
           <div className="flex items-center gap-3">
