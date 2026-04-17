@@ -77,8 +77,8 @@ export default function Hero() {
                 Vind de cursus die
                 <br />jouw bevalling
                 <br />
-                <span className="text-primary">onvergetelijk maakt</span>
-              </h1>
+                <span className="text-white">onvergetelijk maakt</span>
+              </h1> 
               <p className="text-base md:text-[17px] text-white/70 leading-relaxed max-w-[500px]">
                 Vergelijk alle zwangerschapscursussen in Nederland op één plek.
                 Eerlijk, transparant en gratis.

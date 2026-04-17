@@ -5,8 +5,6 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
-/* ─── Data ───────────────────────────────────────────────────────────────── */
-
 const FAQ_CATEGORIES = [
   {
     id: 'algemeen',
@@ -118,8 +116,6 @@ const FAQ_CATEGORIES = [
   },
 ];
 
-/* ─── Accordion item ─────────────────────────────────────────────────────── */
-
 function AccordionItem({ question, answer, isOpen, onToggle }) {
   return (
     <li className="border-b border-black/[0.06] last:border-0">
@@ -137,18 +133,12 @@ function AccordionItem({ question, answer, isOpen, onToggle }) {
           aria-hidden="true"
         />
       </button>
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 pb-5' : 'max-h-0'}`}
-      >
-        <p className="text-[14px] text-muted-foreground leading-relaxed">
-          {answer}
-        </p>
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 pb-5' : 'max-h-0'}`}>
+        <p className="text-[14px] text-muted-foreground leading-relaxed">{answer}</p>
       </div>
     </li>
   );
 }
-
-/* ─── Page ───────────────────────────────────────────────────────────────── */
 
 export default function FAQPage() {
   const [activeCategory, setActiveCategory] = useState('algemeen');
@@ -169,11 +159,29 @@ export default function FAQPage() {
     <>
       <Navbar />
 
-      <main className="flex-1 pt-[65px]">
+      <main className="flex-1 pt-[1px] lg:pt-[1px] relative overflow-hidden">
 
-        {/* ── Hero ──────────────────────────────────────────────────────── */}
-        <section className="max-w-[680px] mx-auto px-4 sm:px-8 text-center pt-16 md:pt-20 pb-12 md:pb-16">
-          <h1 className="text-[36px] sm:text-5xl font-bold text-foreground tracking-tight leading-[1.1] mb-5">
+        {/* ── Background blobs ── */}
+        <div aria-hidden="true" className="pointer-events-none select-none">
+          {/* Top-left green blob */}
+          <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-primary opacity-20 blur-[120px]" />
+          {/* Top-right peach blob */}
+          <div className="absolute -top-10 right-0 w-[360px] h-[360px] rounded-full bg-secondary opacity-60 blur-[100px]" />
+          {/* Mid-left blob */}
+          <div className="absolute top-[40%] -left-24 w-[300px] h-[300px] rounded-full bg-secondary opacity-50 blur-[90px]" />
+          {/* Bottom-right green glow */}
+          <div className="absolute bottom-0 -right-24 w-[500px] h-[500px] rounded-full bg-primary opacity-10 blur-[140px]" />
+        </div>
+
+        {/* ── Hero ── */}
+        <section className="relative z-10 max-w-[680px] mx-auto px-4 sm:px-8 text-center pt-16 md:pt-20 pb-12 md:pb-16">
+          {/* Subtle glow behind title */}
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-secondary opacity-70 blur-[60px] pointer-events-none rounded-full"
+            aria-hidden="true"
+          />
+
+          <h1 className="relative text-[36px] sm:text-5xl font-bold text-foreground tracking-tight leading-[1.1] mb-5">
             Veelgestelde vragen
           </h1>
           <p className="text-base md:text-[17px] text-muted-foreground leading-relaxed max-w-[480px] mx-auto mb-8">
@@ -181,7 +189,7 @@ export default function FAQPage() {
             een zwangerschapscursus via Lumi.
           </p>
 
-          {/* Search bar — UI only */}
+          {/* Search bar */}
           <div className="relative max-w-[440px] mx-auto">
             <iconify-icon
               icon="lucide:search"
@@ -192,21 +200,18 @@ export default function FAQPage() {
               type="text"
               placeholder="Zoek een vraag..."
               aria-label="Zoek in veelgestelde vragen"
-              className="w-full h-12 pl-11 pr-4 border border-black/[0.08] rounded-xl bg-white text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-black/20 transition-colors"
+              className="w-full h-12 pl-11 pr-4 border border-black/[0.08] rounded-xl bg-white/80 backdrop-blur-sm text-sm text-foreground placeholder:text-muted-foreground outline-none focus:border-black/20 transition-colors shadow-sm"
             />
           </div>
         </section>
 
-        {/* ── FAQ content ───────────────────────────────────────────────── */}
-        <section className="max-w-[1000px] mx-auto px-4 sm:px-8 md:px-12 pb-20 md:pb-28">
+        {/* ── FAQ content ── */}
+        <section className="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-8 md:px-12 pb-20 md:pb-28">
           <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
 
-            {/* ── Category tabs (sidebar on desktop, scrollable pills on mobile) ── */}
-            <nav
-              aria-label="FAQ categorieën"
-              className="w-full md:w-[200px] shrink-0"
-            >
-              {/* Mobile: horizontal scroll */}
+            {/* Category nav */}
+            <nav aria-label="FAQ categorieën" className="w-full md:w-[200px] shrink-0">
+              {/* Mobile pills */}
               <ul className="flex md:hidden gap-2 overflow-x-auto pb-2 scrollbar-hide" role="list">
                 {FAQ_CATEGORIES.map((cat) => (
                   <li key={cat.id} className="shrink-0">
@@ -216,7 +221,7 @@ export default function FAQPage() {
                       className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                         activeCategory === cat.id
                           ? 'bg-foreground text-background'
-                          : 'bg-white border border-black/[0.08] text-muted-foreground hover:text-foreground'
+                          : 'bg-white/80 backdrop-blur-sm border border-black/[0.08] text-muted-foreground hover:text-foreground'
                       }`}
                     >
                       <iconify-icon icon={cat.icon} class="text-sm" aria-hidden="true" />
@@ -226,7 +231,7 @@ export default function FAQPage() {
                 ))}
               </ul>
 
-              {/* Desktop: vertical list */}
+              {/* Desktop vertical */}
               <ul className="hidden md:flex flex-col gap-1" role="list">
                 {FAQ_CATEGORIES.map((cat) => (
                   <li key={cat.id}>
@@ -247,10 +252,10 @@ export default function FAQPage() {
               </ul>
             </nav>
 
-            {/* ── Accordion ── */}
+            {/* Accordion */}
             <div className="flex-1 min-w-0">
               {currentCategory && (
-                <div className="bg-white border border-black/[0.07] rounded-2xl px-6 md:px-8">
+                <div className="bg-white/80 backdrop-blur-sm border border-black/[0.05] rounded-2xl px-6 md:px-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
                   <ul role="list">
                     {currentCategory.items.map((item, i) => (
                       <AccordionItem
@@ -268,9 +273,9 @@ export default function FAQPage() {
           </div>
         </section>
 
-        {/* ── CTA ───────────────────────────────────────────────────────── */}
-        <section className="max-w-[1000px] mx-auto px-4 sm:px-8 md:px-12 pb-20 md:pb-28">
-          <div className="bg-secondary rounded-2xl px-8 md:px-12 py-10 md:py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* ── CTA ── */}
+        <section className="relative z-10 max-w-[1000px] mx-auto px-4 sm:px-8 md:px-12 pb-20 md:pb-28">
+          <div className="bg-secondary/80 backdrop-blur-sm rounded-2xl px-8 md:px-12 py-10 md:py-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-black/[0.04]">
             <div className="text-center md:text-left">
               <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
                 Staat je vraag er niet tussen?
