@@ -177,7 +177,7 @@ export default function CourseCategories() {
               id="categories-heading"
               className="text-3xl md:text-[36px] font-bold text-foreground tracking-tight"
             >
-              Wat zoek jij?
+              Welke cursus past bij jou?
             </h2>
           </div>
           <Link
