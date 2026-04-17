@@ -70,17 +70,17 @@ export default function Navbar() {
         <div className="flex items-center justify-between px-6 md:px-12 py-4">
 
           {/* ── Logo ── */}
-<Link
-  href="/"
-  className="flex items-center gap-2.5 shrink-0"
-  aria-label="Birthly – home"
->
-  <img
-    src="/images/logo_final.png"
-    alt="Birthly logo"
-    className="h-8 w-auto"
-  />
-</Link>
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 shrink-0"
+            aria-label="Birthly – home"
+          >
+            <img
+              src="/images/logo_final.png"
+              alt="Birthly logo"
+              className="h-8 w-auto"
+            />
+          </Link>
 
           {/* ── Right: nav links + lang + CTA + mobile hamburger ── */}
           <div className="flex items-center gap-3">

@@ -5,12 +5,17 @@ import { useRouter } from 'next/navigation';
 
 const CATEGORIES = [
   { label: 'Alle cursussen',     type: null },
-  { label: 'Zwangerschapsyoga',  type: 'Zwangerschapsyoga' },
+  { label: 'Allround bevallingscursus',  type: 'Allround bevallingscursus' },
   { label: 'Hypnobirthing',      type: 'Hypnobirthing' },
-  { label: 'Online Cursussen',   type: 'Online Cursussen' },
-  { label: 'Intensief / Weekend', type: 'Intensief / Weekend' },
-  { label: 'Samen met partner',  type: 'Samen met partner' },
-  { label: 'Zwangerschapsgym',   type: 'Zwangerschapsgym' },
+  { label: 'Ademhalingscursus',   type: 'Ademhalingscursus' },
+  { label: 'Borstvoedingscursus', type: 'Borstvoedingscursus' },
+  { label: 'Haptonomie',  type: 'Haptonomie' },
+  { label: 'Slaaptraining',   type: 'Slaaptraining' },
+  { label: 'Zwangerschapsyoga', type: 'Zwangerschapsyoga' },
+  { label: 'ZwangerFit',  type: 'ZwangerFit' },
+  { label: 'Mindfulness',   type: 'Mindfulness' },
+  { label: 'Partnercursus',   type: 'Partnercursus' },
+  { label: 'Online cursussen',   type: 'Online cursussen' },
 ];
 
 export default function CategoriesRow() {
