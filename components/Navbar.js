@@ -14,11 +14,29 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [activeLang, setActiveLang] = useState('NL');
   const [menuOpen, setMenuOpen]     = useState(false);
+  const [hidden, setHidden]         = useState(false);
   const pathname  = usePathname();
   const menuRef   = useRef(null);
   const buttonRef = useRef(null);
+  const lastY     = useRef(0);
 
-  // Close on outside click
+  // Hide on scroll down (mobile only)
+  useEffect(() => {
+    function handleScroll() {
+      if (window.innerWidth >= 1024) return;
+      const currentY = window.scrollY;
+      if (currentY > lastY.current && currentY > 60) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      lastY.current = currentY;
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu on outside click
   useEffect(() => {
     function handleClick(e) {
       if (
@@ -47,7 +65,7 @@ export default function Navbar() {
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-black/[0.08]">
+    <header className={`fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-black/[0.08] transition-transform duration-300 ${hidden ? '-translate-y-full' : 'translate-y-0'}`}>
       <nav aria-label="Hoofdnavigatie">
         <div className="flex items-center justify-between px-6 md:px-12 py-4">
 
@@ -63,8 +81,28 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* ── Right: CTA + hamburger ── */}
+          {/* ── Right: nav links + lang + CTA + mobile hamburger ── */}
           <div className="flex items-center gap-3">
+            {/* Desktop nav links */}
+            <ul className="hidden lg:flex items-center gap-6 mr-2" role="list">
+              {NAV_LINKS.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-foreground ${
+                        isActive ? 'text-foreground' : 'text-muted-foreground'
+                      }`}
+                      aria-current={isActive ? 'page' : undefined}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+
             <LanguageSelector activeLang={activeLang} onChange={setActiveLang} />
 
             <Link
@@ -74,13 +112,14 @@ export default function Navbar() {
               Alle cursussen
             </Link>
 
+            {/* Hamburger — mobile only */}
             <button
               ref={buttonRef}
               onClick={() => setMenuOpen((v) => !v)}
               aria-expanded={menuOpen}
               aria-controls="nav-menu"
               aria-label={menuOpen ? 'Menu sluiten' : 'Menu openen'}
-              className="p-2 rounded-md hover:bg-muted transition-colors"
+              className="lg:hidden p-2 rounded-md hover:bg-muted transition-colors"
             >
               <iconify-icon
                 icon={menuOpen ? 'lucide:x' : 'lucide:menu'}
@@ -91,12 +130,12 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* ── Dropdown menu ── */}
+        {/* ── Mobile dropdown menu ── */}
         {menuOpen && (
           <div
             id="nav-menu"
             ref={menuRef}
-            className="absolute top-full right-4 md:right-10 w-[calc(100%-2rem)] sm:w-[320px] bg-background border border-black/[0.08] rounded-xl shadow-[0_16px_48px_rgba(0,0,0,0.10)] overflow-hidden z-50"
+            className="lg:hidden absolute top-full right-4 w-[calc(100%-2rem)] sm:w-[320px] bg-background border border-black/[0.08] rounded-xl shadow-[0_16px_48px_rgba(0,0,0,0.10)] overflow-hidden z-50"
           >
             <ul className="flex flex-col p-2" role="list">
               {NAV_LINKS.map((link) => {
@@ -120,7 +159,6 @@ export default function Navbar() {
               })}
             </ul>
 
-            {/* CTA in menu — visible on mobile only */}
             <div className="sm:hidden px-3 pb-3">
               <Link
                 href="/cursussen"
