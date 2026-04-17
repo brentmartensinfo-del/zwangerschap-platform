@@ -65,9 +65,9 @@ export default function Hero() {
 
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full">
-              <iconify-icon icon="lucide:flower-2" class="text-sm text-white" aria-hidden="true" />
+              <iconify-icon icon="lucide:heart-handshake" class="text-sm text-white" aria-hidden="true" />
               <span className="text-[11px] font-semibold text-white/90 uppercase tracking-widest">
-                Onafhankelijk vergelijkingsplatform
+                Onafhankelijk cursusplatform
               </span>
             </div>
 
