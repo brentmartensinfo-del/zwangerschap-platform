@@ -171,13 +171,13 @@ export default function CourseCategories() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-12">
           <div>
             <p className="text-[12px] font-bold text-primary uppercase tracking-widest mb-3">
-              Alle categorieën
+              Cursus categorieën
             </p>
             <h2
               id="categories-heading"
               className="text-3xl md:text-[36px] font-bold text-foreground tracking-tight"
             >
-              Welke cursus past bij jou?
+              Welke cursus past bij jou zwangerschap?
             </h2>
           </div>
           <Link
