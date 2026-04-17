@@ -76,9 +76,9 @@ export default function Navbar() {
   aria-label="Birthly – home"
 >
   <img
-    src="/images/logo_final_2.png"
+    src="/images/logo_final.png"
     alt="Birthly logo"
-    className="h-10 w-auto"
+    className="h-8 w-auto"
   />
 </Link>
 
