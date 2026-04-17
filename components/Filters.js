@@ -34,9 +34,6 @@ export default function Filters({ filterOptions, activeFilterCount = 0 }) {
     return () => { document.body.style.overflow = ''; };
   }, [sheetOpen]);
 
-  // Close sheet on route change (filter applied)
-  useEffect(() => { setSheetOpen(false); }, [searchParams]);
-
   const setParam = useCallback(
     (key, value) => {
       const params = new URLSearchParams(searchParams.toString());
