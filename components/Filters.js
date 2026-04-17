@@ -9,7 +9,7 @@ const PRICE_OPTIONS = [
   { label: '€150+',      value: 'high' },
 ];
 
-export default function Filters({ filterOptions, activeFilterCount = 0 }) {
+export default function Filters({ filterOptions, activeFilterCount = 0, total }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -223,7 +223,7 @@ export default function Filters({ filterOptions, activeFilterCount = 0 }) {
                 onClick={() => setSheetOpen(false)}
                 className="w-full py-3.5 bg-primary text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
               >
-                Resultaten bekijken
+                Bekijk resultaten{total != null ? ` (${total})` : ''}
               </button>
             </div>
           </div>

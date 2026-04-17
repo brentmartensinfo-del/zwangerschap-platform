@@ -71,7 +71,7 @@ export default function ResultsBar({ total }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-4">
       {/* Active filter chips */}
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="hidden lg:flex flex-wrap items-center gap-2">
         {activeChips.map(({ key, label }) => (
           <span
             key={key}
