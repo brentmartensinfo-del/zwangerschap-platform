@@ -34,7 +34,7 @@ export default async function CursussenPage({ searchParams }) {
     <>
       <Navbar />
 
-      <main className="flex-1 pt-[1px]">
+      <main className="flex-1 pt-[65px]">
 
         {/* ── Page header ── */}
         <div className="border-b border-black/[0.06] bg-background">
@@ -89,21 +89,31 @@ export default async function CursussenPage({ searchParams }) {
 
             {/* ── Filters sidebar ── */}
             <Suspense fallback={<FiltersSkeleton />}>
-              <aside className="w-full lg:w-[268px] shrink-0 lg:sticky lg:top-[89px]">
+              {/* Mobile: just the compact button, no card wrapper */}
+              <div className="lg:hidden w-full">
+                <Filters filterOptions={filterOptions} activeFilterCount={activeFilterCount} total={allFiltered.length} />
+              </div>
+
+              {/* Desktop: full sidebar card */}
+              <aside className="hidden lg:block w-[268px] shrink-0 sticky top-[89px]">
                 <div className="bg-white border border-black/[0.07] rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.04)]">
                   <div className="px-5 py-4 border-b border-black/[0.06] flex items-center justify-between">
                     <h2 className="text-[14px] font-bold text-foreground">Filters</h2>
-                    {hasFilters && (
+                    {hasFilters ? (
                       <Link
                         href="/cursussen"
                         className="text-[12px] text-primary font-medium hover:opacity-75 transition-opacity"
                       >
                         Alles wissen
                       </Link>
+                    ) : (
+                      <span className="text-[12px] text-muted-foreground">
+                        Geen geselecteerd
+                      </span>
                     )}
                   </div>
                   <div className="p-5">
-                    <Filters filterOptions={filterOptions} activeFilterCount={activeFilterCount} />
+                    <Filters filterOptions={filterOptions} activeFilterCount={activeFilterCount} total={allFiltered.length} />
                   </div>
                 </div>
               </aside>

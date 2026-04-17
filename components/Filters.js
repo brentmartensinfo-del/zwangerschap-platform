@@ -146,33 +146,27 @@ export default function Filters({ filterOptions, activeFilterCount = 0, total })
         {filtersContent}
       </aside>
 
-      {/* ── Mobile: show filters inline when no active filters ── */}
-      {!hasActiveFilters && (
-        <aside className="lg:hidden w-full" aria-label="Filters">
-          {filtersContent}
-        </aside>
-      )}
-
-      {/* ── Mobile: "Filters aanpassen" button when filters are active ── */}
-      {hasActiveFilters && (
-        <div className="lg:hidden w-full">
-          <button
-            onClick={() => setSheetOpen(true)}
-            className="w-full flex items-center justify-between gap-3 px-4 py-3.5 bg-white border border-black/[0.08] rounded-xl shadow-sm hover:shadow-md transition-all"
-          >
-            <div className="flex items-center gap-2.5">
-              <iconify-icon icon="lucide:sliders-horizontal" class="text-base text-foreground" aria-hidden="true" />
-              <span className="text-sm font-semibold text-foreground">
-                Filters aanpassen
-              </span>
-            </div>
-            <span className="flex items-center gap-1.5 px-2.5 py-1 bg-primary text-white text-[12px] font-bold rounded-full">
-              {activeFilterCount}
-              <iconify-icon icon="lucide:check" class="text-xs" aria-hidden="true" />
+      {/* ── Mobile: compact button — no filters or filters active ── */}
+      <div className="lg:hidden w-full">
+        <button
+          onClick={() => setSheetOpen(true)}
+          className="w-full flex items-center justify-between gap-3 px-4 py-3 bg-white border border-black/[0.08] rounded-xl shadow-sm hover:shadow-md transition-all"
+        >
+          <div className="flex items-center gap-2.5">
+            <iconify-icon icon="lucide:sliders-horizontal" class="text-base text-muted-foreground" aria-hidden="true" />
+            <span className="text-[13px] font-medium text-foreground">
+              {hasActiveFilters ? 'Filters aanpassen' : 'Filters selecteren'}
             </span>
-          </button>
-        </div>
-      )}
+          </div>
+          {hasActiveFilters ? (
+            <span className="flex items-center justify-center w-5 h-5 bg-primary text-white text-[11px] font-bold rounded-full">
+              {activeFilterCount}
+            </span>
+          ) : (
+            <iconify-icon icon="lucide:chevron-up" class="text-sm text-muted-foreground" aria-hidden="true" />
+          )}
+        </button>
+      </div>
 
       {/* ── Mobile bottom sheet ── */}
       {sheetOpen && (

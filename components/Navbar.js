@@ -6,8 +6,9 @@ import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
   { label: 'Over ons',      href: '/over-ons' },
-  { label: 'FAQ',           href: '/faq' },
+  { label: 'Hoe werkt het', href: '/#hoe-het-werkt' },
   { label: 'Aanbieders',    href: '/aanbieders' },
+  { label: 'FAQ',           href: '/faq' },
   { label: 'Contact',       href: '/contact' },
 ];
 
@@ -17,6 +18,25 @@ export default function Navbar() {
   const pathname  = usePathname();
   const menuRef   = useRef(null);
   const buttonRef = useRef(null);
+
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
+
+  // Hide on scroll down (mobile only), show on scroll up
+  useEffect(() => {
+    function handleScroll() {
+      if (window.innerWidth >= 1024) return; // desktop: always visible
+      const currentY = window.scrollY;
+      if (currentY > lastY.current && currentY > 60) {
+        setHidden(true);
+      } else {
+        setHidden(false);
+      }
+      lastY.current = currentY;
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Close on outside click
   useEffect(() => {
@@ -47,7 +67,7 @@ export default function Navbar() {
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-black/[0.08]">
+    <header className="sticky md:fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-black/[0.08]">
       <nav aria-label="Hoofdnavigatie">
         <div className="flex items-center justify-between px-6 md:px-12 py-4">
 
@@ -55,11 +75,11 @@ export default function Navbar() {
           <Link
             href="/"
             className="flex items-center gap-2.5 shrink-0"
-            aria-label="Birthly – home"
+            aria-label="Lumi Cursussen – home"
           >
-            <iconify-icon icon="lucide:baby" class="text-[26px] text-primary" aria-hidden="true" />
+            <iconify-icon icon="lucide:flower-2" class="text-[26px] text-primary" aria-hidden="true" />
             <span className="text-lg md:text-xl font-semibold tracking-tight text-foreground">
-              Birthly
+              Lumi Cursussen
             </span>
           </Link>
 
