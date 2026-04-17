@@ -34,7 +34,7 @@ export default async function CursussenPage({ searchParams }) {
     <>
       <Navbar />
 
-      <main className="flex-1 pt-[65px]">
+      <main className="flex-1 pt-[0px] lg:pt-[0px]">
 
         {/* ── Page header ── */}
         <div className="border-b border-black/[0.06] bg-background">
