@@ -7,6 +7,7 @@ import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 import { getPopularCourses, getNewCourses } from '@/lib/courses';
+import CourseCategories from '@/components/CourseCategories';
 
 /**
  * Server Component: fetcht cursusdata en geeft die als props door.
@@ -29,6 +30,7 @@ export default async function HomePage() {
         <NewCourses courses={newCourses} />
         <HowItWorks />
         <Testimonials />
+        <CourseCategories />
         <FAQ />
       </main>
       <Footer />

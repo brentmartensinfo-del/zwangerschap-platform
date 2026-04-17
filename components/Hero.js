@@ -9,8 +9,8 @@ const TRUST_ITEMS = [
   { icon: 'lucide:zap',          label: 'Direct boeken bij de aanbieder' },
 ];
 
-const CITY_OPTIONS  = ['Amsterdam', 'Den Haag', 'Eindhoven', 'Groningen', 'Haarlem', 'Rotterdam', 'Utrecht'];
-const TYPE_OPTIONS  = ['Zwangerschapsyoga', 'Hypnobirthing', 'Online Cursussen', 'Samen met partner', 'Zwangerschapsgym'];
+const CITY_OPTIONS  = ['Amsterdam', 'Den Haag', 'Eindhoven', 'Groningen', 'Rotterdam', 'Utrecht'];
+const TYPE_OPTIONS  = ['Algemene bevallingscursus', 'Hypnobirthing', 'Ademhalingscursus', 'Borstvoedingscursus', 'Haptonomie', 'Slaaptraining', 'Zwangerschapsyoga', 'ZwangerFit', 'Mindfulness', 'Partnercursus'];
 const PRICE_OPTIONS = [
   { label: 'Tot €50',    value: 'low'  },
   { label: '€50 - €150', value: 'mid'  },
