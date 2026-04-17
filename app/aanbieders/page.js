@@ -67,7 +67,7 @@ export default function AanbiedersPage() {
     <>
       <Navbar />
 
-      <main className="flex-1 pt-[65px]">
+      <main className="flex-1 pt-[1px] lg:pt-[1px]">
 
         {/* ── Hero ──────────────────────────────────────────────────────── */}
         <section className="relative overflow-hidden">
