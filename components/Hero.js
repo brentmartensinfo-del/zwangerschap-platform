@@ -48,7 +48,7 @@ export default function Hero() {
           />
         </div>
 
-        {/* ── Gradient overlay — warm + readable ── */}
+        {/* ── Gradient overlay ── */}
         <div
           className="absolute inset-0"
           style={{
@@ -78,7 +78,7 @@ export default function Hero() {
                 <br />jouw bevalling
                 <br />
                 <span className="text-white">onvergetelijk maakt</span>
-              </h1> 
+              </h1>
               <p className="text-base md:text-[17px] text-white/70 leading-relaxed max-w-[500px]">
                 Vergelijk alle zwangerschapscursussen in Nederland op één plek.
                 Eerlijk, transparant en gratis.
@@ -88,8 +88,52 @@ export default function Hero() {
             {/* ── Search ── */}
             <div className="w-full max-w-[700px]">
 
-              {/* Mobile */}
+              {/* Mobile — volgorde: Type → Stad → Prijs → Trefwoord */}
               <div className="md:hidden flex flex-col gap-2 p-4 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 shadow-[0_8px_32px_rgba(0,0,0,0.15)]">
+
+                {/* 1. Type cursus */}
+                <SelectRow
+                  label="Type cursus"
+                  displayValue={type || 'Alle types'}
+                  hasValue={!!type}
+                  icon="lucide:chevron-down"
+                  select={
+                    <select value={type} onChange={(e) => setType(e.target.value)} aria-label="Type cursus" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                      <option value="">Alle types</option>
+                      {TYPE_OPTIONS.map((t) => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                  }
+                />
+
+                {/* 2. Stad */}
+                <SelectRow
+                  label="Stad"
+                  displayValue={city || 'Alle steden'}
+                  hasValue={!!city}
+                  icon="lucide:chevron-down"
+                  select={
+                    <select value={city} onChange={(e) => setCity(e.target.value)} aria-label="Kies een stad" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                      <option value="">Alle steden</option>
+                      {CITY_OPTIONS.map((c) => <option key={c} value={c}>{c}</option>)}
+                    </select>
+                  }
+                />
+
+                {/* 3. Prijs */}
+                <SelectRow
+                  label="Prijs"
+                  displayValue={PRICE_OPTIONS.find((p) => p.value === price)?.label || 'Elk budget'}
+                  hasValue={!!price}
+                  icon="lucide:sliders-horizontal"
+                  select={
+                    <select value={price} onChange={(e) => setPrice(e.target.value)} aria-label="Prijs" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                      <option value="">Elk budget</option>
+                      {PRICE_OPTIONS.map((p) => <option key={p.value} value={p.value}>{p.label}</option>)}
+                    </select>
+                  }
+                />
+
+                {/* 4. Trefwoord */}
                 <SearchRow
                   label="Trefwoord"
                   node={
@@ -103,30 +147,7 @@ export default function Hero() {
                     />
                   }
                 />
-                <SelectRow
-                  label="Stad"
-                  displayValue={city || 'Alle steden'}
-                  hasValue={!!city}
-                  icon="lucide:chevron-down"
-                  select={
-                    <select value={city} onChange={(e) => setCity(e.target.value)} aria-label="Kies een stad" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                      <option value="">Alle steden</option>
-                      {CITY_OPTIONS.map((c) => <option key={c} value={c}>{c}</option>)}
-                    </select>
-                  }
-                />
-                <SelectRow
-                  label="Type cursus"
-                  displayValue={type || 'Alle types'}
-                  hasValue={!!type}
-                  icon="lucide:chevron-down"
-                  select={
-                    <select value={type} onChange={(e) => setType(e.target.value)} aria-label="Type cursus" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                      <option value="">Alle types</option>
-                      {TYPE_OPTIONS.map((t) => <option key={t} value={t}>{t}</option>)}
-                    </select>
-                  }
-                />
+
                 <button
                   onClick={handleSearch}
                   aria-label="Zoeken"
@@ -137,35 +158,10 @@ export default function Hero() {
                 </button>
               </div>
 
-              {/* Desktop pill */}
+              {/* Desktop pill — volgorde: Type → Stad → Prijs → Trefwoord → Knop */}
               <div className="hidden md:flex items-stretch w-full rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 shadow-[0_16px_48px_rgba(0,0,0,0.16)] overflow-hidden">
 
-                {/* Trefwoord */}
-                <PillSegment label="Trefwoord" divider>
-                  <input
-                    type="text"
-                    value={q}
-                    onChange={(e) => setQ(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                    placeholder="Cursus, thema..."
-                    aria-label="Trefwoord"
-                    className="text-sm bg-transparent outline-none text-white placeholder:text-white/60 w-full"
-                  />
-                </PillSegment>
-
-                {/* Stad */}
-                <PillSegment label="Stad" divider relative>
-                  <span className={`text-sm truncate ${city ? 'text-white' : 'text-white/60'}`}>
-                    {city || 'Alle steden'}
-                  </span>
-                  <iconify-icon icon="lucide:chevron-down" class="text-sm text-white/65 ml-auto shrink-0" aria-hidden="true" />
-                  <select value={city} onChange={(e) => setCity(e.target.value)} aria-label="Kies een stad" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                    <option value="">Alle steden</option>
-                    {CITY_OPTIONS.map((c) => <option key={c} value={c}>{c}</option>)}
-                  </select>
-                </PillSegment>
-
-                {/* Type */}
+                {/* 1. Type cursus */}
                 <PillSegment label="Type cursus" divider relative>
                   <span className={`text-sm truncate ${type ? 'text-white' : 'text-white/60'}`}>
                     {type || 'Alle types'}
@@ -177,8 +173,20 @@ export default function Hero() {
                   </select>
                 </PillSegment>
 
-                {/* Prijs */}
-                <PillSegment label="Prijs" relative>
+                {/* 2. Stad */}
+                <PillSegment label="Stad" divider relative>
+                  <span className={`text-sm truncate ${city ? 'text-white' : 'text-white/60'}`}>
+                    {city || 'Alle steden'}
+                  </span>
+                  <iconify-icon icon="lucide:chevron-down" class="text-sm text-white/65 ml-auto shrink-0" aria-hidden="true" />
+                  <select value={city} onChange={(e) => setCity(e.target.value)} aria-label="Kies een stad" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                    <option value="">Alle steden</option>
+                    {CITY_OPTIONS.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                </PillSegment>
+
+                {/* 3. Prijs */}
+                <PillSegment label="Prijs" divider relative>
                   <span className={`text-sm truncate ${price ? 'text-white' : 'text-white/60'}`}>
                     {PRICE_OPTIONS.find((p) => p.value === price)?.label || 'Elk budget'}
                   </span>
@@ -189,7 +197,20 @@ export default function Hero() {
                   </select>
                 </PillSegment>
 
-                {/* Search button */}
+                {/* 4. Trefwoord */}
+                <PillSegment label="Trefwoord">
+                  <input
+                    type="text"
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                    placeholder="Cursus, thema..."
+                    aria-label="Trefwoord"
+                    className="text-sm bg-transparent outline-none text-white placeholder:text-white/60 w-full"
+                  />
+                </PillSegment>
+
+                {/* Zoekknop */}
                 <button
                   onClick={handleSearch}
                   aria-label="Zoeken"

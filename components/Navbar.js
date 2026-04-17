@@ -47,7 +47,7 @@ export default function Navbar() {
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-black/[0.08]">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-black/[0.08]">
       <nav aria-label="Hoofdnavigatie">
         <div className="flex items-center justify-between px-6 md:px-12 py-4">
 

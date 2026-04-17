@@ -8,7 +8,7 @@ import CourseList from '@/components/CourseList';
 import Pagination from '@/components/Pagination';
 import { getAllCourses, getFilterOptions } from '@/lib/courses';
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 12;
 
 export default async function CursussenPage({ searchParams }) {
   const { type, city, language, q, price, sort, page } = await searchParams;
@@ -24,9 +24,9 @@ export default async function CursussenPage({ searchParams }) {
   const start      = (currentPage - 1) * PAGE_SIZE;
   const courses    = allFiltered.slice(start, start + PAGE_SIZE);
 
-  const locationLabel = city  ? ` in ${city}` : '';
-  const typeLabel     = type  ?? 'Zwangerschapscursussen';
-  const pageTitle     = `${typeLabel}${locationLabel}`;
+  const locationLabel     = city  ? ` in ${city}` : '';
+  const typeLabel         = type  ?? 'Zwangerschapscursussen';
+  const pageTitle         = `${typeLabel}${locationLabel}`;
   const hasFilters        = !!(type || city || language || q || price);
   const activeFilterCount = [type, city, language, q, price].filter(Boolean).length;
 
@@ -38,16 +38,17 @@ export default async function CursussenPage({ searchParams }) {
 
         {/* ── Page header ── */}
         <div className="border-b border-black/[0.06] bg-background">
-          <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 py-8 md:py-10">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 py-4 md:py-5">
 
             {/* Breadcrumb */}
-            <nav aria-label="Kruimelpad" className="flex items-center gap-2 text-[13px] text-muted-foreground mb-4">
+            <nav aria-label="Kruimelpad" className="flex items-center gap-2 text-[13px] text-muted-foreground mb-2">
               <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
               <iconify-icon icon="lucide:chevron-right" class="text-xs" aria-hidden="true" />
               <span className="text-foreground font-medium">{typeLabel}</span>
             </nav>
 
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+              {/* Left: title + count */}
               <div>
                 <h1 className="text-2xl md:text-[30px] font-bold text-foreground tracking-tight mb-1.5">
                   {pageTitle}
@@ -59,7 +60,7 @@ export default async function CursussenPage({ searchParams }) {
                   {hasFilters && (
                     <Link
                       href="/cursussen"
-                      className="ml-3 text-primary hover:opacity-75 transition-opacity"
+                      className="hidden sm:inline ml-3 text-primary hover:opacity-75 transition-opacity"
                     >
                       Wis filters
                     </Link>
@@ -67,29 +68,35 @@ export default async function CursussenPage({ searchParams }) {
                 </p>
               </div>
 
-              {/* Trust row */}
-              <div className="hidden md:flex items-center gap-5 text-[13px] text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <iconify-icon icon="lucide:shield-check" class="text-primary text-sm" aria-hidden="true" />
-                  Geverifieerde aanbieders
-                </span>
-                <span className="w-px h-4 bg-black/[0.08]" aria-hidden="true" />
-                <span className="flex items-center gap-1.5">
-                  <iconify-icon icon="lucide:star" class="text-primary text-sm" aria-hidden="true" />
-                  4.8 gemiddeld
-                </span>
+              {/* Right: trust items + sort */}
+              <div className="hidden md:flex flex-col items-end gap-2 shrink-0">
+                <div className="flex items-center gap-5 text-[13px] text-muted-foreground">
+                  <span className="flex items-center gap-1.5">
+                    <iconify-icon icon="lucide:shield-check" class="text-primary text-sm" aria-hidden="true" />
+                    Geverifieerde aanbieders
+                  </span>
+                  <span className="w-px h-4 bg-black/[0.08]" aria-hidden="true" />
+                  <span className="flex items-center gap-1.5">
+                    <iconify-icon icon="lucide:star" class="text-primary text-sm" aria-hidden="true" />
+                    4.8 gemiddeld
+                  </span>
+                </div>
+                {/* Sort dropdown directly below trust items */}
+                <Suspense fallback={null}>
+                  <ResultsBar total={allFiltered.length} />
+                </Suspense>
               </div>
             </div>
           </div>
         </div>
 
         {/* ── Main layout ── */}
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 py-8 md:py-10 pb-24">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-8 md:px-12 py-6 md:py-8 pb-24">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-10 items-start">
 
             {/* ── Filters sidebar ── */}
             <Suspense fallback={<FiltersSkeleton />}>
-              {/* Mobile: just the compact button, no card wrapper */}
+              {/* Mobile: compact button */}
               <div className="lg:hidden w-full">
                 <Filters filterOptions={filterOptions} activeFilterCount={activeFilterCount} total={allFiltered.length} />
               </div>
@@ -122,10 +129,12 @@ export default async function CursussenPage({ searchParams }) {
             {/* ── Results ── */}
             <div className="flex-1 flex flex-col gap-5 min-w-0">
 
-              {/* ResultsBar */}
-              <Suspense fallback={null}>
-                <ResultsBar total={allFiltered.length} />
-              </Suspense>
+              {/* Mobile: ResultsBar (sort only) */}
+              <div className="md:hidden">
+                <Suspense fallback={null}>
+                  <ResultsBar total={allFiltered.length} />
+                </Suspense>
+              </div>
 
               {/* Course grid */}
               {courses.length > 0 ? (

@@ -97,11 +97,6 @@ export default function ResultsBar({ total }) {
           </button>
         )}
 
-        {total != null && (
-          <span className="text-[13px] text-muted-foreground ml-1">
-            {total} {total === 1 ? 'resultaat' : 'resultaten'}
-          </span>
-        )}
       </div>
 
       {/* Sort dropdown */}
