@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const TRUST_ITEMS = [
-  { icon: 'lucide:shield-check', label: 'Onafhankelijk platform' },
+  { icon: 'lucide:shield-check', label: 'Geverifieerde aanbieders' },
   { icon: 'lucide:star',         label: '4.8 gemiddeld · 1.200+ ouders' },
   { icon: 'lucide:zap',          label: 'Direct boeken bij de aanbieder' },
 ];

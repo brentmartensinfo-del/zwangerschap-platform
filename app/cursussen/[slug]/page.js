@@ -2,16 +2,15 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import StickyBookingBar from '@/components/StickyBookingBar';
 import { getCourseBySlug, getAllCourses } from '@/lib/courses';
 import { getProviderBySlug } from '@/lib/providers';
 
-/* ── Static params voor build-time generatie ─────────────────────────────── */
 export async function generateStaticParams() {
   const courses = await getAllCourses();
   return courses.map((c) => ({ slug: c.slug }));
 }
 
-/* ── Metadata ────────────────────────────────────────────────────────────── */
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const course = await getCourseBySlug(slug);
@@ -22,7 +21,6 @@ export async function generateMetadata({ params }) {
   };
 }
 
-/* ── Page ────────────────────────────────────────────────────────────────── */
 export default async function CourseDetailPage({ params }) {
   const { slug } = await params;
   const course = await getCourseBySlug(slug);
@@ -30,24 +28,10 @@ export default async function CourseDetailPage({ params }) {
   if (!course) notFound();
 
   const {
-    title,
-    image,
-    alt,
-    description,
-    provider,
-    price,
-    rating,
-    ratingCount,
-    labels = [],
-    bookingUrl,
-    descriptionLong,
-    curriculum = [],
-    learningItems = [],
-    includes = [],
-    guarantees = [],
-    practical = [],
-    quickInfo = [],
-    providerSlug,
+    title, image, alt, description, provider, price, rating, ratingCount,
+    labels = [], bookingUrl, descriptionLong, curriculum = [],
+    learningItems = [], includes = [], guarantees = [], practical = [],
+    quickInfo = [], providerSlug,
   } = course;
 
   const providerData = providerSlug ? await getProviderBySlug(providerSlug) : null;
@@ -56,7 +40,7 @@ export default async function CourseDetailPage({ params }) {
     <>
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 pb-24 lg:pb-0">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-8 md:px-12 py-10 pb-20">
 
           {/* ── Breadcrumb ── */}
@@ -78,9 +62,7 @@ export default async function CourseDetailPage({ params }) {
                 <iconify-icon icon="lucide:star" class="text-base text-foreground" aria-hidden="true" />
                 <span>{rating}</span>
                 {ratingCount && (
-                  <span className="text-muted-foreground font-normal underline">
-                    ({ratingCount} reviews)
-                  </span>
+                  <span className="text-muted-foreground font-normal underline">({ratingCount} reviews)</span>
                 )}
               </div>
               <span className="text-black/20" aria-hidden="true">•</span>
@@ -90,10 +72,7 @@ export default async function CourseDetailPage({ params }) {
                   <span className="text-black/20" aria-hidden="true">•</span>
                   <div className="flex flex-wrap gap-1.5">
                     {labels.map((label) => (
-                      <span
-                        key={label}
-                        className="text-[11px] px-2 py-1 bg-secondary text-secondary-foreground rounded font-medium uppercase tracking-wide"
-                      >
+                      <span key={label} className="text-[11px] px-2 py-1 bg-secondary text-secondary-foreground rounded font-medium uppercase tracking-wide">
                         {label}
                       </span>
                     ))}
@@ -105,22 +84,15 @@ export default async function CourseDetailPage({ params }) {
 
           {/* ── Hero image ── */}
           <div className="w-full aspect-[21/9] rounded-xl overflow-hidden mb-12">
-            <img
-              src={image}
-              alt={alt}
-              className="w-full h-full object-cover"
-              width={1200}
-              height={514}
-            />
+            <img src={image} alt={alt} className="w-full h-full object-cover" width={1200} height={514} />
           </div>
 
-          {/* ── Content grid: main + sidebar ── */}
+          {/* ── Content grid ── */}
           <div className="flex flex-col lg:grid lg:grid-cols-[1fr_380px] gap-10 lg:gap-16 items-start">
 
             {/* ── Main column ── */}
             <div className="flex flex-col gap-14 min-w-0">
 
-              {/* Quick info row */}
               {quickInfo.length > 0 && (
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-6 pb-8 border-b border-black/[0.06]">
                   {quickInfo.map((item) => (
@@ -135,25 +107,17 @@ export default async function CourseDetailPage({ params }) {
                 </div>
               )}
 
-              {/* Over deze cursus */}
               <section aria-labelledby="over-heading">
-                <h2 id="over-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-4">
-                  Over deze cursus
-                </h2>
+                <h2 id="over-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-4">Over deze cursus</h2>
                 <p className="text-base text-muted-foreground leading-relaxed mb-4">{description}</p>
                 {(descriptionLong || description) !== description && (
-                  <p className="text-base text-muted-foreground leading-relaxed whitespace-pre-line">
-                    {descriptionLong || description}
-                  </p>
+                  <p className="text-base text-muted-foreground leading-relaxed whitespace-pre-line">{descriptionLong || description}</p>
                 )}
               </section>
 
-              {/* Wat je gaat leren */}
               {learningItems.length > 0 && (
                 <section aria-labelledby="leren-heading">
-                  <h2 id="leren-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-4">
-                    Wat je gaat leren
-                  </h2>
+                  <h2 id="leren-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-4">Wat je gaat leren</h2>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6" role="list">
                     {learningItems.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-[15px] text-foreground leading-snug">
@@ -165,20 +129,15 @@ export default async function CourseDetailPage({ params }) {
                 </section>
               )}
 
-              {/* Programma overzicht */}
               {curriculum.length > 0 && (
                 <section aria-labelledby="programma-heading">
-                  <h2 id="programma-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-2">
-                    Programma overzicht
-                  </h2>
+                  <h2 id="programma-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-2">Programma overzicht</h2>
                   <p className="text-base text-muted-foreground leading-relaxed mb-6">
                     De cursus is opgebouwd rondom de belangrijkste thema's voor een ontspannen zwangerschap en voorbereiding op de bevalling.
                   </p>
-                  <ol className="flex flex-col gap-4y" role="list">
+                  <ol className="flex flex-col gap-4" role="list">
                     {curriculum.map((item) => (
-                      <li
-                        key={item.period}
-                        className="flex gap-5 md:gap-6 p-5 border border-black/[0.08] rounded-md bg-white">
+                      <li key={item.period} className="flex gap-5 md:gap-6 p-5 border border-black/[0.08] rounded-md bg-white">
                         <span className="w-[88px] shrink-0 text-center text-[12px] font-semibold bg-secondary text-secondary-foreground px-2.5 py-1 rounded-md whitespace-nowrap leading-none flex items-center justify-center border border-black/[0.06]">
                           {item.period}
                         </span>
@@ -192,12 +151,9 @@ export default async function CourseDetailPage({ params }) {
                 </section>
               )}
 
-              {/* Praktische informatie */}
               {practical.length > 0 && (
                 <section aria-labelledby="praktisch-heading">
-                  <h2 id="praktisch-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-6">
-                    Praktische informatie
-                  </h2>
+                  <h2 id="praktisch-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-6">Praktische informatie</h2>
                   <ul className="grid grid-cols-1 sm:grid-cols-3 gap-6" role="list">
                     {practical.map((item) => (
                       <li key={item.title} className="flex flex-col gap-4 p-6 bg-secondary rounded-md">
@@ -211,8 +167,6 @@ export default async function CourseDetailPage({ params }) {
                       </li>
                     ))}
                   </ul>
-
-                  {/* Map placeholder */}
                   <div className="mt-6 w-full rounded-md overflow-hidden border border-black/[0.08]">
                     <img
                       src="https://storage.googleapis.com/banani-generated-images/generated-images/e930dd6e-9164-4bbd-a517-523633967b66.jpg"
@@ -225,11 +179,8 @@ export default async function CourseDetailPage({ params }) {
                 </section>
               )}
 
-              {/* Over de aanbieder */}
               <section aria-labelledby="aanbieder-heading">
-                <h2 id="aanbieder-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-6">
-                  Over de aanbieder
-                </h2>
+                <h2 id="aanbieder-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-6">Over de aanbieder</h2>
                 <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center p-6 border border-black/[0.08] rounded-xl bg-white">
                   <img
                     src={providerData?.avatar ?? 'https://storage.googleapis.com/banani-avatars/avatar%2Ffemale%2F25-35%2FEuropean%2F3'}
@@ -240,16 +191,9 @@ export default async function CourseDetailPage({ params }) {
                   />
                   <div>
                     <h3 className="text-lg font-semibold text-foreground mb-1">{provider}</h3>
-                    {providerData && (
-                      <p className="text-sm text-muted-foreground mb-3">
-                        {providerData.tagline}
-                      </p>
-                    )}
+                    {providerData && <p className="text-sm text-muted-foreground mb-3">{providerData.tagline}</p>}
                     {providerSlug ? (
-                      <Link
-                        href={`/aanbieders/${providerSlug}`}
-                        className="inline-block px-4 py-2 border border-black/[0.08] rounded-md text-[13px] font-medium text-foreground hover:border-black/20 transition-colors"
-                      >
+                      <Link href={`/aanbieders/${providerSlug}`} className="inline-block px-4 py-2 border border-black/[0.08] rounded-md text-[13px] font-medium text-foreground hover:border-black/20 transition-colors">
                         Bekijk profiel
                       </Link>
                     ) : (
@@ -262,14 +206,13 @@ export default async function CourseDetailPage({ params }) {
               </section>
             </div>
 
-            {/* ── Sticky booking card ── */}
+            {/* ── Sticky sidebar booking card ── */}
             <aside className="w-full lg:sticky lg:top-24" aria-label="Boeking">
+              {/* Sentinel — sticky bar hides when this is visible */}
+              <div id="booking-card-sentinel" />
               <div className="bg-white border border-black/[0.08] rounded-xl p-6 shadow-[0_12px_24px_rgba(0,0,0,0.04),0_4px_8px_rgba(0,0,0,0.02)]">
-
-                {/* Price */}
                 <p className="text-[28px] font-semibold text-foreground mb-6">{price}</p>
 
-                {/* CTA */}
                 {bookingUrl ? (
                   <a
                     href={bookingUrl}
@@ -280,18 +223,13 @@ export default async function CourseDetailPage({ params }) {
                     Boek deze cursus
                   </a>
                 ) : (
-                  <button
-                    disabled
-                    className="w-full py-3.5 bg-muted text-muted-foreground rounded-md text-base font-semibold cursor-not-allowed mb-4"
-                  >
+                  <button disabled className="w-full py-3.5 bg-muted text-muted-foreground rounded-md text-base font-semibold cursor-not-allowed mb-4">
                     Niet beschikbaar
                   </button>
                 )}
-                <p className="text-[13px] text-muted-foreground text-center mb-6">
-                  Je wordt doorgestuurd naar de cursusaanbieder.
-                </p>
 
-                {/* Includes */}
+                <p className="text-[13px] text-muted-foreground text-center mb-6">Je wordt doorgestuurd naar de cursusaanbieder.</p>
+
                 {includes.length > 0 && (
                   <div>
                     <h4 className="text-sm font-semibold text-foreground mb-4">Deze cursus is inclusief:</h4>
@@ -306,7 +244,6 @@ export default async function CourseDetailPage({ params }) {
                   </div>
                 )}
 
-                {/* Guarantees */}
                 {guarantees.length > 0 && (
                   <ul className="flex flex-col gap-3 mt-6 pt-6 border-t border-black/[0.06]" role="list">
                     {guarantees.map((g) => (
@@ -323,7 +260,10 @@ export default async function CourseDetailPage({ params }) {
         </div>
       </main>
 
+      {/* ── Sticky mobile booking bar ── */}
+      <StickyBookingBar price={price} bookingUrl={bookingUrl} title={title} />
+
       <Footer />
     </>
   );
-} 
+}
