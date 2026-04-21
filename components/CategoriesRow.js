@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 const CATEGORIES = [
   { label: 'Alle cursussen',     type: null },
-  { label: 'Allround bevallingscursus',  type: 'Allround bevallingscursus' },
+  { label: 'Complete bevallingscursus',  type: 'Complete bevallingscursus' },
   { label: 'Hypnobirthing',      type: 'Hypnobirthing' },
   { label: 'Ademhalingscursus',   type: 'Ademhalingscursus' },
   { label: 'Borstvoedingscursus', type: 'Borstvoedingscursus' },

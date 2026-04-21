@@ -10,7 +10,7 @@ const TRUST_ITEMS = [
 ];
 
 const CITY_OPTIONS  = ['Amsterdam', 'Den Haag', 'Eindhoven', 'Groningen', 'Rotterdam', 'Utrecht'];
-const TYPE_OPTIONS  = ['Allround bevallingscursus', 'Hypnobirthing', 'Ademhalingscursus', 'Borstvoedingscursus', 'Haptonomie', 'Slaaptraining', 'Zwangerschapsyoga', 'ZwangerFit', 'Mindfulness', 'Partnercursus', 'Online cursussen'];
+const TYPE_OPTIONS  = ['Complete bevallingscursus', 'Hypnobirthing', 'Ademhalingscursus', 'Borstvoedingscursus', 'Haptonomie', 'Slaaptraining', 'Zwangerschapsyoga', 'ZwangerFit', 'Mindfulness', 'Partnercursus', 'Online cursussen'];
 const PRICE_OPTIONS = [
   { label: 'Tot €50',    value: 'low'  },
   { label: '€50 - €150', value: 'mid'  },

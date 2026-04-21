@@ -131,7 +131,7 @@ export default async function CourseDetailPage({ params }) {
 
               {curriculum.length > 0 && (
                 <section aria-labelledby="programma-heading">
-                  <h2 id="programma-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-2">Programma overzicht</h2>
+                  <h2 id="programma-heading" className="text-2xl font-semibold text-foreground tracking-tight mb-2">Cursus overzicht</h2>
                   <p className="text-base text-muted-foreground leading-relaxed mb-6">
                     De cursus is opgebouwd rondom de belangrijkste thema's voor een ontspannen zwangerschap en voorbereiding op de bevalling.
                   </p>

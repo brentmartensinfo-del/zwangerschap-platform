@@ -100,7 +100,7 @@ export default function CourseCard({
         <div className="flex items-center justify-between pt-2.5 border-t border-black/[0.06] mt-auto gap-2">
           <div className="min-w-0">
             <p className="text-[9px] font-semibold text-muted-foreground uppercase tracking-wide mb-0.5">
-              Prijs
+              Prijs v.a.
             </p>
             <span className="text-[14px] font-bold text-foreground leading-none">
               {price}
