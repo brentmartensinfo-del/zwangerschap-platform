@@ -70,7 +70,7 @@ export default async function AanbiedersPage() {
     <>
       <Navbar />
 
-      <main className="flex-1 pt-[65px]">
+      <main className="flex-1">
 
         {/* ── Hero ──────────────────────────────────────────────────────── */}
         <section className="relative overflow-hidden">
