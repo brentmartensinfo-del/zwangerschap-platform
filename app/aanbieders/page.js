@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ProviderCard from '@/components/ProviderCard';
+import { getAllProviders } from '@/lib/providers';
 
 export const metadata = {
   title: 'Aanbieders | Lumi Cursussen',
@@ -62,12 +64,13 @@ const SPECIALISATIONS = [
   },
 ];
 
-export default function AanbiedersPage() {
+export default async function AanbiedersPage() {
+  const providers = await getAllProviders();
   return (
     <>
       <Navbar />
 
-      <main className="flex-1 pt-[1px] lg:pt-[1px]">
+      <main className="flex-1 pt-[65px]">
 
         {/* ── Hero ──────────────────────────────────────────────────────── */}
         <section className="relative overflow-hidden">
@@ -86,7 +89,7 @@ export default function AanbiedersPage() {
             aria-hidden="true"
           />
 
-          <div className="relative max-w-[860px] mx-auto px-4 sm:px-8 text-center pt-24 md:pt-32 pb-20 md:pb-28">
+          <div className="relative max-w-[860px] mx-auto px-4 sm:px-8 text-center pt-6 md:pt-8 pb-14 md:pb-20">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-black/[0.07] shadow-sm mb-8">
               <iconify-icon icon="lucide:shield-check" class="text-sm text-primary" aria-hidden="true" />
@@ -207,70 +210,43 @@ export default function AanbiedersPage() {
           </ul>
         </section>
 
-        {/* ── Specialisaties ────────────────────────────────────────────── */}
-        <section className="w-full bg-secondary py-20 md:py-28" aria-labelledby="spec-heading">
+        {/* ── Aanbieders grid ── */}
+        <section className="w-full bg-secondary py-20 md:py-28" aria-labelledby="aanbieders-heading">
           <div className="max-w-[1200px] mx-auto px-4 sm:px-8 md:px-12">
 
-            <div className="text-center mb-14 md:mb-16">
-              <p className="text-[12px] font-semibold text-primary uppercase tracking-widest mb-3">
-                Wat je kunt verwachten
-              </p>
-              <h2
-                id="spec-heading"
-                className="text-3xl md:text-[38px] font-bold text-foreground tracking-tight mb-5"
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 md:mb-16">
+              <div>
+                <p className="text-[12px] font-semibold text-primary uppercase tracking-widest mb-3">
+                  Onze aanbieders
+                </p>
+                <h2
+                  id="aanbieders-heading"
+                  className="text-3xl md:text-[38px] font-bold text-foreground tracking-tight"
+                >
+                  Maak kennis met de experts
+                </h2>
+              </div>
+              <Link
+                href="/cursussen"
+                className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-black/[0.08] text-foreground text-sm font-semibold rounded-xl hover:shadow-md transition-all"
               >
-                Verschillende specialisaties
-              </h2>
-              <p className="text-base text-muted-foreground max-w-[420px] mx-auto leading-relaxed">
-                Vind de expert en de methode die het beste aansluit bij jouw
-                wensen en behoeften.
-              </p>
+                Bekijk alle cursussen
+                <iconify-icon icon="lucide:arrow-right" class="text-base" aria-hidden="true" />
+              </Link>
             </div>
 
-            <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5" role="list">
-              {SPECIALISATIONS.map((spec) => (
-                <li key={spec.title}>
-                  <Link
-                    href={spec.href}
-                    className="group block rounded-2xl overflow-hidden relative"
-                  >
-                    {/* Image */}
-                    <div className="aspect-[3/4] overflow-hidden">
-                      <img
-                        src={spec.image}
-                        alt={spec.title}
-                        className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700 ease-out"
-                        width={300}
-                        height={400}
-                      />
-                    </div>
-
-                    {/* Overlay — always present, deepens on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/75 via-foreground/15 to-transparent group-hover:from-foreground/85 transition-all duration-300" />
-
-                    {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <p className="text-white font-bold text-[15px] leading-snug mb-1">
-                        {spec.title}
-                      </p>
-                      <p className="text-white/70 text-[12px] leading-snug">
-                        {spec.description}
-                      </p>
-                      <div className="flex items-center gap-1.5 mt-3 translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                        <span className="text-white text-[12px] font-semibold">Bekijk cursussen</span>
-                        <iconify-icon icon="lucide:arrow-right" class="text-white text-xs" aria-hidden="true" />
-                      </div>
-                    </div>
-                  </Link>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" role="list">
+              {providers.map((provider) => (
+                <li key={provider.slug}>
+                  <ProviderCard {...provider} />
                 </li>
               ))}
             </ul>
 
-            {/* Browse CTA */}
-            <div className="text-center mt-10">
+            <div className="text-center mt-8 md:hidden">
               <Link
                 href="/cursussen"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-black/[0.08] text-foreground text-sm font-semibold rounded-xl hover:shadow-md transition-all"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-black/[0.08] text-foreground text-sm font-semibold rounded-xl hover:shadow-md transition-all"
               >
                 Bekijk alle cursussen
                 <iconify-icon icon="lucide:arrow-right" class="text-base" aria-hidden="true" />
