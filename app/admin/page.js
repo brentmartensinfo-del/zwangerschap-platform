@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import Navbar from '@/components/Navbar';
 
 /* ─── Constanten ─────────────────────────────────────────────────────────── */
 
@@ -146,10 +145,7 @@ export default function AdminPage() {
   const tabs = mode === 'cursus' ? COURSE_TABS : PROVIDER_TABS;
 
   return (
-    <>
-      <Navbar />
-
-      <main className="flex-1 bg-secondary/40 min-h-screen">
+    <main className="flex-1 bg-secondary/40 min-h-screen">
         <div className="max-w-[1100px] mx-auto px-4 sm:px-8 md:px-12 py-10">
 
           {/* ── Header ── */}
@@ -546,7 +542,6 @@ export default function AdminPage() {
 
         </div>
       </main>
-    </>
   );
 }
 

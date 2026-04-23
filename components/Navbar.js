@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
+  { label: 'Over ons',      href: '/over-ons' },
   { label: 'FAQ',           href: '/faq' },
   { label: 'Aanbieders',    href: '/aanbieders' },
   { label: 'Contact',       href: '/contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onOpenFinder }) {
   const [activeLang, setActiveLang] = useState('NL');
   const [menuOpen, setMenuOpen]     = useState(false);
   const [hidden, setHidden]         = useState(false);
@@ -80,29 +81,39 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* ── Right: nav links + lang + CTA + mobile hamburger ── */}
-          <div className="flex items-center gap-3">
-            {/* Desktop nav links */}
-            <ul className="hidden lg:flex items-center gap-6 mr-2" role="list">
-              {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-foreground ${
-                        isActive ? 'text-foreground' : 'text-muted-foreground'
-                      }`}
-                      aria-current={isActive ? 'page' : undefined}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+          {/* ── Desktop nav links — next to logo ── */}
+          <ul className="hidden lg:flex items-center gap-6 ml-8" role="list">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`text-sm font-medium whitespace-nowrap transition-colors hover:text-foreground ${
+                      isActive ? 'text-foreground' : 'text-muted-foreground'
+                    }`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
 
+          {/* ── Right: lang + CTA + mobile hamburger ── */}
+          <div className="flex items-center gap-3">
             <LanguageSelector activeLang={activeLang} onChange={setActiveLang} />
+
+            {onOpenFinder && (
+              <button
+                onClick={onOpenFinder}
+                className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary/10 text-primary text-sm font-medium whitespace-nowrap hover:bg-primary/15 transition-colors"
+              >
+                <iconify-icon icon="lucide:sparkles" class="text-sm" aria-hidden="true" />
+                Start keuzehulp
+              </button>
+            )}
 
             <Link
               href="/cursussen"

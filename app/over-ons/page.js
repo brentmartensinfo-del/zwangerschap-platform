@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 export const metadata = {
   title: 'Over ons | Lumi Cursussen',
@@ -75,16 +73,13 @@ const STATS = [
 
 export default function OverOnsPage() {
   return (
-    <>
-      <Navbar />
-
-      <main className="flex-1 flex flex-col">
+    <main className="flex-1 flex flex-col">
 
         {/* ── 1. Hero ── */}
         <section className="relative overflow-hidden">
           <div className="relative w-full h-[500px] md:h-[600px]">
             <img
-              src="https://images.pexels.com/photos/4894853/pexels-photo-4894853.jpeg"
+              src="https://storage.googleapis.com/banani-generated-images/generated-images/55c4601e-7001-4d27-a8c4-a76438bd7eb5.jpg"
               alt="Groep zwangere vrouwen die samen lachen in een gezellige studio"
               className="w-full h-full object-cover object-center"
             />
@@ -366,8 +361,5 @@ export default function OverOnsPage() {
         </section>
 
       </main>
-
-      <Footer />
-    </>
   );
 }

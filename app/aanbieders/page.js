@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import ProviderCard from '@/components/ProviderCard';
 import { getAllProviders } from '@/lib/providers';
 
@@ -14,10 +12,7 @@ export default async function AanbiedersPage() {
   const providers = await getAllProviders();
 
   return (
-    <>
-      <Navbar />
-
-      <main className="flex-1">
+    <main className="flex-1">
 
         {/* ── Hero — met achtergrondafbeelding ── */}
         <section className="relative overflow-hidden">
@@ -210,8 +205,5 @@ export default async function AanbiedersPage() {
         </section>
 
       </main>
-
-      <Footer />
-    </>
   );
 }

@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import RootLayout from '@/components/RootLayout';
 
 export const metadata: Metadata = {
   title: 'Birthly – Vind de perfecte zwangerschapscursus',
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
     'Vergelijk onafhankelijk zwangerschapscursussen en ontdek wat het beste bij jullie past.',
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode;
@@ -22,7 +23,7 @@ export default function RootLayout({
       </head>
       <body>
         <div className="pt-[65px]">
-          {children}
+          <RootLayout>{children}</RootLayout>
         </div>
       </body>
     </html>

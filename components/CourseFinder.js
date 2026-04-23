@@ -163,113 +163,113 @@ export default function CourseFinder() {
   const url = done ? buildUrl(answers) : '/cursussen';
 
   return (
-    <section className="py-10 md:py-14 relative overflow-hidden">
+    <section className="relative overflow-hidden">
       {/* Soft background blobs */}
       <div aria-hidden="true" className="pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-primary opacity-[0.07] blur-[100px]" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[300px] rounded-full bg-secondary opacity-50 blur-[80px]" />
       </div>
 
-      <div className="relative max-w-[1100px] mx-auto px-4 sm:px-8 md:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-6 items-stretch">
+      <div className="relative flex flex-col lg:flex-row items-stretch min-h-[520px]">
 
-        {/* Glass card */}
-        <div className="bg-white/80 backdrop-blur-sm border border-black/[0.07] rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col">
+        {/* ── Left: form ── */}
+        <div className="w-full lg:w-[55%] px-4 sm:px-8 md:px-12 py-10 md:py-14">
+          <div className="bg-white/80 backdrop-blur-sm border border-black/[0.07] rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col h-full">
 
-          {/* Progress bar */}
-          <div className="h-1 bg-black/[0.05]">
-            <div
-              className="h-full bg-primary transition-all duration-500 ease-out"
-              style={{ width: done ? '100%' : `${progress}%` }}
-              aria-hidden="true"
-            />
-          </div>
+            {/* Progress bar */}
+            <div className="h-1 bg-black/[0.05]">
+              <div
+                className="h-full bg-primary transition-all duration-500 ease-out"
+                style={{ width: done ? '100%' : `${progress}%` }}
+                aria-hidden="true"
+              />
+            </div>
 
-          <div className={`p-5 md:p-7 transition-opacity duration-[280ms] flex-1 ${animating ? 'opacity-0' : 'opacity-100'}`}>
+            <div className={`p-5 md:p-7 flex-1 transition-opacity duration-[280ms] ${animating ? 'opacity-0' : 'opacity-100'}`}>
 
-            {/* Header inside card */}
-            {!done && (
-              <div className="mb-4">
-                <p className="text-[11px] font-bold text-primary uppercase tracking-widest mb-1">Cursus finder</p>
-                <h2 className="text-[18px] font-bold text-foreground">Welke cursus past bij jou?</h2>
-              </div>
-            )}
+              {/* Header */}
+              {!done && (
+                <div className="mb-4">
+                  <p className="text-[11px] font-bold text-primary uppercase tracking-widest mb-1">Cursus finder</p>
+                  <h2 className="text-[18px] font-bold text-foreground">Welke cursus past bij jou?</h2>
+                </div>
+              )}
 
-            {!done ? (
-              <>
-                {/* Step indicator */}
-                <div className="flex items-center justify-between mb-4">
-                  <button
-                    onClick={handleBack}
-                    disabled={currentStep === 0}
-                    className="flex items-center gap-1.5 text-[13px] text-muted-foreground hover:text-foreground transition-colors disabled:opacity-0"
-                  >
-                    <iconify-icon icon="lucide:arrow-left" class="text-sm" aria-hidden="true" />
-                    Terug
-                  </button>
-                  <div className="flex items-center justify-center gap-1.5" aria-hidden="true">
-                    {STEPS.map((_, i) => (
-                      <div
-                        key={i}
-                        className={`rounded-full transition-all duration-300 ${
-                          i === currentStep
-                            ? 'w-5 h-2 bg-primary'
-                            : i < currentStep
-                            ? 'w-2 h-2 bg-primary/40'
-                            : 'w-2 h-2 bg-black/10'
-                        }`}
+              {!done ? (
+                <>
+                  {/* Step indicator */}
+                  <div className="flex items-center justify-between mb-4">
+                    <button
+                      onClick={handleBack}
+                      disabled={currentStep === 0}
+                      className="flex items-center gap-1.5 text-[13px] text-muted-foreground hover:text-foreground transition-colors disabled:opacity-0"
+                    >
+                      <iconify-icon icon="lucide:arrow-left" class="text-sm" aria-hidden="true" />
+                      Terug
+                    </button>
+                    <div className="flex items-center justify-center gap-1.5" aria-hidden="true">
+                      {STEPS.map((_, i) => (
+                        <div
+                          key={i}
+                          className={`rounded-full transition-all duration-300 ${
+                            i === currentStep
+                              ? 'w-5 h-2 bg-primary'
+                              : i < currentStep
+                              ? 'w-2 h-2 bg-primary/40'
+                              : 'w-2 h-2 bg-black/10'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-[12px] font-semibold text-muted-foreground">
+                      {currentStep + 1} / {STEPS.length}
+                    </span>
+                  </div>
+
+                  {/* Question */}
+                  <div className="mb-4 text-center">
+                    <h3 className="text-[17px] md:text-[19px] font-bold text-foreground mb-1">
+                      {step.question}
+                    </h3>
+                    <p className="text-[12px] text-muted-foreground">{step.sub}</p>
+                  </div>
+
+                  {/* Options */}
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2" role="list">
+                    {step.options.map((opt) => (
+                      <OptionButton
+                        key={opt.id}
+                        option={opt}
+                        selected={answers[step.id] === opt.id}
+                        onSelect={() => handleSelect(opt.id)}
                       />
                     ))}
-                  </div>
-                  <span className="text-[12px] font-semibold text-muted-foreground">
-                    {currentStep + 1} / {STEPS.length}
-                  </span>
-                </div>
-
-                {/* Question */}
-                <div className="mb-4 text-center">
-                  <h3 className="text-[17px] md:text-[19px] font-bold text-foreground mb-1">
-                    {step.question}
-                  </h3>
-                  <p className="text-[12px] text-muted-foreground">{step.sub}</p>
-                </div>
-
-                {/* Options — 2 columns on md+ */}
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2" role="list">
-                  {step.options.map((opt) => (
-                    <OptionButton
-                      key={opt.id}
-                      option={opt}
-                      selected={answers[step.id] === opt.id}
-                      onSelect={() => handleSelect(opt.id)}
-                    />
-                  ))}
-                </ul>
-              </>
-            ) : (
-              <ResultScreen
-                recommendations={recommendations}
-                url={url}
-                answers={answers}
-                onRestart={handleRestart}
-              />
-            )}
+                  </ul>
+                </>
+              ) : (
+                <ResultScreen
+                  recommendations={recommendations}
+                  url={url}
+                  answers={answers}
+                  onRestart={handleRestart}
+                />
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Right: image — full bleed to section edges */}
-        <div className="hidden lg:block relative rounded-3xl overflow-hidden -mr-12">
+        {/* ── Right: image full bleed ── */}
+        <div className="hidden lg:block lg:flex-1 relative">
           <img
             src="https://images.pexels.com/photos/3662667/pexels-photo-3662667.jpeg"
             alt="Zwangere vrouw bereidt zich voor op bevalling"
-            className="w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
           <div
             className="absolute inset-0"
-            style={{ background: 'linear-gradient(to top, rgba(43,43,43,0.60) 0%, transparent 50%)' }}
+            style={{ background: 'linear-gradient(to top, rgba(43,43,43,0.65) 0%, transparent 55%)' }}
             aria-hidden="true"
           />
-          {/* Overlay text */}
           <div className="absolute bottom-0 left-0 right-0 p-7">
             <p className="text-[12px] font-bold text-white/60 uppercase tracking-widest mb-2">Birthly</p>
             <p className="text-[18px] font-bold text-white leading-snug mb-3">
@@ -291,7 +291,6 @@ export default function CourseFinder() {
           </div>
         </div>
 
-        </div>
       </div>
     </section>
   );

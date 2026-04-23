@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 const FAQ_CATEGORIES = [
   {
@@ -152,10 +150,7 @@ export default function FAQPage() {
   }
 
   return (
-    <>
-      <Navbar />
-
-      <main className="flex-1 relative overflow-hidden">
+    <main className="flex-1 relative overflow-hidden">
 
         {/* ── Background blobs ── */}
         <div aria-hidden="true" className="pointer-events-none select-none">
@@ -269,8 +264,5 @@ export default function FAQPage() {
         </section>
 
       </main>
-
-      <Footer />
-    </>
   );
 }

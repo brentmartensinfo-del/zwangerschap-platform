@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { getProviderBySlug, getAllProviders } from '@/lib/providers';
 import { getAllCourses } from '@/lib/courses';
 
@@ -37,10 +35,7 @@ export default async function ProviderPage({ params }) {
   const courses = allCourses.filter((c) => c.providerSlug === slug);
 
   return (
-    <>
-      <Navbar />
-
-      <main className="flex-1 pt-[0px]">
+    <main className="flex-1 pt-[65px]">
 
         {/* ── Hero ──────────────────────────────────────────────────────── */}
         <section className="relative w-full h-[400px] md:h-[480px] overflow-hidden">
@@ -51,7 +46,7 @@ export default async function ProviderPage({ params }) {
             width={1440}
             height={480}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/95 via-foreground/70 to-foreground/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/40 to-foreground/10" />
 
           <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-8 md:px-16 pb-10 md:pb-14">
             <div className="max-w-[900px]">
@@ -328,8 +323,5 @@ export default async function ProviderPage({ params }) {
           </div>
         </div>
       </main>
-
-      <Footer />
-    </>
   );
 }

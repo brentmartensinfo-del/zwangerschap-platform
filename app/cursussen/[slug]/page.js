@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import StickyBookingBar from '@/components/StickyBookingBar';
 import { getCourseBySlug, getAllCourses } from '@/lib/courses';
 import { getProviderBySlug } from '@/lib/providers';
@@ -38,8 +36,6 @@ export default async function CourseDetailPage({ params }) {
 
   return (
     <>
-      <Navbar />
-
       <main className="flex-1 pb-24 lg:pb-0">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-8 md:px-12 py-10 pb-20">
 
@@ -208,7 +204,6 @@ export default async function CourseDetailPage({ params }) {
 
             {/* ── Sticky sidebar booking card ── */}
             <aside className="w-full lg:sticky lg:top-24" aria-label="Boeking">
-              {/* Sentinel — sticky bar hides when this is visible */}
               <div id="booking-card-sentinel" />
               <div className="bg-white border border-black/[0.08] rounded-xl p-6 shadow-[0_12px_24px_rgba(0,0,0,0.04),0_4px_8px_rgba(0,0,0,0.02)]">
                 <p className="text-[28px] font-semibold text-foreground mb-6">{price}</p>
@@ -260,10 +255,7 @@ export default async function CourseDetailPage({ params }) {
         </div>
       </main>
 
-      {/* ── Sticky mobile booking bar ── */}
       <StickyBookingBar price={price} bookingUrl={bookingUrl} title={title} />
-
-      <Footer />
     </>
   );
 }

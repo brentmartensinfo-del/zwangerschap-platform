@@ -1,7 +1,5 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import Filters from '@/components/Filters';
 import ResultsBar from '@/components/ResultsBar';
 import CourseList from '@/components/CourseList';
@@ -31,10 +29,7 @@ export default async function CursussenPage({ searchParams }) {
   const activeFilterCount = [type, city, language, q, price].filter(Boolean).length;
 
   return (
-    <>
-      <Navbar />
-
-      <main className="flex-1 pt-[0px] lg:pt-[0px]">
+    <main className="flex-1 pt-[0px] lg:pt-[0px]">
 
         {/* ── Page header ── */}
         <div className="border-b border-black/[0.06] bg-background">
@@ -156,9 +151,6 @@ export default async function CursussenPage({ searchParams }) {
           </div>
         </div>
       </main>
-
-      <Footer />
-    </>
   );
 }
 
