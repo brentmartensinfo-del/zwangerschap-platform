@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
-  { label: 'Over ons',      href: '/over-ons' },
   { label: 'FAQ',           href: '/faq' },
   { label: 'Aanbieders',    href: '/aanbieders' },
   { label: 'Contact',       href: '/contact' },
@@ -81,8 +80,8 @@ export default function Navbar({ onOpenFinder }) {
             </span>
           </Link>
 
-          {/* ── Desktop nav links — next to logo ── */}
-          <ul className="hidden lg:flex items-center gap-6 ml-8" role="list">
+          {/* ── Desktop nav links — right aligned ── */}
+          <ul className="hidden lg:flex items-center gap-6 ml-auto mr-4" role="list">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
