@@ -74,11 +74,10 @@ export default function Navbar() {
             className="flex items-center gap-2.5 shrink-0"
             aria-label="Birthly – home"
           >
-            <img
-              src="/images/logo_final.png"
-              alt="Birthly logo"
-              className="h-8 w-auto"
-            />
+            <iconify-icon icon="lucide:baby" class="text-[26px] text-primary" aria-hidden="true" />
+            <span className="text-lg md:text-xl font-semibold tracking-tight text-foreground">
+              Birthly
+            </span>
           </Link>
 
           {/* ── Right: nav links + lang + CTA + mobile hamburger ── */}

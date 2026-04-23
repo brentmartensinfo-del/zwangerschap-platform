@@ -3,7 +3,7 @@ import Link from 'next/link';
 const TESTIMONIALS = [
   {
     quote:
-      'Via Birthly vond ik precies de hypnobirthing cursus die ik zocht. Het overzicht was super helder en ik kon de prijzen goed vergelijken. De cursus zelf was een fantastische ervaring!',
+      'Via GeboorteHub vond ik precies de hypnobirthing cursus die ik zocht. Het overzicht was super helder en ik kon de prijzen goed vergelijken. De cursus zelf was een fantastische ervaring!',
     name: 'Sanne (29)',
     context: 'Volgde Hypnobirthing in Utrecht',
     avatar:
@@ -12,7 +12,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      'Mijn partner en ik zagen door de bomen het bos niet meer. Birthly bracht daar verandering in. Binnen vijf minuten hadden we een weekendcursus geboekt die perfect bij ons paste.',
+      'Mijn partner en ik zagen door de bomen het bos niet meer. GeboorteHub bracht daar verandering in. Binnen vijf minuten hadden we een weekendcursus geboekt die perfect bij ons paste.',
     name: 'Mark (32)',
     context: 'Volgde Intensieve Bevalcursus',
     avatar:
@@ -35,10 +35,20 @@ export default function Testimonials() {
 
   return (
     <section
-      className="py-16 md:py-24 px-4 sm:px-8 md:px-12"
+      className="relative py-16 md:py-24 px-4 sm:px-8 md:px-12 overflow-hidden"
       aria-labelledby="testimonials-heading"
     >
-      <div className="max-w-[1100px] mx-auto">
+      {/* Background image + overlay */}
+      <div className="absolute inset-0" aria-hidden="true">
+        <img
+          src="https://images.pexels.com/photos/57529/pexels-photo-57529.jpeg"
+          alt=""
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-white/90" />
+      </div>
+
+      <div className="relative z-10 max-w-[1100px] mx-auto">
 
         {/* ── Header ── */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 md:mb-14">
@@ -52,7 +62,7 @@ export default function Testimonials() {
             >
               Waarom ouders
               <br className="hidden sm:block" />
-              Birthly gebruiken
+              voor Lumi kiezen
             </h2>
           </div>
           <div className="flex items-center gap-3 md:pb-1">
@@ -90,7 +100,7 @@ export default function Testimonials() {
         >
           {/* Featured testimonial */}
           <li className="md:row-span-2">
-            <figure className="h-full flex flex-col bg-white border border-black/[0.07] rounded-2xl p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-shadow duration-300">
+            <figure className="h-full flex flex-col bg-white/75 backdrop-blur-sm border border-black/[0.07] rounded-2xl p-8 md:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)] transition-shadow duration-300">
 
               {/* Stars */}
               <div className="flex gap-0.5 mb-6">
@@ -140,7 +150,7 @@ export default function Testimonials() {
           {/* Smaller testimonials */}
           {rest.map((t) => (
             <li key={t.name}>
-              <figure className="flex flex-col bg-white border border-black/[0.07] rounded-2xl p-6 md:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.07)] transition-shadow duration-300 h-full">
+              <figure className="flex flex-col bg-white/75 backdrop-blur-sm border border-black/[0.07] rounded-2xl p-6 md:p-7 shadow-[0_4px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.07)] transition-shadow duration-300 h-full">
 
                 {/* Stars */}
                 <div className="flex gap-0.5 mb-4">
