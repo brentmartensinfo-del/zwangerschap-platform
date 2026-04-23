@@ -33,7 +33,7 @@ export default function ContactForm() {
 
         {/* Description */}
         <p className="text-[15px] text-muted-foreground leading-relaxed">
-          Heb je een vraag over een cursus, aanbieder of boeking? App ons
+          Heb je een vraag over een cursus, aanbieder of iets anders? App ons
           direct — geen formulieren, geen wachttijden.
         </p>
 
@@ -48,7 +48,7 @@ export default function ContactForm() {
             </p>
           </div>
           <p className="text-[11px] text-muted-foreground mt-2">
-            Pas het bericht aan nadat je op de knop klikt.
+            Pas het bericht aan nadat je op de knop Open WhatsApp klikt.
           </p>
         </div>
 

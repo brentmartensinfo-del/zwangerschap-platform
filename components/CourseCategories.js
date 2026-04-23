@@ -101,13 +101,13 @@ const CATEGORIES = [
   },
   {
     id: 'allinone',
-    label: 'All-in-one cursussen',
+    label: 'Complete bevallingscursus',
     icon: 'lucide:layers',
     accent: 'text-[#9b5a3a]',
     iconBg: 'bg-[#f0d4c0]',
     image: 'https://images.pexels.com/photos/7990107/pexels-photo-7990107.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
     courses: [
-      'Complete zwangerschapscursus',
+      'Complete bevallingscursus',
       'Groepscursus',
       'Privé cursus',
       'Online cursus',
@@ -148,9 +148,7 @@ const CATEGORIES = [
 ];
 
 export default function CourseCategories() {
-  const [openCategories, setOpenCategories] = useState(
-    () => new Set(CATEGORIES.map((c) => c.id))
-  );
+  const [openCategories, setOpenCategories] = useState(() => new Set());
 
   function toggle(id) {
     setOpenCategories((prev) => {

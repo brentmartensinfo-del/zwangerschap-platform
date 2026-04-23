@@ -6,7 +6,7 @@ import Link from 'next/link';
 const FAQS = [
   {
     id: 'faq-1',
-    question: 'Zijn de cursussen op Lumi onafhankelijk?',
+    question: 'Zijn de cursussen op Birthly onafhankelijk?',
     answer:
       'Ja, Lumi is een volledig onafhankelijk platform. Wij hebben geen commerciële relatie met de aanbieders die hun cursus via ons aanbieden. Onze beoordelingen zijn afkomstig van echte ouders.',
   },
@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     id: 'faq-4',
-    question: 'Betaal ik extra servicekosten als ik via GeboorteHub boek?',
+    question: 'Betaal ik extra servicekosten als ik via Birhtly boek?',
     answer:
       'Nee. GeboorteHub rekent geen enkele servicekosten, onze dienstverlening is gratis. Je betaalt precies het bedrag dat op de cursuspagina staat vermeld, rechtstreeks aan de aanbieder.',
   },

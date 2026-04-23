@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 const NAV_LINKS = [
   { label: 'FAQ',           href: '/faq' },
   { label: 'Aanbieders',    href: '/aanbieders' },
-  { label: 'Over ons',      href: '/over-ons' },
   { label: 'Contact',       href: '/contact' },
 ];
 

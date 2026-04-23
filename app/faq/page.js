@@ -1,5 +1,5 @@
 'use client';
- 
+
 import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
@@ -12,24 +12,24 @@ const FAQ_CATEGORIES = [
     icon: 'lucide:info',
     items: [
       {
-        q: 'Wat is Lumi Cursussen?',
-        a: 'Lumi is een onafhankelijk platform waarop je zwangerschapscursussen kunt vergelijken en boeken. We brengen gecertificeerde aanbieders samen op één plek, zodat jij zonder gedoe de cursus vindt die het beste bij jou past.',
+        q: 'Wat is Birthly?',
+        a: 'Birthly is een onafhankelijk vergelijkingsplatform voor zwangerschapscursussen in Nederland. Wij brengen gecertificeerde aanbieders samen op één plek, zodat jij zonder stress de cursus vindt die het beste bij jou en je situatie past.',
       },
       {
-        q: 'Is Lumi gratis te gebruiken?',
-        a: 'Ja, Lumi is volledig gratis voor aanstaande ouders. Je betaalt alleen voor de cursus zelf, rechtstreeks bij de aanbieder. Wij rekenen geen extra servicekosten.',
+        q: 'Is Birthly gratis te gebruiken?',
+        a: 'Ja, Birthly is volledig gratis voor aanstaande ouders. Je betaalt alleen voor de cursus zelf, rechtstreeks bij de aanbieder. Wij rekenen geen servicekosten of bemiddelingskosten.',
       },
       {
-        q: 'Zijn de aanbieders op Lumi betrouwbaar?',
-        a: 'Ja. Alle aanbieders worden door ons gecontroleerd op certificeringen, ervaring en reviews voordat ze worden toegelaten. Wij werken uitsluitend samen met gecertificeerde professionals.',
+        q: 'Kan ik cursussen boeken via Birthly?',
+        a: 'Nee, je boekt niet via Birthly. Via ons platform vergelijk je cursussen en klik je door naar de website van de aanbieder. De boeking en betaling verlopen volledig rechtstreeks tussen jou en de aanbieder — zonder tussenpersoon.',
+      },
+      {
+        q: 'Zijn de aanbieders op Birthly betrouwbaar?',
+        a: 'Ja. Alle aanbieders worden door ons persoonlijk gecontroleerd op certificeringen, ervaring en beoordelingen voordat ze op het platform verschijnen. Wij werken uitsluitend samen met gecertificeerde professionals.',
       },
       {
         q: 'In welke steden zijn cursussen beschikbaar?',
-        a: 'Je vindt cursussen in de meeste grote steden in Nederland, waaronder Amsterdam, Rotterdam, Utrecht, Den Haag, Groningen, Haarlem en Eindhoven. Daarnaast bieden veel aanbieders online cursussen aan die overal te volgen zijn.',
-      },
-      {
-        q: 'Kan ik ook online cursussen volgen?',
-        a: 'Absoluut. Op Lumi vind je een ruim aanbod aan online cursussen die je in je eigen tempo of live via video kunt volgen. Handig als je weinig tijd hebt of niet in een grote stad woont.',
+        a: 'Je vindt cursussen in de meeste grote steden in Nederland, waaronder Amsterdam, Rotterdam, Utrecht, Den Haag, Groningen, Haarlem en Eindhoven. Veel aanbieders bieden ook online cursussen aan die je overal kunt volgen.',
       },
     ],
   },
@@ -40,54 +40,50 @@ const FAQ_CATEGORIES = [
     items: [
       {
         q: 'Wat is het verschil tussen de cursustypen?',
-        a: 'Zwangerschapsyoga richt zich op beweging en ontspanning. Hypnobirthing leert je mentale technieken om de bevalling kalm tegemoet te gaan. Een bevalcursus samen met partner behandelt de praktische voorbereiding voor jullie allebei. Online cursussen kun je flexibel volgen wanneer het jou uitkomt.',
+        a: 'Zwangerschapsyoga richt zich op beweging en ontspanning. Hypnobirthing leert je mentale technieken om de bevalling kalm tegemoet te gaan. Een bevalcursus samen met partner bereidt jullie allebei voor op de praktische kant. Online cursussen volg je flexibel wanneer het jou uitkomt.',
       },
       {
-        q: 'Wanneer kan ik beginnen met een cursus?',
-        a: 'De meeste cursussen zijn geschikt vanaf de 16e tot 20e week van je zwangerschap. Weekendcursussen en privécursussen zijn ook later in de zwangerschap nog goed te volgen. Controleer bij de aanbieder wat de aanbevolen startdatum is.',
+        q: 'Wanneer kan ik het beste beginnen met een cursus?',
+        a: 'De meeste cursussen zijn geschikt vanaf de 16e tot 20e week van je zwangerschap. Weekendcursussen en privécursussen zijn ook later in de zwangerschap goed te volgen. Controleer bij de aanbieder wat de aanbevolen startdatum is.',
       },
       {
         q: 'Mag mijn partner meekomen?',
-        a: "Dat hangt af van het type cursus. Cursussen met het label 'Samen met partner' zijn specifiek bedoeld voor koppels. Bij yoga- en mindfulnesscursussen is de partner doorgaans niet aanwezig, maar dit verschilt per aanbieder.",
+        a: "Dat hangt af van het type cursus. Cursussen met het label 'Samen met partner' zijn speciaal bedoeld voor koppels. Bij yoga- en mindfulnesscursussen is de partner doorgaans niet aanwezig, maar dit verschilt per aanbieder.",
       },
       {
-        q: 'Hoe groot zijn de groepen?',
-        a: 'De meeste fysieke cursussen werken met kleine groepen van 6 tot 10 deelnemers. Dit zorgt voor persoonlijke aandacht en een veilige sfeer. Bij privécursussen ben jij de enige deelnemer.',
+        q: 'Hoe groot zijn de cursusgroepen?',
+        a: 'De meeste fysieke cursussen werken met kleine groepen van 6 tot 10 deelnemers voor persoonlijke aandacht. Bij privécursussen ben jij de enige deelnemer.',
       },
       {
         q: 'Zijn de cursussen ook geschikt voor een tweede zwangerschap?',
-        a: 'Ja, zeker. Veel vrouwen volgen bij een tweede zwangerschap bewust een andere cursus om nieuwe technieken te leren of simpelweg om opnieuw stil te staan bij deze bijzondere periode.',
-      },
-      {
-        q: 'Wat als ik een cursus moet missen door omstandigheden?',
-        a: 'Dit verschilt per aanbieder. Bij de meeste cursussen kun je een gemiste les inhalen of krijg je toegang tot opnames. Bekijk de voorwaarden bij de specifieke aanbieder.',
+        a: 'Ja, zeker. Veel vrouwen volgen bij een tweede zwangerschap bewust een andere cursus om nieuwe technieken te leren, of om opnieuw even stil te staan bij deze bijzondere periode.',
       },
     ],
   },
   {
-    id: 'boeken',
-    label: 'Boeken & betalen',
-    icon: 'lucide:credit-card',
+    id: 'doorsturen',
+    label: 'Doorsturen & contact',
+    icon: 'lucide:arrow-up-right',
     items: [
       {
-        q: 'Hoe boek ik een cursus via Lumi?',
-        a: "Via Lumi vergelijk je cursussen en klik je door naar de website van de aanbieder. De boeking en betaling verlopen rechtstreeks bij de aanbieder — wij zijn geen tussenpartij in het boekingsproces.",
+        q: 'Hoe werkt het doorsturen naar een aanbieder?',
+        a: 'Op de cursuspagina of het aanbiedersprofiel vind je een knop "Ga naar website" of "Boek deze cursus". Die knop stuurt je rechtstreeks door naar de website van de aanbieder, waar je alle informatie vindt en de boeking kunt afronden.',
+      },
+      {
+        q: 'Kan ik direct contact opnemen met een aanbieder via Birthly?',
+        a: 'Birthly is een vergelijkingsplatform — wij sturen je door naar de aanbieder. Op het profiel van elke aanbieder vind je de contactgegevens zoals website, e-mail en telefoonnummer om rechtstreeks contact op te nemen.',
       },
       {
         q: 'Worden zwangerschapscursussen vergoed door de zorgverzekering?',
-        a: 'Sommige cursussen worden (deels) vergoed via de aanvullende verzekering. Dit verschilt per verzekering en per type cursus. Vraag dit na bij jouw zorgverzekeraar of bij de aanbieder.',
-      },
-      {
-        q: 'Kan ik een cursus annuleren?',
-        a: 'Annuleringsvoorwaarden zijn per aanbieder verschillend. De meeste aanbieders hanteren een kosteloos annuleringsbeleid tot 14 dagen voor de startdatum. Bekijk altijd de voorwaarden op de website van de aanbieder.',
-      },
-      {
-        q: 'Welke betaalmethoden worden geaccepteerd?',
-        a: 'Dit is afhankelijk van de aanbieder. De meeste aanbieders accepteren iDEAL, creditcard en soms ook bankoverschrijving. Dit vind je terug op de boekingspagina van de aanbieder.',
+        a: 'Sommige cursussen worden (deels) vergoed via de aanvullende verzekering. Dit verschilt per verzekeraar en per cursustype. Vraag dit na bij jouw zorgverzekeraar of bij de aanbieder zelf.',
       },
       {
         q: 'Wat als een cursus vol is?',
-        a: 'Als een cursus volgeboekt is, kun je jezelf op de wachtlijst zetten via de aanbieder. Veel aanbieders bieden ook alternatieve startdata aan. Op Lumi kun je vergelijkbare cursussen van andere aanbieders bekijken.',
+        a: 'Als een cursus volgeboekt is, kun je via de aanbieder op de wachtlijst terecht. Veel aanbieders hebben ook alternatieve startdata. Op Birthly kun je eenvoudig vergelijkbare cursussen van andere aanbieders vinden.',
+      },
+      {
+        q: 'Kan ik een cursus annuleren?',
+        a: 'Annuleringsvoorwaarden worden bepaald door de aanbieder, niet door Birthly. Wij zijn geen partij in de boeking. Bekijk altijd de voorwaarden op de website van de aanbieder voordat je boekt.',
       },
     ],
   },
@@ -97,20 +93,20 @@ const FAQ_CATEGORIES = [
     icon: 'lucide:building-2',
     items: [
       {
-        q: 'Hoe kan ik mijn cursus aanmelden bij Lumi?',
+        q: 'Hoe kan ik mijn cursus aanmelden bij Birthly?',
         a: 'Via onze contactpagina kun je een aanvraag indienen om je cursus aan te melden. We beoordelen elke aanvraag op certificeringen, kwaliteit en relevantie voor onze doelgroep.',
       },
       {
-        q: 'Wat zijn de voorwaarden om op Lumi te staan?',
-        a: 'Aanbieders moeten beschikken over relevante certificeringen, aantoonbare ervaring en een actief aanbod. We controleren dit bij aanmelding en monitoren reviews na plaatsing.',
+        q: 'Wat zijn de voorwaarden om op Birthly te staan?',
+        a: 'Aanbieders moeten beschikken over relevante certificeringen, aantoonbare ervaring en een actief aanbod. We controleren dit bij aanmelding en monitoren beoordelingen na plaatsing.',
       },
       {
-        q: 'Hoeveel kost het om op Lumi te staan?',
+        q: 'Hoeveel kost het om op Birthly te staan?',
         a: 'Neem contact met ons op voor actuele tarieven en samenwerkingsmogelijkheden. We bieden verschillende opties afhankelijk van het aantal cursussen en de gewenste zichtbaarheid.',
       },
       {
         q: 'Hoe werkt het reviewsysteem?',
-        a: 'Deelnemers die een cursus hebben gevolgd kunnen een review achterlaten op het profiel van de aanbieder. Reviews worden gemodereerd om de betrouwbaarheid te waarborgen.',
+        a: 'Deelnemers die een cursus hebben gevolgd kunnen een beoordeling achterlaten op het profiel van de aanbieder. Beoordelingen worden gemodereerd om betrouwbaarheid te waarborgen.',
       },
     ],
   },
@@ -159,43 +155,28 @@ export default function FAQPage() {
     <>
       <Navbar />
 
-      <main className="flex-1 pt-[1px] lg:pt-[1px] relative overflow-hidden">
+      <main className="flex-1 relative overflow-hidden">
 
         {/* ── Background blobs ── */}
         <div aria-hidden="true" className="pointer-events-none select-none">
-          {/* Top-left green blob */}
           <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-primary opacity-20 blur-[120px]" />
-          {/* Top-right peach blob */}
           <div className="absolute -top-10 right-0 w-[360px] h-[360px] rounded-full bg-secondary opacity-60 blur-[100px]" />
-          {/* Mid-left blob */}
           <div className="absolute top-[40%] -left-24 w-[300px] h-[300px] rounded-full bg-secondary opacity-50 blur-[90px]" />
-          {/* Bottom-right green glow */}
           <div className="absolute bottom-0 -right-24 w-[500px] h-[500px] rounded-full bg-primary opacity-10 blur-[140px]" />
         </div>
 
         {/* ── Hero ── */}
-        <section className="relative z-10 max-w-[680px] mx-auto px-4 sm:px-8 text-center pt-16 md:pt-20 pb-12 md:pb-16">
-          {/* Subtle glow behind title */}
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-secondary opacity-70 blur-[60px] pointer-events-none rounded-full"
-            aria-hidden="true"
-          />
-
-          <h1 className="relative text-[36px] sm:text-5xl font-bold text-foreground tracking-tight leading-[1.1] mb-5">
+        <section className="relative z-10 max-w-[680px] mx-auto px-4 sm:px-8 text-center pt-12 md:pt-16 pb-10 md:pb-14">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] bg-secondary opacity-70 blur-[60px] pointer-events-none rounded-full" aria-hidden="true" />
+          <h1 className="relative text-[36px] sm:text-5xl font-bold text-foreground tracking-tight leading-[1.1] mb-4">
             Veelgestelde vragen
           </h1>
           <p className="text-base md:text-[17px] text-muted-foreground leading-relaxed max-w-[480px] mx-auto mb-8">
-            Alles wat je wilt weten over het vinden, vergelijken en boeken van
-            een zwangerschapscursus via Lumi.
+            Alles wat je wilt weten over Birthly — hoe het werkt, wat we doen
+            en hoe je de juiste cursus vindt.
           </p>
-
-          {/* Search bar */}
           <div className="relative max-w-[440px] mx-auto">
-            <iconify-icon
-              icon="lucide:search"
-              class="absolute left-4 top-1/2 -translate-y-1/2 text-base text-muted-foreground pointer-events-none"
-              aria-hidden="true"
-            />
+            <iconify-icon icon="lucide:search" class="absolute left-4 top-1/2 -translate-y-1/2 text-base text-muted-foreground pointer-events-none" aria-hidden="true" />
             <input
               type="text"
               placeholder="Zoek een vraag..."
@@ -211,17 +192,14 @@ export default function FAQPage() {
 
             {/* Category nav */}
             <nav aria-label="FAQ categorieën" className="w-full md:w-[200px] shrink-0">
-              {/* Mobile pills */}
-              <ul className="flex md:hidden gap-2 overflow-x-auto pb-2 scrollbar-hide" role="list">
+              <ul className="flex md:hidden gap-2 overflow-x-auto pb-2" role="list">
                 {FAQ_CATEGORIES.map((cat) => (
                   <li key={cat.id} className="shrink-0">
                     <button
                       onClick={() => handleCategoryChange(cat.id)}
                       aria-current={activeCategory === cat.id ? 'true' : undefined}
                       className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                        activeCategory === cat.id
-                          ? 'bg-foreground text-background'
-                          : 'bg-white/80 backdrop-blur-sm border border-black/[0.08] text-muted-foreground hover:text-foreground'
+                        activeCategory === cat.id ? 'bg-foreground text-background' : 'bg-white/80 backdrop-blur-sm border border-black/[0.08] text-muted-foreground hover:text-foreground'
                       }`}
                     >
                       <iconify-icon icon={cat.icon} class="text-sm" aria-hidden="true" />
@@ -230,8 +208,6 @@ export default function FAQPage() {
                   </li>
                 ))}
               </ul>
-
-              {/* Desktop vertical */}
               <ul className="hidden md:flex flex-col gap-1" role="list">
                 {FAQ_CATEGORIES.map((cat) => (
                   <li key={cat.id}>
@@ -239,9 +215,7 @@ export default function FAQPage() {
                       onClick={() => handleCategoryChange(cat.id)}
                       aria-current={activeCategory === cat.id ? 'true' : undefined}
                       className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-left transition-colors ${
-                        activeCategory === cat.id
-                          ? 'bg-foreground text-background'
-                          : 'text-muted-foreground hover:bg-black/[0.04] hover:text-foreground'
+                        activeCategory === cat.id ? 'bg-foreground text-background' : 'text-muted-foreground hover:bg-black/[0.04] hover:text-foreground'
                       }`}
                     >
                       <iconify-icon icon={cat.icon} class="text-base shrink-0" aria-hidden="true" />
@@ -286,7 +260,7 @@ export default function FAQPage() {
             </div>
             <Link
               href="/contact"
-              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 whitespace-nowrap"
+              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity whitespace-nowrap"
             >
               Neem contact op
               <iconify-icon icon="lucide:arrow-right" class="text-base" aria-hidden="true" />

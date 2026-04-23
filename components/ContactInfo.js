@@ -61,7 +61,7 @@ export default function ContactInfo() {
           </h4>
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          De meeste vragen over cursussen, boekingen en annuleringen
+          De meeste vragen over cursussen, aanbieders en overige vragen
           beantwoorden we al op onze FAQ pagina.
         </p>
         <Link

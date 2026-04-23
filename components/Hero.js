@@ -9,8 +9,8 @@ const TRUST_ITEMS = [
   { icon: 'lucide:zap',          label: 'Direct boeken bij de aanbieder' },
 ];
 
-const CITY_OPTIONS  = ['Amsterdam', 'Den Haag', 'Eindhoven', 'Groningen', 'Rotterdam', 'Utrecht'];
-const TYPE_OPTIONS  = ['Complete bevallingscursus', 'Hypnobirthing', 'Ademhalingscursus', 'Borstvoedingscursus', 'Haptonomie', 'Slaaptraining', 'Zwangerschapsyoga', 'ZwangerFit', 'Mindfulness', 'Partnercursus', 'Online cursussen'];
+const CITY_OPTIONS  = ['Amsterdam', 'Den Haag', 'Eindhoven', 'Groningen', 'Haarlem', 'Rotterdam', 'Utrecht'];
+const TYPE_OPTIONS  = ['Zwangerschapsyoga', 'Hypnobirthing', 'Online Cursussen', 'Samen met partner', 'Zwangerschapsgym'];
 const PRICE_OPTIONS = [
   { label: 'Tot €50',    value: 'low'  },
   { label: '€50 - €150', value: 'mid'  },
@@ -65,7 +65,7 @@ export default function Hero() {
 
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 backdrop-blur-sm border border-white/20 rounded-full">
-              <iconify-icon icon="lucide:heart-handshake" class="text-sm text-white" aria-hidden="true" />
+              <iconify-icon icon="lucide:baby" class="text-sm text-white" aria-hidden="true" />
               <span className="text-[11px] font-semibold text-white/90 uppercase tracking-widest">
                 Onafhankelijk cursusplatform
               </span>
@@ -130,21 +130,6 @@ export default function Hero() {
                       <option value="">Elk budget</option>
                       {PRICE_OPTIONS.map((p) => <option key={p.value} value={p.value}>{p.label}</option>)}
                     </select>
-                  }
-                />
-
-                {/* 4. Trefwoord */}
-                <SearchRow
-                  label="Trefwoord"
-                  node={
-                    <input
-                      type="text"
-                      value={q}
-                      onChange={(e) => setQ(e.target.value)}
-                      placeholder="Zoek cursus, thema..."
-                      aria-label="Trefwoord"
-                      className="text-sm bg-transparent outline-none text-foreground placeholder:text-muted-foreground w-full"
-                    />
                   }
                 />
 

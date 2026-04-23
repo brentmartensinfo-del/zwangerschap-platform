@@ -7,7 +7,7 @@ const FOOTER_COLS = [
       { label: 'Ons verhaal',      href: '/over-ons' },
       { label: 'Hoe het werkt',    href: '/#hoe-het-werkt' },
       { label: 'Klantervaringen',  href: '/#testimonials' },
-      { label: 'Werken bij Lumi',  href: '/contact' },
+      { label: 'Werken bij Birthly',  href: '/contact' },
     ],
   },
   {
@@ -47,15 +47,15 @@ export default function Footer() {
             <Link
               href="/"
               className="inline-flex items-center gap-2.5 group"
-              aria-label="Lumi Cursussen – home"
+              aria-label="Birthly – home"
             >
               <iconify-icon
-                icon="lucide:flower-2"
-                class="text-2xl text-primary"
+                icon="lucide:baby"
+                class="text-2xl text-primarly"
                 aria-hidden="true"
               />
               <span className="text-lg font-semibold tracking-tight text-white">
-                Lumi Cursussen
+                Birthly.nl
               </span>
             </Link>
 
@@ -104,7 +104,7 @@ export default function Footer() {
         {/* ── Bottom bar ── */}
         <div className="pt-7 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="text-[13px] text-white/30">
-            © 2025 Lumi Cursussen B.V. Alle rechten voorbehouden.
+            © 2026 Birthly B.V. Alle rechten voorbehouden.
           </p>
           <nav aria-label="Juridische links">
             <ul className="flex flex-wrap gap-5" role="list">
