@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const NAV_LINKS = [
+  { label: 'Over ons',      href: '/over-ons' },
   { label: 'FAQ',           href: '/faq' },
   { label: 'Aanbieders',    href: '/aanbieders' },
   { label: 'Contact',       href: '/contact' },
@@ -167,6 +168,18 @@ export default function Navbar({ onOpenFinder }) {
                 );
               })}
             </ul>
+
+            {onOpenFinder && (
+              <div className="px-3 pt-1 pb-2">
+                <button
+                  onClick={() => { onOpenFinder(); setMenuOpen(false); }}
+                  className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-primary/10 text-primary text-sm font-semibold hover:bg-primary/15 transition-colors"
+                >
+                  <iconify-icon icon="lucide:sparkles" class="text-sm" aria-hidden="true" />
+                  Start keuzehulp
+                </button>
+              </div>
+            )}
 
             <div className="sm:hidden px-3 pb-3">
               <Link
