@@ -11,11 +11,10 @@ const STEPS = [
     question: 'Wat spreekt je het meest aan?',
     sub: 'Kies wat het beste bij jou past op dit moment.',
     options: [
-      { id: 'relax',       label: 'Ontspanning & rust',              icon: 'lucide:heart',           hint: 'Meest gekozen' },
-      { id: 'active',      label: 'Actief bewegen',                  icon: 'lucide:activity',        hint: null },
-      { id: 'prep',        label: 'Voorbereiding op bevalling',      icon: 'lucide:baby',            hint: 'Populair bij eerste zwangerschap' },
-      { id: 'partner',     label: 'Samen met partner',               icon: 'lucide:users',           hint: null },
-      { id: 'unsure',      label: 'Weet ik nog niet',                icon: 'lucide:help-circle',     hint: null },
+      { id: 'relax',   label: 'Ontspanning & rust',         icon: 'lucide:heart',    hint: 'Meest gekozen' },
+      { id: 'active',  label: 'Actief bewegen',             icon: 'lucide:activity', hint: null },
+      { id: 'prep',    label: 'Voorbereiding op bevalling', icon: 'lucide:baby',     hint: null },
+      { id: 'partner', label: 'Samen met partner',          icon: 'lucide:users',    hint: null },
     ],
   },
   {
@@ -121,7 +120,7 @@ function buildUrl(answers) {
 
 /* ─── Hoofd component ────────────────────────────────────────────────────── */
 
-export default function CourseFinder() {
+export default function CourseFinder({ hideImage = false }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers]         = useState({});
   const [animating, setAnimating]     = useState(false);
@@ -163,18 +162,12 @@ export default function CourseFinder() {
   const url = done ? buildUrl(answers) : '/cursussen';
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Soft background blobs */}
-      <div aria-hidden="true" className="pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-primary opacity-[0.07] blur-[100px]" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[300px] rounded-full bg-secondary opacity-50 blur-[80px]" />
-      </div>
-
-      <div className="relative flex flex-col lg:flex-row items-stretch min-h-[520px]">
+    <section className="relative bg-transparent">
+<div className={`relative flex flex-col items-stretch ${hideImage ? '' : 'lg:flex-row min-h-[520px]'}`}>
 
         {/* ── Left: form ── */}
-        <div className="w-full lg:w-[55%] px-4 sm:px-8 md:px-12 py-10 md:py-14">
-          <div className="bg-white/80 backdrop-blur-sm border border-black/[0.07] rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col h-full">
+        <div className={`w-full ${hideImage ? '' : 'px-5 sm:px-8 py-8 lg:w-[55%] md:px-12 md:py-14'}`}>
+          <div className="bg-white border border-black/[0.07] rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col h-full">
 
             {/* Progress bar */}
             <div className="h-1 bg-black/[0.05]">
@@ -187,13 +180,7 @@ export default function CourseFinder() {
 
             <div className={`p-5 md:p-7 flex-1 transition-opacity duration-[280ms] ${animating ? 'opacity-0' : 'opacity-100'}`}>
 
-              {/* Header */}
-              {!done && (
-                <div className="mb-4">
-                  <p className="text-[11px] font-bold text-primary uppercase tracking-widest mb-1">Cursus finder</p>
-                  <h2 className="text-[18px] font-bold text-foreground">Welke cursus past bij jou?</h2>
-                </div>
-              )}
+
 
               {!done ? (
                 <>
@@ -259,7 +246,7 @@ export default function CourseFinder() {
         </div>
 
         {/* ── Right: image full bleed ── */}
-        <div className="hidden lg:block lg:flex-1 relative">
+        <div className={`lg:flex-1 relative ${hideImage ? 'hidden' : 'hidden lg:block'}`}>
           <img
             src="https://images.pexels.com/photos/3662667/pexels-photo-3662667.jpeg"
             alt="Zwangere vrouw bereidt zich voor op bevalling"
@@ -298,12 +285,12 @@ export default function CourseFinder() {
 
 /* ─── Option button ──────────────────────────────────────────────────────── */
 
-function OptionButton({ option, selected, onSelect }) {
+function OptionButton({ option, selected, onSelect, hintAsBadge = false }) {
   return (
-    <li>
+    <li className="h-full">
       <button
         onClick={onSelect}
-        className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl border text-left transition-all duration-200 group ${
+        className={`w-full h-full min-h-[72px] flex items-center gap-4 px-4 py-3.5 rounded-2xl border text-left transition-all duration-200 group ${
           selected
             ? 'bg-primary border-primary shadow-[0_4px_16px_rgba(122,166,122,0.25)]'
             : 'bg-white border-black/[0.08] hover:border-primary/40 hover:bg-primary/[0.03] hover:shadow-sm'
@@ -320,24 +307,35 @@ function OptionButton({ option, selected, onSelect }) {
           />
         </div>
 
-        {/* Label + hint */}
+        {/* Label + optional subtitle */}
         <div className="flex-1 min-w-0">
           <p className={`text-[14px] font-semibold leading-snug transition-colors ${selected ? 'text-white' : 'text-foreground'}`}>
             {option.label}
           </p>
-          {option.hint && (
+          {!hintAsBadge && option.hint && (
             <p className={`text-[11px] mt-0.5 transition-colors ${selected ? 'text-white/70' : 'text-muted-foreground'}`}>
               {option.hint}
             </p>
           )}
         </div>
 
-        {/* Check */}
-        <iconify-icon
-          icon={selected ? 'lucide:check-circle-2' : 'lucide:circle'}
-          class={`text-lg shrink-0 transition-colors duration-200 ${selected ? 'text-white' : 'text-black/15 group-hover:text-primary/30'}`}
-          aria-hidden="true"
-        />
+        {/* Badge (stap 1 only) + check */}
+        <div className="flex flex-col items-end justify-between self-stretch gap-1 shrink-0">
+          {hintAsBadge && option.hint ? (
+            <span className={`text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full whitespace-nowrap ${
+              selected ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'
+            }`}>
+              {option.hint}
+            </span>
+          ) : (
+            <span />
+          )}
+          <iconify-icon
+            icon={selected ? 'lucide:check-circle-2' : 'lucide:circle'}
+            class={`text-lg transition-colors duration-200 ${selected ? 'text-white' : 'text-black/15 group-hover:text-primary/30'}`}
+            aria-hidden="true"
+          />
+        </div>
       </button>
     </li>
   );

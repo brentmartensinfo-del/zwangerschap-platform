@@ -27,7 +27,7 @@ export default function CourseFinderModal({ open, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+      className="fixed inset-0 z-[100] flex items-end md:items-center md:justify-center"
       role="dialog"
       aria-modal="true"
       aria-label="Cursus keuzehulp"
@@ -39,10 +39,20 @@ export default function CourseFinderModal({ open, onClose }) {
         aria-hidden="true"
       />
 
-      {/* Modal container */}
-      <div className="relative z-10 w-full max-w-[1000px] max-h-[90vh] overflow-y-auto rounded-3xl shadow-[0_32px_80px_rgba(0,0,0,0.25)]">
+      {/* ── Mobiel: full screen sheet ── */}
+      <div className="md:hidden relative z-10 w-full h-[95vh] rounded-t-3xl overflow-y-auto bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.20)]">
+        <button
+          onClick={onClose}
+          aria-label="Keuzehulp sluiten"
+          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/[0.06] flex items-center justify-center hover:bg-black/10 transition-colors"
+        >
+          <iconify-icon icon="lucide:x" class="text-base text-foreground" aria-hidden="true" />
+        </button>
+        <CourseFinder hideImage />
+      </div>
 
-        {/* Sluitknop */}
+      {/* ── Desktop: centered modal, geen afbeelding ── */}
+      <div className="hidden md:block relative z-10 w-full max-w-[720px] max-h-[92vh] overflow-y-auto rounded-3xl shadow-[0_32px_80px_rgba(0,0,0,0.25)] bg-white overflow-hidden">
         <button
           onClick={onClose}
           aria-label="Keuzehulp sluiten"
@@ -50,8 +60,7 @@ export default function CourseFinderModal({ open, onClose }) {
         >
           <iconify-icon icon="lucide:x" class="text-base text-foreground" aria-hidden="true" />
         </button>
-
-        <CourseFinder />
+        <CourseFinder hideImage />
       </div>
     </div>
   );

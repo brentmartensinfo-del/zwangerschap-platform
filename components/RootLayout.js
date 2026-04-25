@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CourseFinderModal from '@/components/CourseFinderModal';
@@ -8,6 +9,8 @@ import CourseFinderModal from '@/components/CourseFinderModal';
 export default function RootLayout({ children }) {
   const [finderOpen, setFinderOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
+  const pathname = usePathname();
+  const isHomepage = pathname === '/';
 
   useEffect(() => {
     function handleScroll() {
@@ -25,7 +28,7 @@ export default function RootLayout({ children }) {
       <Footer />
 
       {/* ── Floating keuzehulp knop — mobiel only, zichtbaar na hero ── */}
-      {!finderOpen && pastHero && (
+      {!finderOpen && pastHero && isHomepage && (
         <button
           onClick={() => setFinderOpen(true)}
           aria-label="Start keuzehulp"
