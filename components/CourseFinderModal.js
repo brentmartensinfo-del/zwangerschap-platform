@@ -48,7 +48,7 @@ export default function CourseFinderModal({ open, onClose }) {
         >
           <iconify-icon icon="lucide:x" class="text-base text-foreground" aria-hidden="true" />
         </button>
-        <CourseFinder hideImage />
+        <CourseFinder hideImage onDone={onClose} />
       </div>
 
       {/* ── Desktop: centered modal, geen afbeelding ── */}
@@ -60,7 +60,7 @@ export default function CourseFinderModal({ open, onClose }) {
         >
           <iconify-icon icon="lucide:x" class="text-base text-foreground" aria-hidden="true" />
         </button>
-        <CourseFinder hideImage />
+        <CourseFinder hideImage onDone={onClose} />
       </div>
     </div>
   );

@@ -120,7 +120,7 @@ function buildUrl(answers) {
 
 /* ─── Hoofd component ────────────────────────────────────────────────────── */
 
-export default function CourseFinder({ hideImage = false }) {
+export default function CourseFinder({ hideImage = false, onDone }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers]         = useState({});
   const [animating, setAnimating]     = useState(false);
@@ -184,8 +184,11 @@ export default function CourseFinder({ hideImage = false }) {
 
               {!done ? (
                 <>
-                  {/* Step indicator */}
+                  {/* Step indicator — mobiel: terug+teller links, dots rechts met ruimte voor kruisje */}
+                  {/* Desktop: terug links, dots midden, teller rechts */}
                   <div className="flex items-center justify-between mb-4">
+
+                    {/* Terug knop — altijd links */}
                     <button
                       onClick={handleBack}
                       disabled={currentStep === 0}
@@ -194,7 +197,9 @@ export default function CourseFinder({ hideImage = false }) {
                       <iconify-icon icon="lucide:arrow-left" class="text-sm" aria-hidden="true" />
                       Terug
                     </button>
-                    <div className="flex items-center justify-center gap-1.5" aria-hidden="true">
+
+                    {/* Dots — midden op desktop, rechts op mobiel met ruimte voor kruisje */}
+                    <div className="flex items-center justify-center gap-1.5 md:mr-0 mr-10" aria-hidden="true">
                       {STEPS.map((_, i) => (
                         <div
                           key={i}
@@ -208,7 +213,9 @@ export default function CourseFinder({ hideImage = false }) {
                         />
                       ))}
                     </div>
-                    <span className="text-[12px] font-semibold text-muted-foreground">
+
+                    {/* Teller — rechts op desktop, verborgen op mobiel */}
+                    <span className="hidden md:block text-[12px] font-semibold text-muted-foreground">
                       {currentStep + 1} / {STEPS.length}
                     </span>
                   </div>
@@ -414,6 +421,7 @@ function ResultScreen({ recommendations, url, answers, onRestart }) {
       {/* CTA */}
       <Link
         href={url}
+        onClick={() => onDone?.()}
         className="flex items-center justify-center gap-2 w-full py-4 bg-primary text-white text-[15px] font-semibold rounded-2xl hover:opacity-90 active:scale-[0.98] transition-all"
       >
         Bekijk passende cursussen
