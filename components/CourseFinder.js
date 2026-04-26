@@ -143,7 +143,7 @@ export default function CourseFinder({ hideImage = false, onDone }) {
 
         {/* ── Left: form ── */}
         <div className={`w-full ${hideImage ? '' : 'px-5 sm:px-8 py-8 lg:w-[55%] md:px-12 md:py-14'}`}>
-          <div className="bg-white border border-black/[0.07] rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col h-full">
+          <div className="bg-white border-2 border-primary rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col h-full">
 
             {/* ── MOBIEL HEADER ── */}
             {!done && (

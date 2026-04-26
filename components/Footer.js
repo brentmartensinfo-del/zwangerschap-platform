@@ -7,7 +7,7 @@ const FOOTER_COLS = [
       { label: 'Ons verhaal',      href: '/over-ons' },
       { label: 'Hoe het werkt',    href: '/#hoe-het-werkt' },
       { label: 'Klantervaringen',  href: '/#testimonials' },
-      { label: 'Werken bij Birthly',  href: '/contact' },
+      { label: 'Birthly blog',  href: '/blog' },
     ],
   },
   {

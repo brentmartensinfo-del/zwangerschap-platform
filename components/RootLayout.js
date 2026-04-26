@@ -20,6 +20,14 @@ export default function RootLayout({ children }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    function handleOpenFinder() {
+      setFinderOpen(true);
+    }
+    window.addEventListener('open-finder', handleOpenFinder);
+    return () => window.removeEventListener('open-finder', handleOpenFinder);
+  }, []);
+
   return (
     <>
       <Navbar onOpenFinder={() => setFinderOpen(true)} />
