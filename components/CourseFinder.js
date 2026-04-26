@@ -82,10 +82,9 @@ function getRecommendation(answers) {
   return results.slice(0, 2);
 }
 
-function buildUrl(answers) {
+function buildUrl(answers, selectedType) {
   const params = new URLSearchParams();
-  const recs = getRecommendation(answers);
-  if (recs[0]) params.set('type', recs[0].type);
+  if (selectedType) params.set('type', selectedType);
   if (answers.location && answers.location !== 'online') params.set('city', answers.location);
   if (answers.budget === 'low')  params.set('price', 'low');
   if (answers.budget === 'mid')  params.set('price', 'mid');
@@ -136,7 +135,6 @@ export default function CourseFinder({ hideImage = false, onDone }) {
   }
 
   const recommendations = done ? getRecommendation(answers) : [];
-  const url = done ? buildUrl(answers) : '/cursussen';
   const hasSelection = !!answers[step?.id];
 
   return (
@@ -238,10 +236,10 @@ export default function CourseFinder({ hideImage = false, onDone }) {
                 <div className="p-5 md:p-7">
                   <ResultScreen
                     recommendations={recommendations}
-                    url={url}
                     answers={answers}
                     onRestart={handleRestart}
                     onDone={onDone}
+                    buildUrl={buildUrl}
                   />
                 </div>
               )}
@@ -339,7 +337,13 @@ function OptionButton({ option, selected, onSelect, hintAsBadge = false }) {
 
 /* ─── Result screen ──────────────────────────────────────────────────────── */
 
-function ResultScreen({ recommendations, url, answers, onRestart, onDone }) {
+function ResultScreen({ recommendations, answers, onRestart, onDone, buildUrl }) {
+  const [selected, setSelected] = useState(recommendations[0]?.type ?? null);
+
+  function toggleSelect(type) {
+    setSelected(type);
+  }
+
   return (
     <div className="flex flex-col gap-5">
       <div className="text-center">
@@ -347,22 +351,36 @@ function ResultScreen({ recommendations, url, answers, onRestart, onDone }) {
           <iconify-icon icon="lucide:sparkles" class="text-2xl text-primary" aria-hidden="true" />
         </div>
         <h3 className="text-[20px] font-bold text-foreground mb-1.5">Jouw perfecte match</h3>
-        <p className="text-[13px] text-muted-foreground">Op basis van jouw antwoorden raden we dit aan:</p>
+        <p className="text-[13px] text-muted-foreground">Kies een type cursus om te bekijken:</p>
       </div>
 
       <ul className="flex flex-col gap-3" role="list">
         {recommendations.map((rec, i) => (
-          <li key={rec.type} className={`flex gap-4 p-4 rounded-2xl border ${i === 0 ? 'bg-primary/5 border-primary/20' : 'bg-white border-black/[0.07]'}`}>
-            <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${i === 0 ? 'bg-primary/15' : 'bg-secondary'}`}>
-              <iconify-icon icon={i === 0 ? 'lucide:star' : 'lucide:bookmark'} class={`text-sm ${i === 0 ? 'text-primary' : 'text-muted-foreground'}`} aria-hidden="true" />
-            </div>
-            <div className="min-w-0">
-              <div className="flex items-center gap-2 mb-0.5">
-                <p className="text-[14px] font-bold text-foreground">{rec.type}</p>
-                {i === 0 && <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wide">Top keuze</span>}
+          <li key={rec.type}>
+            <button
+              onClick={() => toggleSelect(rec.type)}
+              className={`w-full flex gap-4 p-4 rounded-2xl border text-left transition-all duration-150 ${
+                selected === rec.type
+                  ? 'bg-primary/[0.06] border-primary'
+                  : 'bg-white border-black/[0.08] hover:border-primary/40'
+              }`}
+            >
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${selected === rec.type ? 'bg-primary/15' : 'bg-secondary'}`}>
+                <iconify-icon icon={i === 0 ? 'lucide:star' : 'lucide:bookmark'} class={`text-sm ${selected === rec.type ? 'text-primary' : 'text-muted-foreground'}`} aria-hidden="true" />
               </div>
-              <p className="text-[12px] text-muted-foreground leading-snug">{rec.reason}</p>
-            </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <p className="text-[14px] font-bold text-foreground">{rec.type}</p>
+                  {i === 0 && <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wide">Top keuze</span>}
+                </div>
+                <p className="text-[12px] text-muted-foreground leading-snug">{rec.reason}</p>
+              </div>
+              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 self-center transition-all duration-150 ${
+                selected === rec.type ? 'border-primary bg-primary' : 'border-black/20'
+              }`}>
+                {selected === rec.type && <div className="w-2 h-2 rounded-full bg-white" />}
+              </div>
+            </button>
           </li>
         ))}
       </ul>
@@ -383,7 +401,7 @@ function ResultScreen({ recommendations, url, answers, onRestart, onDone }) {
       </div>
 
       <Link
-        href={url}
+        href={buildUrl(answers, selected)}
         onClick={() => onDone?.()}
         className="flex items-center justify-center gap-2 w-full py-4 bg-primary text-white text-[15px] font-semibold rounded-2xl hover:opacity-90 active:scale-[0.98] transition-all"
       >
