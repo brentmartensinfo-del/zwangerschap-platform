@@ -35,7 +35,7 @@ export default async function ProviderPage({ params }) {
   const courses = allCourses.filter((c) => c.providerSlug === slug);
 
   return (
-    <main className="flex-1 pt-[65px]">
+    <main className="flex-1">
 
         {/* ── Hero ──────────────────────────────────────────────────────── */}
         <section className="relative w-full h-[400px] md:h-[480px] overflow-hidden">
