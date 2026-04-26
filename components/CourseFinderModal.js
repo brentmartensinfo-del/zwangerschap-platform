@@ -40,7 +40,7 @@ export default function CourseFinderModal({ open, onClose }) {
       />
 
       {/* ── Mobiel: full screen sheet ── */}
-      <div className="md:hidden relative z-10 w-full h-[95vh] rounded-t-3xl overflow-y-auto bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.20)]">
+      <div className="md:hidden relative z-10 w-full h-screen overflow-y-auto bg-white">
         <button
           onClick={onClose}
           aria-label="Keuzehulp sluiten"

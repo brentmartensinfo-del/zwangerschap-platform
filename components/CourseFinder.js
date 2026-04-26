@@ -22,10 +22,10 @@ const STEPS = [
     question: 'Wat is jouw situatie?',
     sub: 'Zodat we de beste match voor jou kunnen vinden.',
     options: [
-      { id: 'first',      label: 'Eerste zwangerschap',             icon: 'lucide:sparkles',        hint: null },
-      { id: 'again',      label: 'Al eerder zwanger geweest',       icon: 'lucide:refresh-ccw',     hint: null },
-      { id: 'specific',   label: 'Specifieke situatie',             icon: 'lucide:shield-check',    hint: 'Bijv. medisch of extra spannend' },
-      { id: 'explore',    label: 'Gewoon oriënteren',               icon: 'lucide:compass',         hint: null },
+      { id: 'first',    label: 'Eerste zwangerschap',       icon: 'lucide:sparkles',     hint: null },
+      { id: 'again',    label: 'Al eerder zwanger geweest', icon: 'lucide:refresh-ccw',  hint: null },
+      { id: 'specific', label: 'Specifieke situatie',       icon: 'lucide:shield-check', hint: 'Bijv. medisch of extra spannend' },
+      { id: 'explore',  label: 'Gewoon oriënteren',         icon: 'lucide:compass',      hint: null },
     ],
   },
   {
@@ -33,10 +33,10 @@ const STEPS = [
     question: 'Hoe wil je de cursus volgen?',
     sub: 'Kies de manier die het beste bij jouw leven past.',
     options: [
-      { id: 'group',      label: 'In een groep',                    icon: 'lucide:users-round',     hint: 'Gezellig en inspirerend' },
-      { id: 'private',    label: 'Privé / 1-op-1',                  icon: 'lucide:user',            hint: 'Helemaal op maat' },
-      { id: 'online',     label: 'Online',                          icon: 'lucide:monitor',         hint: 'Op jouw moment en tempo' },
-      { id: 'noformat',   label: 'Geen voorkeur',                   icon: 'lucide:circle-dashed',   hint: null },
+      { id: 'group',    label: 'In een groep',    icon: 'lucide:users-round',   hint: 'Gezellig en inspirerend' },
+      { id: 'private',  label: 'Privé / 1-op-1',  icon: 'lucide:user',          hint: 'Helemaal op maat' },
+      { id: 'online',   label: 'Online',           icon: 'lucide:monitor',       hint: 'Op jouw moment en tempo' },
+      { id: 'noformat', label: 'Geen voorkeur',    icon: 'lucide:circle-dashed', hint: null },
     ],
   },
   {
@@ -44,10 +44,10 @@ const STEPS = [
     question: 'Wat is je budget?',
     sub: 'We tonen cursussen die daarbinnen passen.',
     options: [
-      { id: 'low',        label: 'Tot €50',                         icon: 'lucide:coins',           hint: null },
-      { id: 'mid',        label: '€50 – €150',                      icon: 'lucide:banknote',        hint: 'Meest aanbod' },
-      { id: 'high',       label: '€150+',                           icon: 'lucide:gem',             hint: 'Premium & privé' },
-      { id: 'any',        label: 'Maakt niet uit',                  icon: 'lucide:infinity',        hint: null },
+      { id: 'low',  label: 'Tot €50',       icon: 'lucide:coins',    hint: null },
+      { id: 'mid',  label: '€50 – €150',    icon: 'lucide:banknote', hint: 'Meest aanbod' },
+      { id: 'high', label: '€150+',         icon: 'lucide:gem',      hint: 'Premium & privé' },
+      { id: 'any',  label: 'Maakt niet uit', icon: 'lucide:infinity', hint: null },
     ],
   },
   {
@@ -55,13 +55,13 @@ const STEPS = [
     question: 'Waar zoek je?',
     sub: 'We zoeken het aanbod bij jou in de buurt.',
     options: [
-      { id: 'Amsterdam',  label: 'Amsterdam',   icon: 'lucide:map-pin', hint: null },
-      { id: 'Rotterdam',  label: 'Rotterdam',   icon: 'lucide:map-pin', hint: null },
-      { id: 'Utrecht',    label: 'Utrecht',      icon: 'lucide:map-pin', hint: null },
-      { id: 'Den Haag',   label: 'Den Haag',    icon: 'lucide:map-pin', hint: null },
-      { id: 'Groningen',  label: 'Groningen',   icon: 'lucide:map-pin', hint: null },
-      { id: 'Eindhoven',  label: 'Eindhoven',   icon: 'lucide:map-pin', hint: null },
-      { id: 'online',     label: 'Maakt niet uit / Online', icon: 'lucide:globe', hint: 'Overal te volgen' },
+      { id: 'Amsterdam', label: 'Amsterdam',              icon: 'lucide:map-pin', hint: null },
+      { id: 'Rotterdam', label: 'Rotterdam',              icon: 'lucide:map-pin', hint: null },
+      { id: 'Utrecht',   label: 'Utrecht',                icon: 'lucide:map-pin', hint: null },
+      { id: 'Den Haag',  label: 'Den Haag',               icon: 'lucide:map-pin', hint: null },
+      { id: 'Groningen', label: 'Groningen',              icon: 'lucide:map-pin', hint: null },
+      { id: 'Eindhoven', label: 'Eindhoven',              icon: 'lucide:map-pin', hint: null },
+      { id: 'online',    label: 'Maakt niet uit / Online', icon: 'lucide:globe',  hint: 'Overal te volgen' },
     ],
   },
 ];
@@ -69,41 +69,16 @@ const STEPS = [
 /* ─── Aanbevelingslogica ─────────────────────────────────────────────────── */
 
 function getRecommendation(answers) {
-  const { interest, format, budget } = answers;
-
+  const { interest, format } = answers;
   const map = {
-    relax: [
-      { type: 'Zwangerschapsyoga',  reason: 'Perfect voor ontspanning en bewuste verbinding met je baby.' },
-      { type: 'Hypnobirthing',       reason: 'Leert je mentale technieken om rustig en krachtig te bevallen.' },
-    ],
-    active: [
-      { type: 'Zwangerschapsgym',   reason: 'Blijf fit en sterk gedurende je zwangerschap.' },
-      { type: 'Zwangerschapsyoga',   reason: 'Combineer beweging met ontspanning op jouw eigen tempo.' },
-    ],
-    prep: [
-      { type: 'Complete bevallingscursus', reason: 'Alles wat je moet weten voor een goede voorbereiding op de bevalling.' },
-      { type: 'Hypnobirthing',              reason: 'Geeft je vertrouwen en concrete tools voor de bevalling.' },
-    ],
-    partner: [
-      { type: 'Complete bevallingscursus', reason: 'Speciaal voor koppels die samen willen voorbereiden.' },
-      { type: 'Hypnobirthing',              reason: 'Samen leren ontspannen en de bevalling tegemoet gaan.' },
-    ],
-    unsure: [
-      { type: 'Zwangerschapsyoga',         reason: 'Een zachte start — goed voor bijna elke situatie.' },
-      { type: 'Complete bevallingscursus', reason: 'Brede voorbereiding die alle belangrijke onderwerpen dekt.' },
-    ],
+    relax:   [{ type: 'Zwangerschapsyoga', reason: 'Perfect voor ontspanning en bewuste verbinding met je baby.' }, { type: 'Hypnobirthing', reason: 'Leert je mentale technieken om rustig en krachtig te bevallen.' }],
+    active:  [{ type: 'Zwangerschapsgym', reason: 'Blijf fit en sterk gedurende je zwangerschap.' }, { type: 'Zwangerschapsyoga', reason: 'Combineer beweging met ontspanning op jouw eigen tempo.' }],
+    prep:    [{ type: 'Complete bevallingscursus', reason: 'Alles wat je moet weten voor een goede voorbereiding op de bevalling.' }, { type: 'Hypnobirthing', reason: 'Geeft je vertrouwen en concrete tools voor de bevalling.' }],
+    partner: [{ type: 'Complete bevallingscursus', reason: 'Speciaal voor koppels die samen willen voorbereiden.' }, { type: 'Hypnobirthing', reason: 'Samen leren ontspannen en de bevalling tegemoet gaan.' }],
+    unsure:  [{ type: 'Zwangerschapsyoga', reason: 'Een zachte start — goed voor bijna elke situatie.' }, { type: 'Complete bevallingscursus', reason: 'Brede voorbereiding die alle belangrijke onderwerpen dekt.' }],
   };
-
   let results = map[interest] || map['unsure'];
-
-  // Online format → voorkeur voor online cursussen
-  if (format === 'online') {
-    results = [
-      { type: 'Online cursussen', reason: 'Volledig flexibel te volgen, waar en wanneer jij wilt.' },
-      ...results,
-    ].slice(0, 2);
-  }
-
+  if (format === 'online') results = [{ type: 'Online cursussen', reason: 'Volledig flexibel te volgen, waar en wanneer jij wilt.' }, ...results].slice(0, 2);
   return results.slice(0, 2);
 }
 
@@ -126,16 +101,18 @@ export default function CourseFinder({ hideImage = false, onDone }) {
   const [animating, setAnimating]     = useState(false);
   const [done, setDone]               = useState(false);
 
-  const step = STEPS[currentStep];
+  const step     = STEPS[currentStep];
   const progress = ((currentStep) / STEPS.length) * 100;
 
   function handleSelect(optionId) {
+    setAnswers((prev) => ({ ...prev, [step.id]: optionId }));
+  }
+
+  function handleNext() {
     if (animating) return;
-
-    const newAnswers = { ...answers, [step.id]: optionId };
-    setAnswers(newAnswers);
+    const selected = answers[step.id];
+    if (!selected) return;
     setAnimating(true);
-
     setTimeout(() => {
       if (currentStep < STEPS.length - 1) {
         setCurrentStep((s) => s + 1);
@@ -143,7 +120,7 @@ export default function CourseFinder({ hideImage = false, onDone }) {
         setDone(true);
       }
       setAnimating(false);
-    }, 280);
+    }, 200);
   }
 
   function handleBack() {
@@ -160,35 +137,47 @@ export default function CourseFinder({ hideImage = false, onDone }) {
 
   const recommendations = done ? getRecommendation(answers) : [];
   const url = done ? buildUrl(answers) : '/cursussen';
+  const hasSelection = !!answers[step?.id];
 
   return (
     <section className="relative bg-transparent">
-<div className={`relative flex flex-col items-stretch ${hideImage ? '' : 'lg:flex-row min-h-[520px]'}`}>
+      <div className={`relative flex flex-col items-stretch ${hideImage ? '' : 'lg:flex-row min-h-[520px]'}`}>
 
         {/* ── Left: form ── */}
         <div className={`w-full ${hideImage ? '' : 'px-5 sm:px-8 py-8 lg:w-[55%] md:px-12 md:py-14'}`}>
           <div className="bg-white border border-black/[0.07] rounded-3xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col h-full">
 
+            {/* ── MOBIEL HEADER ── */}
+            {!done && (
+              <div className="relative flex items-center justify-between px-5 pt-4 pb-2">
+                <button
+                  onClick={handleBack}
+                  disabled={currentStep === 0}
+                  className="w-9 h-9 rounded-full bg-black/[0.06] flex items-center justify-center disabled:opacity-0 transition-colors hover:bg-black/10"
+                >
+                  <iconify-icon icon="lucide:arrow-left" class="text-base text-foreground" aria-hidden="true" />
+                </button>
+                <span className="absolute left-1/2 -translate-x-1/2 text-[14px] font-semibold text-foreground">Keuzehulp</span>
+<span />
+              </div>
+            )}
+
             {/* Progress bar */}
-            <div className="h-1 bg-black/[0.05]">
+            <div className="h-1.5 bg-black/[0.05]">
               <div
-                className="h-full bg-primary transition-all duration-500 ease-out"
+                className="h-full bg-primary transition-all duration-500 ease-out rounded-full"
                 style={{ width: done ? '100%' : `${progress}%` }}
                 aria-hidden="true"
               />
             </div>
 
-            <div className={`p-5 md:p-7 flex-1 transition-opacity duration-[280ms] ${animating ? 'opacity-0' : 'opacity-100'}`}>
-
-
+            {/* ── Content ── */}
+            <div className={`flex-1 flex flex-col transition-opacity duration-200 ${animating ? 'opacity-0' : 'opacity-100'}`}>
 
               {!done ? (
                 <>
-                  {/* Step indicator — mobiel: terug+teller links, dots rechts met ruimte voor kruisje */}
-                  {/* Desktop: terug links, dots midden, teller rechts */}
-                  <div className="flex items-center justify-between mb-4">
-
-                    {/* Terug knop — altijd links */}
+                  {/* ── DESKTOP step indicator — hidden, replaced by mobile header ── */}
+                  <div className="hidden">
                     <button
                       onClick={handleBack}
                       disabled={currentStep === 0}
@@ -197,79 +186,80 @@ export default function CourseFinder({ hideImage = false, onDone }) {
                       <iconify-icon icon="lucide:arrow-left" class="text-sm" aria-hidden="true" />
                       Terug
                     </button>
-
-                    {/* Dots — midden op desktop, rechts op mobiel met ruimte voor kruisje */}
-                    <div className="flex items-center justify-center gap-1.5 md:mr-0 mr-10" aria-hidden="true">
+                    <div className="flex items-center gap-1.5" aria-hidden="true">
                       {STEPS.map((_, i) => (
                         <div
                           key={i}
                           className={`rounded-full transition-all duration-300 ${
-                            i === currentStep
-                              ? 'w-5 h-2 bg-primary'
-                              : i < currentStep
-                              ? 'w-2 h-2 bg-primary/40'
-                              : 'w-2 h-2 bg-black/10'
+                            i === currentStep ? 'w-5 h-2 bg-primary'
+                            : i < currentStep  ? 'w-2 h-2 bg-primary/40'
+                            : 'w-2 h-2 bg-black/10'
                           }`}
                         />
                       ))}
                     </div>
-
-                    {/* Teller — rechts op desktop, verborgen op mobiel */}
-                    <span className="hidden md:block text-[12px] font-semibold text-muted-foreground">
-                      {currentStep + 1} / {STEPS.length}
-                    </span>
+<span />
                   </div>
 
                   {/* Question */}
-                  <div className="mb-4 text-center">
-                    <h3 className="text-[17px] md:text-[19px] font-bold text-foreground mb-1">
+                  <div className="px-5 pt-4 pb-3">
+                    <h3 className="text-[20px] md:text-[19px] font-bold text-foreground mb-2 leading-snug">
                       {step.question}
                     </h3>
-                    <p className="text-[12px] text-muted-foreground">{step.sub}</p>
+                    <p className="text-[13px] text-muted-foreground leading-relaxed">{step.sub}</p>
                   </div>
 
                   {/* Options */}
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2" role="list">
+                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-2.5 px-5 pb-4" role="list">
                     {step.options.map((opt) => (
                       <OptionButton
                         key={opt.id}
                         option={opt}
                         selected={answers[step.id] === opt.id}
                         onSelect={() => handleSelect(opt.id)}
+                        hintAsBadge={currentStep === 0}
                       />
                     ))}
                   </ul>
+
+                  {/* ── Volgende knop ── */}
+                  <div className="px-5 pb-4 pt-2 mt-auto">
+                    <button
+                      onClick={handleNext}
+                      disabled={!hasSelection}
+                      className="w-full py-4 bg-primary text-white text-[15px] font-semibold rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.98]"
+                    >
+                      Volgende vraag
+                      <iconify-icon icon="lucide:arrow-right" class="text-base" aria-hidden="true" />
+                    </button>
+                  </div>
                 </>
               ) : (
-                <ResultScreen
-                  recommendations={recommendations}
-                  url={url}
-                  answers={answers}
-                  onRestart={handleRestart}
-                />
+                <div className="p-5 md:p-7">
+                  <ResultScreen
+                    recommendations={recommendations}
+                    url={url}
+                    answers={answers}
+                    onRestart={handleRestart}
+                    onDone={onDone}
+                  />
+                </div>
               )}
             </div>
           </div>
         </div>
 
-        {/* ── Right: image full bleed ── */}
+        {/* ── Right: image ── */}
         <div className={`lg:flex-1 relative ${hideImage ? 'hidden' : 'hidden lg:block'}`}>
           <img
             src="https://images.pexels.com/photos/3662667/pexels-photo-3662667.jpeg"
             alt="Zwangere vrouw bereidt zich voor op bevalling"
             className="absolute inset-0 w-full h-full object-cover object-center"
           />
-          <div
-            className="absolute inset-0"
-            style={{ background: 'linear-gradient(to top, rgba(43,43,43,0.65) 0%, transparent 55%)' }}
-            aria-hidden="true"
-          />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(43,43,43,0.65) 0%, transparent 55%)' }} aria-hidden="true" />
           <div className="absolute bottom-0 left-0 right-0 p-7">
             <p className="text-[12px] font-bold text-white/60 uppercase tracking-widest mb-2">Birthly</p>
-            <p className="text-[18px] font-bold text-white leading-snug mb-3">
-              Vind de cursus die
-              <br />bij jou past
-            </p>
+            <p className="text-[18px] font-bold text-white leading-snug mb-3">Vind de cursus die<br />bij jou past</p>
             <div className="flex flex-col gap-2">
               {[
                 { icon: 'lucide:shield-check', label: 'Alleen gecertificeerde aanbieders' },
@@ -294,54 +284,53 @@ export default function CourseFinder({ hideImage = false, onDone }) {
 
 function OptionButton({ option, selected, onSelect, hintAsBadge = false }) {
   return (
-    <li className="h-full">
+    <li>
       <button
         onClick={onSelect}
-        className={`w-full h-full min-h-[72px] flex items-center gap-4 px-4 py-3.5 rounded-2xl border text-left transition-all duration-200 group ${
+        className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl border text-left transition-all duration-150 group ${
           selected
-            ? 'bg-primary border-primary shadow-[0_4px_16px_rgba(122,166,122,0.25)]'
-            : 'bg-white border-black/[0.08] hover:border-primary/40 hover:bg-primary/[0.03] hover:shadow-sm'
+            ? 'bg-primary/[0.06] border-primary'
+            : 'bg-white border-black/[0.08] hover:border-primary/40 hover:bg-primary/[0.02]'
         }`}
       >
         {/* Icon */}
-        <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-200 ${
-          selected ? 'bg-white/20' : 'bg-secondary group-hover:bg-primary/10'
+        <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-150 ${
+          selected ? 'bg-primary/15' : 'bg-secondary group-hover:bg-primary/10'
         }`}>
           <iconify-icon
             icon={option.icon}
-            class={`text-base transition-colors duration-200 ${selected ? 'text-white' : 'text-foreground/60 group-hover:text-primary'}`}
+            class={`text-base transition-colors duration-150 ${selected ? 'text-primary' : 'text-foreground/60 group-hover:text-primary'}`}
             aria-hidden="true"
           />
         </div>
 
-        {/* Label + optional subtitle */}
+        {/* Label + subtitle */}
         <div className="flex-1 min-w-0">
-          <p className={`text-[14px] font-semibold leading-snug transition-colors ${selected ? 'text-white' : 'text-foreground'}`}>
+          <p className={`text-[15px] font-semibold leading-snug ${selected ? 'text-foreground' : 'text-foreground'}`}>
             {option.label}
           </p>
           {!hintAsBadge && option.hint && (
-            <p className={`text-[11px] mt-0.5 transition-colors ${selected ? 'text-white/70' : 'text-muted-foreground'}`}>
-              {option.hint}
-            </p>
+            <p className="text-[12px] mt-0.5 text-muted-foreground">{option.hint}</p>
           )}
         </div>
 
-        {/* Badge (stap 1 only) + check */}
+        {/* Badge (stap 1) + radio */}
         <div className="flex flex-col items-end justify-between self-stretch gap-1 shrink-0">
           {hintAsBadge && option.hint ? (
             <span className={`text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-full whitespace-nowrap ${
-              selected ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'
+              selected ? 'bg-primary/15 text-primary' : 'bg-primary/10 text-primary'
             }`}>
               {option.hint}
             </span>
           ) : (
             <span />
           )}
-          <iconify-icon
-            icon={selected ? 'lucide:check-circle-2' : 'lucide:circle'}
-            class={`text-lg transition-colors duration-200 ${selected ? 'text-white' : 'text-black/15 group-hover:text-primary/30'}`}
-            aria-hidden="true"
-          />
+          {/* Radio circle */}
+          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-150 ${
+            selected ? 'border-primary bg-primary' : 'border-black/20'
+          }`}>
+            {selected && <div className="w-2 h-2 rounded-full bg-white" />}
+          </div>
         </div>
       </button>
     </li>
@@ -350,45 +339,27 @@ function OptionButton({ option, selected, onSelect, hintAsBadge = false }) {
 
 /* ─── Result screen ──────────────────────────────────────────────────────── */
 
-function ResultScreen({ recommendations, url, answers, onRestart }) {
+function ResultScreen({ recommendations, url, answers, onRestart, onDone }) {
   return (
-    <div className="flex flex-col gap-6">
-
-      {/* Header */}
+    <div className="flex flex-col gap-5">
       <div className="text-center">
         <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
           <iconify-icon icon="lucide:sparkles" class="text-2xl text-primary" aria-hidden="true" />
         </div>
-        <h3 className="text-[20px] font-bold text-foreground mb-1.5">
-          Jouw perfecte match
-        </h3>
-        <p className="text-[13px] text-muted-foreground">
-          Op basis van jouw antwoorden raden we dit aan:
-        </p>
+        <h3 className="text-[20px] font-bold text-foreground mb-1.5">Jouw perfecte match</h3>
+        <p className="text-[13px] text-muted-foreground">Op basis van jouw antwoorden raden we dit aan:</p>
       </div>
 
-      {/* Recommendations */}
       <ul className="flex flex-col gap-3" role="list">
         {recommendations.map((rec, i) => (
-          <li
-            key={rec.type}
-            className={`flex gap-4 p-4 rounded-2xl border ${
-              i === 0
-                ? 'bg-primary/5 border-primary/20'
-                : 'bg-white border-black/[0.07]'
-            }`}
-          >
+          <li key={rec.type} className={`flex gap-4 p-4 rounded-2xl border ${i === 0 ? 'bg-primary/5 border-primary/20' : 'bg-white border-black/[0.07]'}`}>
             <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5 ${i === 0 ? 'bg-primary/15' : 'bg-secondary'}`}>
               <iconify-icon icon={i === 0 ? 'lucide:star' : 'lucide:bookmark'} class={`text-sm ${i === 0 ? 'text-primary' : 'text-muted-foreground'}`} aria-hidden="true" />
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-2 mb-0.5">
                 <p className="text-[14px] font-bold text-foreground">{rec.type}</p>
-                {i === 0 && (
-                  <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wide">
-                    Top keuze
-                  </span>
-                )}
+                {i === 0 && <span className="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wide">Top keuze</span>}
               </div>
               <p className="text-[12px] text-muted-foreground leading-snug">{rec.reason}</p>
             </div>
@@ -396,18 +367,11 @@ function ResultScreen({ recommendations, url, answers, onRestart }) {
         ))}
       </ul>
 
-      {/* City + budget summary */}
       <div className="flex flex-wrap gap-2">
         {answers.location && answers.location !== 'online' && (
           <span className="flex items-center gap-1.5 text-[12px] px-3 py-1.5 bg-secondary rounded-full text-foreground font-medium">
             <iconify-icon icon="lucide:map-pin" class="text-xs text-primary" aria-hidden="true" />
             {answers.location}
-          </span>
-        )}
-        {answers.location === 'online' && (
-          <span className="flex items-center gap-1.5 text-[12px] px-3 py-1.5 bg-secondary rounded-full text-foreground font-medium">
-            <iconify-icon icon="lucide:globe" class="text-xs text-primary" aria-hidden="true" />
-            Online
           </span>
         )}
         {answers.budget && answers.budget !== 'any' && (
@@ -418,7 +382,6 @@ function ResultScreen({ recommendations, url, answers, onRestart }) {
         )}
       </div>
 
-      {/* CTA */}
       <Link
         href={url}
         onClick={() => onDone?.()}
@@ -428,11 +391,7 @@ function ResultScreen({ recommendations, url, answers, onRestart }) {
         <iconify-icon icon="lucide:arrow-right" class="text-base" aria-hidden="true" />
       </Link>
 
-      {/* Restart */}
-      <button
-        onClick={onRestart}
-        className="text-[13px] text-muted-foreground hover:text-foreground transition-colors text-center"
-      >
+      <button onClick={onRestart} className="text-[13px] text-muted-foreground hover:text-foreground transition-colors text-center">
         Opnieuw beginnen
       </button>
     </div>
